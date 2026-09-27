@@ -1,790 +1,2176 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+<!DOCTYPE html><html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prime Pizza - Artesanal & Saborosa</title>
-    
-    <script type="importmap">
-    {
-        "imports": {
-            "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
-            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+    <title>Prime Pizza - Artesanal & Saborosa</title><!-- THREE.JS -->
+<script type="importmap">
+{
+    "imports": {
+        "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+        "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+    }
+}
+</script>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background: #050505;
+        color: #f1f1f1;
+        overflow-x: hidden;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: rgba(5, 5, 5, 0.92);
+        backdrop-filter: blur(12px);
+        z-index: 1000;
+        border-bottom: 1px solid #1a1a1a;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+    }
+
+    .logo {
+        font-size: 1.4rem;
+        font-weight: 900;
+        color: #ff4500;
+        letter-spacing: 1px;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+    }
+
+    .nav-links a {
+        color: #bbb;
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 600;
+        transition: 0.3s;
+    }
+
+    .nav-links a:hover {
+        color: #ff4500;
+    }
+
+    /* =========================
+       HERO 3D
+    ========================= */
+
+    .hero {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+        min-height: 700px;
+        overflow: hidden;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background:
+            radial-gradient(
+                circle at center,
+                #351309 0%,
+                #100705 42%,
+                #020202 100%
+            );
+    }
+
+    #pizza3d {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        display: block;
+    }
+
+    /* brilho cinematográfico */
+
+    .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        pointer-events: none;
+
+        background:
+            radial-gradient(
+                circle at 50% 55%,
+                rgba(255, 90, 20, 0.13),
+                transparent 35%
+            );
+    }
+
+    .hero::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        pointer-events: none;
+
+        background:
+            radial-gradient(
+                circle at center,
+                transparent 15%,
+                rgba(0,0,0,.25) 55%,
+                rgba(0,0,0,.88) 100%
+            );
+    }
+
+    /* =========================
+       TEXTO HERO
+    ========================= */
+
+    .hero-content {
+        position: relative;
+        z-index: 10;
+        max-width: 680px;
+        padding: 0 20px;
+        text-align: center;
+        pointer-events: none;
+    }
+
+    .hero-content * {
+        pointer-events: auto;
+    }
+
+    .badge-fumaca {
+        background: rgba(255, 69, 0, 0.16);
+        color: #ff7043;
+        border: 1px solid rgba(255, 69, 0, 0.4);
+        padding: 8px 16px;
+        border-radius: 30px;
+        font-size: 0.82rem;
+        font-weight: bold;
+        display: inline-block;
+        margin-bottom: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .hero-content h1 {
+        font-size: clamp(2.3rem, 5vw, 4rem);
+        font-weight: 900;
+        line-height: 1.1;
+        margin-bottom: 20px;
+        color: #fff;
+        text-shadow:
+            0 4px 20px rgba(0,0,0,.8),
+            0 0 30px rgba(255,70,0,.15);
+    }
+
+    .hero-content p {
+        font-size: 1.1rem;
+        color: #ccc;
+        margin-bottom: 30px;
+        line-height: 1.6;
+    }
+
+    .btn-acao {
+        background: linear-gradient(
+            135deg,
+            #ff5a00,
+            #ff2600
+        );
+
+        color: white;
+        padding: 15px 35px;
+        border-radius: 30px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        text-decoration: none;
+
+        box-shadow:
+            0 6px 25px rgba(255, 69, 0, 0.5),
+            0 0 40px rgba(255, 69, 0, 0.15);
+
+        display: inline-block;
+        transition: .3s;
+
+        border: none;
+        cursor: pointer;
+    }
+
+    .btn-acao:hover {
+        transform: translateY(-3px) scale(1.03);
+        box-shadow:
+            0 10px 35px rgba(255, 69, 0, .65);
+    }
+
+    /* =========================
+       INDICADOR 3D
+    ========================= */
+
+    .instruction {
+        position: absolute;
+        bottom: 35px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 10;
+
+        color: rgba(255,255,255,.55);
+        font-size: .8rem;
+        letter-spacing: 1px;
+
+        pointer-events: none;
+
+        animation: pulseInstruction 2s infinite;
+    }
+
+    @keyframes pulseInstruction {
+        0%,100% {
+            opacity: .4;
+        }
+
+        50% {
+            opacity: 1;
         }
     }
-    </script>
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            scroll-behavior: smooth;
-        }
+    /* =========================
+       CARDÁPIO
+    ========================= */
 
-        body {
-            background-color: #050505;
-            color: #f1f1f1;
-            overflow-x: hidden;
-        }
+    .menu-section {
+        padding: 90px 20px;
+        max-width: 1100px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 20;
+        background: #050505;
+    }
 
-        /* HEADER FIXO */
+    .section-title {
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .section-title h2 {
+        font-size: 2.5rem;
+        color: #fff;
+        margin-bottom: 10px;
+    }
+
+    .section-title p {
+        color: #888;
+        font-size: 1rem;
+    }
+
+    .menu-grid {
+        display: grid;
+        grid-template-columns:
+            repeat(auto-fit, minmax(280px, 1fr));
+
+        gap: 25px;
+    }
+
+    .menu-card {
+        background: #111;
+        border: 1px solid #222;
+        border-radius: 16px;
+        overflow: hidden;
+        transition: .3s;
+
+        display: flex;
+        flex-direction: column;
+    }
+
+    .menu-card:hover {
+        border-color: #ff4500;
+        transform: translateY(-5px);
+    }
+
+    .card-img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+        background: #1a1a1a;
+    }
+
+    .card-body {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .card-body h3 {
+        font-size: 1.3rem;
+        color: #fff;
+        margin-bottom: 10px;
+    }
+
+    .card-body p {
+        color: #999;
+        font-size: .9rem;
+        line-height: 1.5;
+        margin-bottom: 20px;
+        flex: 1;
+    }
+
+    .card-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .price {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: #4cd137;
+    }
+
+    .btn-add-cart {
+        background: #ff4500;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 20px;
+        border: none;
+        font-weight: bold;
+        font-size: .9rem;
+        cursor: pointer;
+        transition: .3s;
+    }
+
+    .btn-add-cart:hover {
+        background: #e03e00;
+    }
+
+    /* =========================
+       CARRINHO
+    ========================= */
+
+    .cart-float {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+
+        background: #4cd137;
+        color: white;
+
+        width: 65px;
+        height: 65px;
+
+        border-radius: 50%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 1.8rem;
+
+        box-shadow:
+            0 4px 20px rgba(76, 209, 55, .5);
+
+        z-index: 2000;
+        cursor: pointer;
+        transition: .3s;
+    }
+
+    .cart-float:hover {
+        transform: scale(1.08);
+    }
+
+    .cart-counter {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+
+        background: #ff4500;
+        color: white;
+
+        font-size: .75rem;
+
+        width: 22px;
+        height: 22px;
+
+        border-radius: 50%;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-weight: bold;
+    }
+
+    .cart-drawer {
+        position: fixed;
+        top: 0;
+        right: -100%;
+
+        width: 100%;
+        max-width: 380px;
+        height: 100%;
+
+        background: #111;
+
+        z-index: 2500;
+
+        box-shadow:
+            -5px 0 25px rgba(0,0,0,.8);
+
+        display: flex;
+        flex-direction: column;
+
+        transition: right .4s ease;
+
+        border-left: 1px solid #222;
+    }
+
+    .cart-drawer.open {
+        right: 0;
+    }
+
+    .cart-header {
+        padding: 20px;
+        background: #161616;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        border-bottom: 1px solid #222;
+    }
+
+    .cart-header h3 {
+        color: #fff;
+        font-size: 1.2rem;
+    }
+
+    .close-cart {
+        font-size: 1.8rem;
+        color: #888;
+        cursor: pointer;
+    }
+
+    .cart-items {
+        flex: 1;
+        overflow-y: auto;
+        padding: 20px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .cart-item {
+        background: #181818;
+
+        padding: 12px 15px;
+
+        border-radius: 10px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        border: 1px solid #252525;
+    }
+
+    .cart-item-info h4 {
+        color: #fff;
+        font-size: .95rem;
+        margin-bottom: 4px;
+    }
+
+    .cart-item-info span {
+        color: #4cd137;
+        font-weight: bold;
+        font-size: .9rem;
+    }
+
+    .cart-item-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .cart-item-controls button {
+        background: #252525;
+        color: white;
+
+        border: none;
+
+        width: 25px;
+        height: 25px;
+
+        border-radius: 50%;
+
+        cursor: pointer;
+        font-weight: bold;
+    }
+
+    .cart-footer {
+        padding: 20px;
+        background: #161616;
+
+        border-top: 1px solid #222;
+
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .cart-total {
+        display: flex;
+        justify-content: space-between;
+
+        font-size: 1.1rem;
+
+        color: #fff;
+        font-weight: bold;
+    }
+
+    .cart-total span:last-child {
+        color: #4cd137;
+    }
+
+    .btn-whatsapp-finalizar {
+        background: #25d366;
+        color: white;
+
+        padding: 14px;
+
+        border-radius: 30px;
+
+        border: none;
+
+        font-size: 1rem;
+        font-weight: bold;
+
+        cursor: pointer;
+        text-align: center;
+
+        transition: .3s;
+    }
+
+    .btn-whatsapp-finalizar:hover {
+        background: #1ebe5d;
+    }
+
+    /* =========================
+       CELULAR
+    ========================= */
+
+    @media (max-width: 700px) {
+
         header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            background: rgba(5, 5, 5, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid #1a1a1a;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
+            padding: 13px 18px;
         }
 
         .logo {
-            font-size: 1.4rem;
-            font-weight: 900;
-            color: #ff4500;
-            letter-spacing: 1px;
+            font-size: 1.1rem;
         }
 
         .nav-links {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: #bbb;
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        .nav-links a:hover {
-            color: #ff4500;
-        }
-
-        /* HERO COM O MOTOR 3D THREE.JS */
-        .hero {
-            position: relative;
-            width: 100%;
-            height: 100vh;
-            min-height: 700px;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: radial-gradient(circle at center, #241008 0%, #080504 45%, #020202 100%);
-        }
-
-        #pizza3d {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-
-        .hero::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            z-index: 2;
-            pointer-events: none;
-            background: radial-gradient(circle at center, transparent 20%, rgba(0,0,0,.25) 55%, rgba(0,0,0,.85) 100%);
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 5;
-            max-width: 650px;
-            padding: 0 20px;
-            text-align: center;
-            pointer-events: none;
-        }
-
-        .hero-content * {
-            pointer-events: auto;
-        }
-
-        .badge-fumaca {
-            background: rgba(255, 69, 0, 0.2);
-            color: #ff5722;
-            border: 1px solid rgba(255, 69, 0, 0.4);
-            padding: 8px 16px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            font-weight: bold;
-            display: inline-block;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .hero-content h1 {
-            font-size: clamp(2.3rem, 5vw, 4rem);
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 20px;
-            color: #fff;
-            text-shadow: 0 4px 20px rgba(0,0,0,0.8);
-        }
-
-        .hero-content p {
-            font-size: 1.1rem;
-            color: #ccc;
-            margin-bottom: 30px;
-            line-height: 1.6;
-        }
-
-        .btn-acao {
-            background: #ff4500;
-            color: white;
-            padding: 15px 35px;
-            border-radius: 30px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            text-decoration: none;
-            box-shadow: 0 6px 25px rgba(255, 69, 0, 0.5);
-            display: inline-block;
-            transition: 0.3s;
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-acao:hover {
-            background: #e03e00;
-            transform: translateY(-2px);
-        }
-
-        /* SEÇÃO DO CARDÁPIO */
-        .menu-section {
-            padding: 90px 20px;
-            max-width: 1100px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 10;
-            background: #050505;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: #fff;
-            margin-bottom: 10px;
-        }
-
-        .section-title p {
-            color: #888;
-            font-size: 1rem;
-        }
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        .menu-card {
-            background: #111;
-            border: 1px solid #222;
-            border-radius: 16px;
-            overflow: hidden;
-            transition: 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .menu-card:hover {
-            border-color: #ff4500;
-            transform: translateY(-5px);
-        }
-
-        .card-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background-color: #1a1a1a;
-        }
-
-        .card-body {
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            flex: 1;
-        }
-
-        .card-body h3 {
-            font-size: 1.3rem;
-            color: #fff;
-            margin-bottom: 10px;
-        }
-
-        .card-body p {
-            color: #999;
-            font-size: 0.9rem;
-            line-height: 1.5;
-            margin-bottom: 20px;
-            flex: 1;
-        }
-
-        .card-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .price {
-            font-size: 1.2rem;
-            font-weight: bold;
-            color: #4cd137;
-        }
-
-        .btn-add-cart {
-            background: #ff4500;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 20px;
-            border: none;
-            font-weight: bold;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn-add-cart:hover {
-            background: #e03e00;
-        }
-
-        /* BOTÃO FLUTUANTE DO CARRINHO */
-        .cart-float {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            background: #4cd137;
-            color: white;
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            box-shadow: 0 4px 20px rgba(76, 209, 55, 0.5);
-            z-index: 2000;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .cart-float:hover {
-            transform: scale(1.08);
-        }
-
-        .cart-counter {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            background: #ff4500;
-            color: white;
-            font-size: 0.75rem;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-        }
-
-        /* GAVETA DO CARRINHO */
-        .cart-drawer {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            max-width: 380px;
-            height: 100%;
-            background: #111;
-            z-index: 2500;
-            box-shadow: -5px 0 25px rgba(0,0,0,0.8);
-            display: flex;
-            flex-direction: column;
-            transition: right 0.4s ease;
-            border-left: 1px solid #222;
-        }
-
-        .cart-drawer.open {
-            right: 0;
-        }
-
-        .cart-header {
-            padding: 20px;
-            background: #161616;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #222;
-        }
-
-        .cart-header h3 {
-            color: #fff;
-            font-size: 1.2rem;
-        }
-
-        .close-cart {
-            font-size: 1.8rem;
-            color: #888;
-            cursor: pointer;
-        }
-
-        .cart-items {
-            flex: 1;
-            overflow-y: auto;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
-        .cart-item {
-            background: #181818;
-            padding: 12px 15px;
-            border-radius: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border: 1px solid #252525;
-        }
-
-        .cart-item-info h4 {
-            color: #fff;
-            font-size: 0.95rem;
-            margin-bottom: 4px;
-        }
-
-        .cart-item-info span {
-            color: #4cd137;
-            font-weight: bold;
-            font-size: 0.9rem;
-        }
-
-        .cart-item-controls {
-            display: flex;
-            align-items: center;
             gap: 10px;
         }
 
-        .cart-item-controls button {
-            background: #252525;
-            color: white;
-            border: none;
-            width: 25px;
-            height: 25px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-weight: bold;
+        .nav-links a {
+            font-size: .8rem;
         }
 
-        .cart-footer {
-            padding: 20px;
-            background: #161616;
-            border-top: 1px solid #222;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+        .hero {
+            min-height: 650px;
         }
 
-        .cart-total {
-            display: flex;
-            justify-content: space-between;
-            font-size: 1.1rem;
-            color: #fff;
-            font-weight: bold;
+        .hero-content {
+            padding-top: 60px;
         }
 
-        .cart-total span:last-child {
-            color: #4cd137;
+        .hero-content h1 {
+            font-size: 2.35rem;
         }
 
-        .btn-whatsapp-finalizar {
-            background: #25d366;
-            color: white;
-            padding: 14px;
-            border-radius: 30px;
-            border: none;
-            font-size: 1rem;
-            font-weight: bold;
-            cursor: pointer;
-            text-align: center;
-            transition: 0.3s;
+        .hero-content p {
+            font-size: .95rem;
         }
 
-        .btn-whatsapp-finalizar:hover {
-            background: #1ebe5d;
+        .instruction {
+            bottom: 20px;
         }
-    </style>
-</head>
-<body>
 
-    <header>
-        <div class="logo">🍕 PRIME PIZZA</div>
-        <div class="nav-links">
-            <a href="#home">Início</a>
-            <a href="#cardapio">Cardápio</a>
-        </div>
-    </header>
+        .menu-section {
+            padding-top: 70px;
+        }
+    }
+</style>
 
-    <section id="home" class="hero">
-        <canvas id="pizza3d"></canvas>
-        <div class="hero-content">
-            <span class="badge-fumaca">🔥 Artesanal • Forno a Lenha • 3D Interativo</span>
-            <h1>Veja sua pizza nascer em 3D</h1>
-            <p>Massa leve de longa fermentação, molho fresco, ingredientes flutuando e fumaça em tempo real direto na sua tela.</p>
-            <button class="btn-acao" onclick="montarPizza()">🍕 Montar Minha Pizza</button>
-        </div>
-    </section>
+</head><body><!-- =========================
+     HEADER
+========================= -->
 
-    <section id="cardapio" class="menu-section">
-        <div class="section-title">
-            <h2>Nosso Cardápio Exclusivo</h2>
-            <p>Monte seu pedido adicionando quantos itens quiser ao carrinho</p>
-        </div>
+<header>
 
-        <div class="menu-grid">
-            <div class="menu-card">
-                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=600&auto=format&fit=crop" alt="Margherita Especial" class="card-img">
-                <div class="card-body">
-                    <h3>Margherita Especial</h3>
-                    <p>Molho de tomate rústico, mozarela de búfala artesanal esticando, manjericão fresco e azeite extra virgem.</p>
-                    <div class="card-footer">
-                        <span class="price">R$ 48,00</span>
-                        <button class="btn-add-cart" onclick="adicionarAoCarrinho('Margherita Especial', 48.00)">Adicionar 🛒</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-card">
-                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=600&auto=format&fit=crop" alt="Calabresa Suprema" class="card-img">
-                <div class="card-body">
-                    <h3>Calabresa Suprema</h3>
-                    <p>Fatias finas de calabresa artesanal defumada, toque especial de pimenta, cebolas roxas caramelizadas e azeitonas negras.</p>
-                    <div class="card-footer">
-                        <span class="price">R$ 52,00</span>
-                        <button class="btn-add-cart" onclick="adicionarAoCarrinho('Calabresa Suprema', 52.00)">Adicionar 🛒</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-card">
-                <img src="https://images.unsplash.com/photo-1571407971189-e2230472d196?q=80&w=600&auto=format&fit=crop" alt="Quatro Queijos Premium" class="card-img">
-                <div class="card-body">
-                    <h3>Quatro Queijos Premium</h3>
-                    <p>Seleção especial de mozarela, provolone maturado, gorgonzola cremoso e catupiry original de altíssima qualidade.</p>
-                    <div class="card-footer">
-                        <span class="price">R$ 58,00</span>
-                        <button class="btn-add-cart" onclick="adicionarAoCarrinho('Quatro Queijos Premium', 58.00)">Adicionar 🛒</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-card">
-                <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=600&auto=format&fit=crop" alt="Coca-Cola 2 Litros" class="card-img">
-                <div class="card-body">
-                    <h3>Coca-Cola 2 Litros</h3>
-                    <p>Gelada, perfeita para acompanhar a sua pizza artesanal favorita com a família ou amigos.</p>
-                    <div class="card-footer">
-                        <span class="price">R$ 14,00</span>
-                        <button class="btn-add-cart" onclick="adicionarAoCarrinho('Coca-Cola 2 Litros', 14.00)">Adicionar 🛒</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <div class="cart-float" onclick="toggleCarrinho()">
-        🛒
-        <span id="cart-counter" class="cart-counter">0</span>
+    <div class="logo">
+        🍕 PRIME PIZZA
     </div>
 
-    <div id="cart-drawer" class="cart-drawer">
-        <div class="cart-header">
-            <h3>Seu Carrinho de Compras</h3>
-            <span class="close-cart" onclick="toggleCarrinho()">&times;</span>
-        </div>
-        <div id="cart-items-container" class="cart-items">
-            </div>
-        <div class="cart-footer">
-            <div class="cart-total">
-                <span>Total:</span>
-                <span id="cart-total-price">R$ 0,00</span>
-            </div>
-            <button class="btn-whatsapp-finalizar" onclick="finalizarPedidoWhatsApp()">Finalizar Pedido no WhatsApp 📱</button>
-        </div>
+    <div class="nav-links">
+        <a href="#home">Início</a>
+        <a href="#cardapio">Cardápio</a>
     </div>
 
-    <script type="module">
-        import * as THREE from 'three';
+</header>
 
-        const canvas = document.getElementById('pizza3d');
-        const scene = new THREE.Scene();
 
-        const camera = new THREE.PerspectiveCamera(
-            45,
-            canvas.clientWidth / canvas.clientHeight,
+<!-- =========================
+     HERO 3D
+========================= -->
+
+<section id="home" class="hero">
+
+    <canvas id="pizza3d"></canvas>
+
+    <div class="hero-content">
+
+        <span class="badge-fumaca">
+            🔥 Artesanal • Forno a Lenha • 3D Interativo
+        </span>
+
+        <h1>
+            Veja sua pizza nascer em 3D
+        </h1>
+
+        <p>
+            Massa artesanal, molho fresco,
+            ingredientes flutuando e uma pizza
+            sendo montada diante dos seus olhos.
+        </p>
+
+        <button
+            class="btn-acao"
+            onclick="montarPizza()"
+        >
+            🍕 Montar Minha Pizza
+        </button>
+
+    </div>
+
+    <div class="instruction">
+        ✨ Arraste o mouse ou toque na tela
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CARDÁPIO
+========================= -->
+
+<section id="cardapio" class="menu-section">
+
+    <div class="section-title">
+
+        <h2>
+            Nosso Cardápio Exclusivo
+        </h2>
+
+        <p>
+            Monte seu pedido adicionando
+            quantos itens quiser ao carrinho
+        </p>
+
+    </div>
+
+
+    <div class="menu-grid">
+
+        <!-- PRODUTO 1 -->
+
+        <div class="menu-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=600&auto=format&fit=crop"
+                alt="Margherita Especial"
+                class="card-img"
+            >
+
+            <div class="card-body">
+
+                <h3>
+                    Margherita Especial
+                </h3>
+
+                <p>
+                    Molho de tomate rústico,
+                    mozarela de búfala artesanal,
+                    manjericão fresco e azeite
+                    extra virgem.
+                </p>
+
+                <div class="card-footer">
+
+                    <span class="price">
+                        R$ 48,00
+                    </span>
+
+                    <button
+                        class="btn-add-cart"
+                        onclick="adicionarAoCarrinho('Margherita Especial', 48.00)"
+                    >
+                        Adicionar 🛒
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUTO 2 -->
+
+        <div class="menu-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=600&auto=format&fit=crop"
+                alt="Calabresa Suprema"
+                class="card-img"
+            >
+
+            <div class="card-body">
+
+                <h3>
+                    Calabresa Suprema
+                </h3>
+
+                <p>
+                    Calabresa artesanal defumada,
+                    pimenta especial, cebola roxa
+                    caramelizada e azeitonas negras.
+                </p>
+
+                <div class="card-footer">
+
+                    <span class="price">
+                        R$ 52,00
+                    </span>
+
+                    <button
+                        class="btn-add-cart"
+                        onclick="adicionarAoCarrinho('Calabresa Suprema', 52.00)"
+                    >
+                        Adicionar 🛒
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUTO 3 -->
+
+        <div class="menu-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1571407971189-e2230472d196?q=80&w=600&auto=format&fit=crop"
+                alt="Quatro Queijos Premium"
+                class="card-img"
+            >
+
+            <div class="card-body">
+
+                <h3>
+                    Quatro Queijos Premium
+                </h3>
+
+                <p>
+                    Mozarela, provolone maturado,
+                    gorgonzola cremoso e catupiry.
+                </p>
+
+                <div class="card-footer">
+
+                    <span class="price">
+                        R$ 58,00
+                    </span>
+
+                    <button
+                        class="btn-add-cart"
+                        onclick="adicionarAoCarrinho('Quatro Queijos Premium', 58.00)"
+                    >
+                        Adicionar 🛒
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- PRODUTO 4 -->
+
+        <div class="menu-card">
+
+            <img
+                src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=600&auto=format&fit=crop"
+                alt="Coca-Cola 2 Litros"
+                class="card-img"
+            >
+
+            <div class="card-body">
+
+                <h3>
+                    Coca-Cola 2 Litros
+                </h3>
+
+                <p>
+                    Gelada, perfeita para acompanhar
+                    sua pizza artesanal.
+                </p>
+
+                <div class="card-footer">
+
+                    <span class="price">
+                        R$ 14,00
+                    </span>
+
+                    <button
+                        class="btn-add-cart"
+                        onclick="adicionarAoCarrinho('Coca-Cola 2 Litros', 14.00)"
+                    >
+                        Adicionar 🛒
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CARRINHO
+========================= -->
+
+<div
+    class="cart-float"
+    onclick="toggleCarrinho()"
+>
+
+    🛒
+
+    <span
+        id="cart-counter"
+        class="cart-counter"
+    >
+        0
+    </span>
+
+</div>
+
+
+<div
+    id="cart-drawer"
+    class="cart-drawer"
+>
+
+    <div class="cart-header">
+
+        <h3>
+            Seu Carrinho de Compras
+        </h3>
+
+        <span
+            class="close-cart"
+            onclick="toggleCarrinho()"
+        >
+            &times;
+        </span>
+
+    </div>
+
+
+    <div
+        id="cart-items-container"
+        class="cart-items"
+    >
+    </div>
+
+
+    <div class="cart-footer">
+
+        <div class="cart-total">
+
+            <span>
+                Total:
+            </span>
+
+            <span id="cart-total-price">
+                R$ 0,00
+            </span>
+
+        </div>
+
+        <button
+            class="btn-whatsapp-finalizar"
+            onclick="finalizarPedidoWhatsApp()"
+        >
+            Finalizar Pedido no WhatsApp 📱
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- ======================================================
+     MOTOR 3D
+====================================================== -->
+
+<script type="module">
+
+    import * as THREE from 'three';
+
+
+    /* ==================================================
+       CANVAS
+    ================================================== */
+
+    const canvas =
+        document.getElementById("pizza3d");
+
+
+    /* ==================================================
+       CENA
+    ================================================== */
+
+    const scene =
+        new THREE.Scene();
+
+
+    /* ==================================================
+       CÂMERA
+    ================================================== */
+
+    const camera =
+        new THREE.PerspectiveCamera(
+            42,
+            window.innerWidth / window.innerHeight,
             0.1,
             100
         );
-        camera.position.set(0, 5, 9);
 
-        const renderer = new THREE.WebGLRenderer({
+    camera.position.set(
+        0,
+        6.5,
+        10
+    );
+
+
+    /* ==================================================
+       RENDERIZADOR
+    ================================================== */
+
+    const renderer =
+        new THREE.WebGLRenderer({
             canvas: canvas,
             antialias: true,
             alpha: true
         });
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
-        renderer.shadowMap.enabled = true;
-        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
-        // ILUMINAÇÃO
-        const luzAmbiente = new THREE.HemisphereLight(0xffe8d0, 0x160604, 2);
-        scene.add(luzAmbiente);
 
-        const luzPrincipal = new THREE.DirectionalLight(0xffd0a0, 4);
-        luzPrincipal.position.set(4, 8, 6);
-        luzPrincipal.castShadow = true;
-        scene.add(luzPrincipal);
+    renderer.setPixelRatio(
+        Math.min(
+            window.devicePixelRatio,
+            2
+        )
+    );
 
-        const luzQuente = new THREE.PointLight(0xff4500, 8, 15);
-        luzQuente.position.set(-4, 3, 4);
-        scene.add(luzQuente);
 
-        // 1. MASSA BRANCA 3D
-        const massaMaterial = new THREE.MeshStandardMaterial({
-            color: 0xf5e5c8,
-            roughness: 0.8
+    renderer.setSize(
+        window.innerWidth,
+        window.innerHeight,
+        false
+    );
+
+
+    renderer.shadowMap.enabled = true;
+
+    renderer.shadowMap.type =
+        THREE.PCFSoftShadowMap;
+
+
+    /* ==================================================
+       ILUMINAÇÃO
+    ================================================== */
+
+    const luzAmbiente =
+        new THREE.HemisphereLight(
+            0xffead5,
+            0x160604,
+            2.2
+        );
+
+    scene.add(luzAmbiente);
+
+
+    const luzPrincipal =
+        new THREE.DirectionalLight(
+            0xffd0a0,
+            4
+        );
+
+    luzPrincipal.position.set(
+        4,
+        8,
+        6
+    );
+
+    luzPrincipal.castShadow = true;
+
+    scene.add(luzPrincipal);
+
+
+    const luzQuente =
+        new THREE.PointLight(
+            0xff4500,
+            10,
+            16
+        );
+
+    luzQuente.position.set(
+        -4,
+        3,
+        4
+    );
+
+    scene.add(luzQuente);
+
+
+    /* ==================================================
+       GRUPO DA PIZZA
+    ================================================== */
+
+    const pizzaGrupo =
+        new THREE.Group();
+
+    pizzaGrupo.rotation.x =
+        -0.10;
+
+    scene.add(pizzaGrupo);
+
+
+    /* ==================================================
+       MASSA
+    ================================================== */
+
+    const massaMaterial =
+        new THREE.MeshStandardMaterial({
+            color: 0xe8c28f,
+            roughness: 0.82,
+            metalness: 0
         });
-        const massaGeometry = new THREE.CylinderGeometry(3.2, 3.2, 0.35, 96);
-        const massa = new THREE.Mesh(massaGeometry, massaMaterial);
-        massa.position.y = 0;
-        massa.castShadow = true;
-        massa.receiveShadow = true;
-        scene.add(massa);
 
-        // 2. MOLHO DE TOMATE 3D
-        const molhoMaterial = new THREE.MeshStandardMaterial({
-            color: 0xc83218,
-            roughness: 0.7
+
+    const massaGeometry =
+        new THREE.CylinderGeometry(
+            3.25,
+            3.35,
+            0.38,
+            96
+        );
+
+
+    const massa =
+        new THREE.Mesh(
+            massaGeometry,
+            massaMaterial
+        );
+
+
+    massa.position.y = 0;
+
+    massa.castShadow = true;
+
+    massa.receiveShadow = true;
+
+    pizzaGrupo.add(massa);
+
+
+    /* ==================================================
+       BORDA DA PIZZA
+    ================================================== */
+
+    const bordaMaterial =
+        new THREE.MeshStandardMaterial({
+            color: 0xd99a55,
+            roughness: .75
         });
-        const molhoGeometry = new THREE.CylinderGeometry(2.95, 2.95, 0.08, 96);
-        const molho = new THREE.Mesh(molhoGeometry, molhoMaterial);
-        molho.position.y = 0.22;
-        molho.castShadow = true;
-        scene.add(molho);
 
-        // 3. INGREDIENTES FLUTUANTES (CALABRESA)
-        function criarCalabresa() {
-            const geometry = new THREE.CylinderGeometry(0.32, 0.32, 0.12, 32);
-            const material = new THREE.MeshStandardMaterial({
-                color: 0x9e2515,
-                roughness: 0.65
+
+    const bordaGeometry =
+        new THREE.TorusGeometry(
+            2.92,
+            0.28,
+            24,
+            96
+        );
+
+
+    const borda =
+        new THREE.Mesh(
+            bordaGeometry,
+            bordaMaterial
+        );
+
+
+    borda.rotation.x =
+        Math.PI / 2;
+
+    borda.position.y =
+        0.25;
+
+    borda.castShadow = true;
+
+    pizzaGrupo.add(borda);
+
+
+    /* ==================================================
+       MOLHO
+    ================================================== */
+
+    const molhoMaterial =
+        new THREE.MeshStandardMaterial({
+            color: 0xb91f0f,
+            roughness: .72
+        });
+
+
+    const molhoGeometry =
+        new THREE.CylinderGeometry(
+            2.86,
+            2.86,
+            .09,
+            96
+        );
+
+
+    const molho =
+        new THREE.Mesh(
+            molhoGeometry,
+            molhoMaterial
+        );
+
+
+    molho.position.y =
+        .22;
+
+    molho.castShadow = true;
+
+    pizzaGrupo.add(molho);
+
+
+    /* ==================================================
+       QUEIJO BASE
+    ================================================== */
+
+    const queijoMaterial =
+        new THREE.MeshStandardMaterial({
+            color: 0xffe4a3,
+            roughness: .55
+        });
+
+
+    const queijoGeometry =
+        new THREE.CylinderGeometry(
+            2.72,
+            2.72,
+            .08,
+            96
+        );
+
+
+    const queijo =
+        new THREE.Mesh(
+            queijoGeometry,
+            queijoMaterial
+        );
+
+
+    queijo.position.y =
+        .29;
+
+    pizzaGrupo.add(queijo);
+
+
+    /* ==================================================
+       FUNÇÃO PARA INGREDIENTES
+    ================================================== */
+
+    const ingredientes = [];
+
+
+    function adicionarIngrediente(
+        objeto,
+        destino,
+        altura = 3
+    ) {
+
+        objeto.userData.destino =
+            destino;
+
+        objeto.userData.altura =
+            altura;
+
+        objeto.userData.montando =
+            false;
+
+        objeto.userData.offset =
+            Math.random() * Math.PI * 2;
+
+        scene.add(objeto);
+
+        ingredientes.push(objeto);
+    }
+
+
+    /* ==================================================
+       CALABRESA
+    ================================================== */
+
+    function criarCalabresa() {
+
+        const geometry =
+            new THREE.CylinderGeometry(
+                .34,
+                .34,
+                .13,
+                32
+            );
+
+
+        const material =
+            new THREE.MeshStandardMaterial({
+                color: 0x9c2917,
+                roughness: .62
             });
-            const objeto = new THREE.Mesh(geometry, material);
-            objeto.rotation.x = Math.PI / 2;
-            objeto.castShadow = true;
-            return objeto;
-        }
 
-        const ingredientes = [];
-        for (let i = 0; i < 12; i++) {
-            const ingrediente = criarCalabresa();
-            ingrediente.position.set(
-                (Math.random() - 0.5) * 5,
-                2 + Math.random() * 2,
-                (Math.random() - 0.5) * 4
+
+        const objeto =
+            new THREE.Mesh(
+                geometry,
+                material
             );
-            ingrediente.userData.destino = {
-                x: (Math.random() - 0.5) * 4.5,
-                y: 0.45,
-                z: (Math.random() - 0.5) * 4.5
-            };
-            scene.add(ingrediente);
-            ingredientes.push(ingrediente);
-        }
 
-        // 4. FUMAÇA 3D DE PARTÍCULAS
-        const fumaca = [];
-        const fumacaMaterial = new THREE.MeshBasicMaterial({
-            color: 0xffffff,
-            transparent: true,
-            opacity: 0.12,
-            depthWrite: false
-        });
 
-        for (let i = 0; i < 25; i++) {
-            const geometry = new THREE.SphereGeometry(0.15 + Math.random() * 0.25, 16, 16);
-            const particula = new THREE.Mesh(geometry, fumacaMaterial.clone());
-            particula.position.set(
-                (Math.random() - 0.5) * 2,
-                0.5 + Math.random(),
-                (Math.random() - 0.5) * 2
+        objeto.rotation.x =
+            Math.PI / 2;
+
+        objeto.castShadow = true;
+
+        return objeto;
+    }
+
+
+    for (let i = 0; i < 10; i++) {
+
+        const ingrediente =
+            criarCalabresa();
+
+        const angulo =
+            Math.random() *
+            Math.PI * 2;
+
+        const raio =
+            Math.random() * 2.25;
+
+        adicionarIngrediente(
+            ingrediente,
+            {
+                x:
+                    Math.cos(angulo) * raio,
+                y: .45,
+                z:
+                    Math.sin(angulo) * raio
+            },
+            3 + Math.random() * 1.5
+        );
+
+    }
+
+
+    /* ==================================================
+       AZEITONAS
+    ================================================== */
+
+    function criarAzeitona() {
+
+        const geometry =
+            new THREE.SphereGeometry(
+                .20,
+                24,
+                24
             );
-            particula.userData.velocidade = 0.002 + Math.random() * 0.004;
-            scene.add(particula);
-            fumaca.push(particula);
-        }
 
-        // CONTROLE DE MONTAGEM
-        window.montarPizza = function() {
-            ingredientes.forEach((ingrediente, index) => {
+
+        const material =
+            new THREE.MeshStandardMaterial({
+                color: 0x15130b,
+                roughness: .45
+            });
+
+
+        const objeto =
+            new THREE.Mesh(
+                geometry,
+                material
+            );
+
+        objeto.scale.y = .65;
+
+        objeto.castShadow = true;
+
+        return objeto;
+    }
+
+
+    for (let i = 0; i < 8; i++) {
+
+        const ingrediente =
+            criarAzeitona();
+
+        const angulo =
+            Math.random() *
+            Math.PI * 2;
+
+        const raio =
+            Math.random() * 2.35;
+
+        adicionarIngrediente(
+            ingrediente,
+            {
+                x:
+                    Math.cos(angulo) * raio,
+                y: .55,
+                z:
+                    Math.sin(angulo) * raio
+            },
+            3 + Math.random() * 1.5
+        );
+
+    }
+
+
+    /* ==================================================
+       TOMATES
+    ================================================== */
+
+    function criarTomate() {
+
+        const geometry =
+            new THREE.SphereGeometry(
+                .22,
+                24,
+                24
+            );
+
+
+        const material =
+            new THREE.MeshStandardMaterial({
+                color: 0xf13b20,
+                roughness: .6
+            });
+
+
+        const objeto =
+            new THREE.Mesh(
+                geometry,
+                material
+            );
+
+        objeto.scale.set(
+            1.3,
+            .55,
+            1.1
+        );
+
+        objeto.castShadow = true;
+
+        return objeto;
+    }
+
+
+    for (let i = 0; i < 7; i++) {
+
+        const ingrediente =
+            criarTomate();
+
+        const angulo =
+            Math.random() *
+            Math.PI * 2;
+
+        const raio =
+            Math.random() * 2.2;
+
+        adicionarIngrediente(
+            ingrediente,
+            {
+                x:
+                    Math.cos(angulo) * raio,
+                y: .55,
+                z:
+                    Math.sin(angulo) * raio
+            },
+            3 + Math.random() * 1.5
+        );
+
+    }
+
+
+    /* ==================================================
+       MANJERICÃO
+    ================================================== */
+
+    function criarManjericao() {
+
+        const geometry =
+            new THREE.SphereGeometry(
+                .20,
+                20,
+                20
+            );
+
+
+        const material =
+            new THREE.MeshStandardMaterial({
+                color: 0x3d9b45,
+                roughness: .75
+            });
+
+
+        const objeto =
+            new THREE.Mesh(
+                geometry,
+                material
+            );
+
+
+        objeto.scale.set(
+            1.5,
+            .18,
+            .75
+        );
+
+
+        objeto.castShadow = true;
+
+        return objeto;
+    }
+
+
+    for (let i = 0; i < 6; i++) {
+
+        const ingrediente =
+            criarManjericao();
+
+        const angulo =
+            Math.random() *
+            Math.PI * 2;
+
+        const raio =
+            Math.random() * 2.1;
+
+        adicionarIngrediente(
+            ingrediente,
+            {
+                x:
+                    Math.cos(angulo) * raio,
+                y: .65,
+                z:
+                    Math.sin(angulo) * raio
+            },
+            3 + Math.random() * 1.5
+        );
+
+    }
+
+
+    /* ==================================================
+       FUMAÇA
+    ================================================== */
+
+    const fumaca = [];
+
+
+    for (let i = 0; i < 35; i++) {
+
+        const geometry =
+            new THREE.SphereGeometry(
+                .10 +
+                Math.random() * .20,
+                16,
+                16
+            );
+
+
+        const material =
+            new THREE.MeshBasicMaterial({
+                color: 0xffffff,
+                transparent: true,
+                opacity: 0,
+                depthWrite: false
+            });
+
+
+        const particula =
+            new THREE.Mesh(
+                geometry,
+                material
+            );
+
+
+        particula.position.set(
+            (Math.random() - .5) * 2,
+            .55 + Math.random() * 1.5,
+            (Math.random() - .5) * 2
+        );
+
+
+        particula.userData.velocidade =
+            .006 + Math.random() * .012;
+
+        particula.userData.offset =
+            Math.random() * 100;
+
+        scene.add(particula);
+
+        fumaca.push(particula);
+
+    }
+
+
+    /* ==================================================
+       ESTADO
+    ================================================== */
+
+    let pizzaMontada = false;
+
+
+    /* ==================================================
+       MONTAR PIZZA
+    ================================================== */
+
+    window.montarPizza = function() {
+
+        pizzaMontada = true;
+
+        ingredientes.forEach(
+            (ingrediente, index) => {
+
                 setTimeout(() => {
-                    ingrediente.userData.montando = true;
-                }, index * 120);
-            });
-        };
 
-        // LOOP DE ANIMAÇÃO
-        function animate(time) {
-            requestAnimationFrame(animate);
+                    ingrediente.userData.montando =
+                        true;
 
-            // Animar ingredientes
-            ingredientes.forEach((ingrediente) => {
-                if (!ingrediente.userData.montando) {
-                    ingrediente.position.y = 2.5 + Math.sin(time * 0.002 + ingrediente.id) * 0.25;
-                    ingrediente.rotation.z += 0.01;
-                } else {
-                    const destino = ingrediente.userData.destino;
-                    ingrediente.position.x += (destino.x - ingrediente.position.x) * 0.05;
-                    ingrediente.position.y += (destino.y - ingrediente.position.y) * 0.05;
-                    ingrediente.position.z += (destino.z - ingrediente.position.z) * 0.05;
-                }
-            });
+                }, index * 90);
 
-            // Animar fumaça
-            fumaca.forEach((particula) => {
-                particula.position.y += particula.userData.velocidade;
-                particula.position.x += Math.sin(time * 0.001 + particula.id) * 0.002;
-                particula.scale.multiplyScalar(1.002);
-
-                if (particula.position.y > 4) {
-                    particula.position.y = 0.5;
-                    particula.scale.set(1, 1, 1);
-                }
-            });
-
-            massa.rotation.y += 0.0015;
-            renderer.render(scene, camera);
-        }
-
-        animate();
-
-        // Ajustar redimensionamento de tela
-        window.addEventListener('resize', () => {
-            camera.aspect = canvas.clientWidth / canvas.clientHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
-        });
-    </script>
-
-    <script>
-        let carrinho = [];
-
-        function adicionarAoCarrinho(nome, preco) {
-            let itemExistente = carrinho.find(item => item.name === nome);
-            if (itemExistente) {
-                itemExistente.quantidade++;
-            } else {
-                carrinho.push({ name: nome, price: preco, quantidade: 1 });
             }
-            atualizarCarrinho();
-            document.getElementById('cart-drawer').classList.add('open');
+        );
+
+    };
+
+
+    /* ==================================================
+       MOUSE / TOUCH
+    ================================================== */
+
+    let mouseX = 0;
+    let mouseY = 0;
+
+    window.addEventListener(
+        "mousemove",
+        (event) => {
+
+            mouseX =
+                (event.clientX /
+                window.innerWidth -
+                .5) * 2;
+
+            mouseY =
+                (event.clientY /
+                window.innerHeight -
+                .5) * 2;
+
         }
+    );
 
-        function alterarQuantidade(nome, delta) {
-            let item = carrinho.find(item => item.name === nome);
-            if (item) {
-                item.quantidade += delta;
-                if (item.quantidade <= 0) {
-                    carrinho = carrinho.filter(i => i.name !== nome);
-                }
-            }
-            atualizarCarrinho();
-        }
 
-        function atualizarCarrinho() {
-            let container = document.getElementById('cart-items-container');
-            let counter = document.getElementById('cart-counter');
-            let totalPriceEl = document.getElementById('cart-total-price');
+    window.addEventListener(
+        "touchmove",
+        (event) => {
 
-            container.innerHTML = '';
-            let totalItens = 0;
-            let precoTotal = 0;
-
-            if (carrinho.length === 0) {
-                container.innerHTML = '<p style="color: #777; text-align: center; margin-top: 40px;">Seu carrinho está vazio.</p>';
-            }
-
-            carrinho.forEach(item => {
-                totalItens += item.quantidade;
-                precoTotal += item.price * item.quantidade;
-
-                let div = document.createElement('div');
-                div.className = 'cart-item';
-                div.innerHTML = `
-                    <div class="cart-item-info">
-                        <h4>${item.name}</h4>
-                        <span>R$ ${(item.price * item.quantidade).toFixed(2).replace('.', ',')}</span>
-                    </div>
-                    <div class="cart-item-controls">
-                        <button onclick="alterarQuantidade('${item.name}', -1)">-</button>
-                        <span style="color:#fff; font-weight:bold;">${item.quantidade}</span>
-                        <button onclick="alterarQuantidade('${item.name}', 1)">+</button>
-                    </div>
-                `;
-                container.appendChild(div);
-            });
-
-            counter.innerText = totalItens;
-            totalPriceEl.innerText = `R$ ${precoTotal.toFixed(2).replace('.', ',')}`;
-        }
-
-        function toggleCarrinho() {
-            document.getElementById('cart-drawer').classList.toggle('open');
-        }
-
-        function finalizarPedidoWhatsApp() {
-            if (carrinho.length === 0) {
-                alert('Seu carrinho está vazio! Adicione itens antes de finalizar.');
+            if (!event.touches.length)
                 return;
+
+            mouseX =
+                (event.touches[0].clientX /
+                window.innerWidth -
+                .5) * 2;
+
+            mouseY =
+                (event.touches[0].clientY /
+                window.innerHeight -
+                .5) * 2;
+
+        },
+        { passive: true }
+    );
+
+
+    /* ==================================================
+       LOOP
+    ================================================== */
+
+    function animate(time) {
+
+        requestAnimationFrame(
+            animate
+        );
+
+
+        /* ------------------------------
+           INGREDIENTES
+        ------------------------------ */
+
+        ingredientes.forEach(
+            (ingrediente) => {
+
+                if (
+                    !ingrediente.userData.montando
+                ) {
+
+                    ingrediente.position.y =
+                        ingrediente.userData.altura +
+                        Math.sin(
+                            time * .0015 +
+                            ingrediente.userData.offset
+                        ) * .25;
+
+                    ingrediente.rotation.y +=
+                        .008;
+
+                    ingrediente.rotation.z +=
+                        .004;
+
+                }
+
+                else {
+
+                    const destino =
+                        ingrediente.userData.destino;
+
+
+                    ingrediente.position.x +=
+                        (
+                            destino.x -
+                            ingrediente.position.x
+                        ) * .055;
+
+
+                    ingrediente.position.y +=
+                        (
+                            destino.y -
+                            ingrediente.position.y
+                        ) * .055;
+
+
+                    ingrediente.position.z +=
+                        (
+                            destino.z -
+                            ingrediente.position.z
+                        ) * .055;
+
+
+                    ingrediente.rotation.y *=
+                        .94;
+
+                    ingrediente.rotation.z *=
+                        .94;
+
+                }
+
             }
+        );
 
-            let mensagem = "Olá! Gostaria de fazer o seguinte pedido:%0A%0A";
-            let total = 0;
 
-            carrinho.forEach(item => {
-                let subtotal = item.price * item.quantidade;
-                total += subtotal;
-                mensagem += `• ${item.quantidade}x ${item.name} - R$ ${subtotal.toFixed(2).replace('.', ',')}%0A`;
+        /* ------------------------------
+           FUMAÇA
+        ------------------------------ */
+
+        fumaca.forEach(
+            (particula) => {
+
+                if (!pizzaMontada) {
+
+                    particula.material.opacity =
+                        0;
+
+                    return;
+
+                }
+
+
+                particula.material.opacity =
+                    .08;
+
+
+                particula.position.y +=
+                    particula.userData.velocidade;
+
+
+                particula.position.x +=
+                    Math.sin(
+                        time * .001 +
+                        particula.userData.offset
+                    ) * .002;
+
+
+                particula.position.z +=
+                    Math.cos(
+                        time * .0008 +
+                        particula.userData.offset
+                    ) * .001;
+
+
+                particula.scale.multiplyScalar(
+                    1.003
+                );
+
+
+                if (
+                    particula.position.y >
+                    4.5
+                ) {
+
+                    particula.position.y =
+                        .45;
+
+                    particula.position.x =
+                        (Math.random() - .5) *
+                        1.5;
+
+                    particula.position.z =
+                        (Math.random() - .5) *
+                        1.5;
+
+                    particula.scale.set(
+                        1,
+                        1,
+                        1
+                    );
+
+                }
+
+            }
+        );
+
+
+        /* ------------------------------
+           MOVIMENTO DA PIZZA
+        ------------------------------ */
+
+        pizzaGrupo.rotation.y +=
+            .002;
+
+
+        pizzaGrupo.rotation.x +=
+            (
+                -.10 +
+                mouseY * .06 -
+                pizzaGrupo.rotation.x
+            ) * .03;
+
+
+        pizzaGrupo.position.x +=
+            (
+                mouseX * .45 -
+                pizzaGrupo.position.x
+            ) * .025;
+
+
+        /* ------------------------------
+           CÂMERA
+        ------------------------------ */
+
+        camera.position.x +=
+            (
+                mouseX * .5 -
+                camera.position.x
+            ) * .02;
+
+
+        camera.lookAt(
+            0,
+            .3,
+            0
+        );
+
+
+        renderer.render(
+            scene,
+            camera
+        );
+
+    }
+
+
+    animate(0);
+
+
+    /* ==================================================
+       RESPONSIVIDADE
+    ================================================== */
+
+    window.addEventListener(
+        "resize",
+        () => {
+
+            const width =
+                window.innerWidth;
+
+            const height =
+                window.innerHeight;
+
+
+            camera.aspect =
+                width / height;
+
+            camera.updateProjectionMatrix();
+
+
+            renderer.setSize(
+                width,
+                height,
+                false
+            );
+
+        }
+    );
+
+</script>
+
+
+<!-- ======================================================
+     CARRINHO + WHATSAPP
+====================================================== -->
+
+<script>
+
+    let carrinho = [];
+
+
+    function adicionarAoCarrinho(
+        nome,
+        preco
+    ) {
+
+        let itemExistente =
+            carrinho.find(
+                item =>
+                item.name === nome
+            );
+
+
+        if (itemExistente) {
+
+            itemExistente.quantidade++;
+
+        }
+
+        else {
+
+            carrinho.push({
+                name: nome,
+                price: preco,
+                quantidade: 1
             });
 
-            mensagem += `%0A*Total Geral: R$ ${total.toFixed(2).replace('.', ',')}*`;
-            mensagem += `%0A%0APor favor, confirmar entrega/retirada!`;
-
-            // Substitua pelo seu número real do WhatsApp com DDD (ex: 5563999999999)
-            let numeroWhatsApp = "5563999999999"; 
-            let url = `https://wa.me/${numeroWhatsApp}?text=${mensagem}`;
-            window.open(url, '_blank');
         }
-    </script>
+
+
+        atualizarCarrinho();
+
+
+        document
+            .getElementById(
+                'cart-drawer'
+            )
+            .classList.add('open');
+
+    }
+
+
+    function alterarQuantidade(
+        nome,
+        delta
+    ) {
+
+        let item =
+            carrinho.find(
+                item =>
+                item.name === nome
+            );
+
+
+        if (item) {
+
+            item.quantidade +=
+                delta;
+
+
+            if (
+                item.quantidade <= 0
+            ) {
+
+                carrinho =
+                    carrinho.filter(
+                        i =>
+                        i.name !== nome
+                    );
+
+            }
+
+        }
+
+
+        atualizarCarrinho();
+
+    }
+
+
+    function atualizarCarrinho() {
+
+        let container =
+            document.getElementById(
+                'cart-items-container'
+            );
+
+
+        let counter =
+            document.getElementById(
+                'cart-counter'
+            );
+
+
+        let totalPriceEl =
+            document.getElementById(
+                'cart-total-price'
+            );
+
+
+        container.innerHTML = '';
+
+
+        let totalItens = 0;
+
+        let precoTotal = 0;
+
+
+        if (
+            carrinho.length === 0
+        ) {
+
+            container.innerHTML =
+                '<p style="color:#777;text-align:center;margin-top:40px;">Seu carrinho está vazio.</p>';
+
+        }
+
+
+        carrinho.forEach(
+            item => {
+
+                totalItens +=
+                    item.quantidade;
+
+
+                precoTotal +=
+                    item.price *
+                    item.quantidade;
+
+
+                let div =
+                    document.createElement(
+                        'div'
+                    );
+
+
+                div.className =
+                    'cart-item';
+
+
+                div.innerHTML = `
+
+                    <div class="cart-item-info">
+
+                        <h4>
+                            ${item.name}
+                        </h4>
+
+                        <span>
+                            R$
+                            ${(item.price *
+                            item.quantidade)
+                            .toFixed(2)
+                            .replace('.', ',')}
+                        </span>
+
+                    </div>
+
+                    <div class="cart-item-controls">
+
+                        <button
+                            onclick="alterarQuantidade('${item.name}', -1)"
+                        >
+                            -
+                        </button>
+
+                        <span
+                            style="color:#fff;font-weight:bold;"
+                        >
+                            ${item.quantidade}
+                        </span>
+
+                        <button
+                            onclick="alterarQuantidade('${item.name}', 1)"
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+                `;
+
+
+                container.appendChild(
+                    div
+                );
+
+            }
+        );
+
+
+        counter.innerText =
+            totalItens;
+
+
+        totalPriceEl.innerText =
+            `R$ ${precoTotal
+            .toFixed(2)
+            .replace('.', ',')}`;
+
+    }
+
+
+    function toggleCarrinho() {
+
+        document
+            .getElementById(
+                'cart-drawer'
+            )
+            .classList.toggle(
+                'open'
+            );
+
+    }
+
+
+    function finalizarPedidoWhatsApp() {
+
+        if (
+            carrinho.length === 0
+        ) {
+
+            alert(
+                'Seu carrinho está vazio! Adicione itens antes de finalizar.'
+            );
+
+            return;
+
+        }
+
+
+        let mensagem =
+            "Olá! Gostaria de fazer o seguinte pedido:%0A%0A";
+
+
+        let total = 0;
+
+
+        carrinho.forEach(
+            item => {
+
+                let subtotal =
+                    item.price *
+                    item.quantidade;
+
+
+                total += subtotal;
+
+
+                mensagem +=
+                    `• ${item.quantidade}x ${item.name} - R$ ${subtotal.toFixed(2).replace('.', ',')}%0A`;
+
+            }
+        );
+
+
+        mensagem +=
+            `%0A*Total Geral: R$ ${total.toFixed(2).replace('.', ',')}*`;
+
+
+        mensagem +=
+            `%0A%0APor favor, confirmar entrega/retirada!`;
+
+
+        /*
+           TROQUE PELO WHATSAPP REAL
+        */
+
+        let numeroWhatsApp =
+            "5563999999999";
+
+
+        let url =
+            `https://wa.me/${numeroWhatsApp}?text=${mensagem}`;
+
+
+        window.open(
+            url,
+            '_blank'
+        );
+
+    }
+
+</script>
+
 </body>
 </html>
