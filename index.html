@@ -3,66 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prime Pizza - Experiência 3D</title>
+    <title>Prime Pizza - Sabor e Tradição</title>
     <link rel="stylesheet" href="src/css/style.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 
-    <!-- HERO 3D E ANIMAÇÃO DE INGREDIENTES -->
-    <section id="hero-3d">
-        <!-- Ingredientes flutuantes distribuídos em volta -->
-        <div class="ingredients-fly-container">
-            <span class="fly-item" style="top: 15%; left: 20%; animation-delay: 0.1s;">🍅</span>
-            <span class="fly-item" style="top: 18%; right: 22%; animation-delay: 0.3s;">🍄</span>
-            <span class="fly-item" style="top: 35%; left: 10%; animation-delay: 0.5s;">🧀</span>
-            <span class="fly-item" style="top: 30%; right: 12%; animation-delay: 0.2s;">🫒</span>
-            <span class="fly-item" style="top: 10%; left: 48%; animation-delay: 0.4s;">🍃</span>
-            <span class="fly-item" style="top: 45%; left: 25%; animation-delay: 0.6s;">🍄</span>
-            <span class="fly-item" style="top: 42%; right: 28%; animation-delay: 0.3s;">🍅</span>
+    <!-- CABEÇALHO / MENU DE NAVEGAÇÃO -->
+    <header class="header">
+        <div class="nav-container">
+            <div class="logo">🍕 PRIME PIZZA</div>
+            <nav class="nav-links">
+                <a href="#home">Início</a>
+                <a href="#cardapio" class="highlight-link">Cardápio</a>
+                <a href="#sobre">Nossa História</a>
+                <a href="#contato">Contato</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- PÁGINA INICIAL / HERO COM EFEITO VISUAL DE ALTA QUALIDADE -->
+    <section id="home" class="hero-section">
+        <!-- Ingredientes flutuantes inspirados na referência -->
+        <div class="floating-ingredients">
+            <span class="ing ing-1">🍅</span>
+            <span class="ing ing-2">🧀</span>
+            <span class="ing ing-3">🍄</span>
+            <span class="ing ing-4">🍃</span>
+            <span class="ing ing-5">🫒</span>
+            <span class="ing ing-6">🥓</span>
         </div>
 
-        <div id="canvas-container"></div>
+        <div class="hero-overlay"></div>
         <div class="hero-content">
-            <h1>PRIME PIZZA</h1>
-            <p class="subtitle">Ingredientes frescos, arte e sabor em cada pedaço.</p>
+            <span class="badge-tag">Feita no Forno a Lenha</span>
+            <h1>A verdadeira obra-prima da pizza artesanal</h1>
+            <p>Ingredientes frescos selecionados, queijo derretido perfeito e uma experiência única a cada fatia.</p>
             <div class="hero-buttons">
-                <a href="#cardapio" class="btn primary">Ver Cardápio</a>
+                <a href="#cardapio" class="btn-main">Ver Cardápio Completo 🍕</a>
             </div>
         </div>
+        
+        <!-- Efeito visual de fumaça na base -->
+        <div class="steam-effect"></div>
     </section>
 
-    <!-- CARDÁPIO -->
+    <!-- SECÇÃO DO CARDÁPIO (Completamente reformulada e elegante) -->
     <section id="cardapio" class="menu-section">
         <div class="container">
-            <h2>Escolha sua Delícia</h2>
+            <div class="section-title">
+                <h2>Nosso Cardápio Exclusivo</h2>
+                <p>Escolha a sua categoria favorita e monte o seu pedido</p>
+            </div>
             
-            <div class="categories">
-                <button class="cat-btn active">Pizzas Salgadas</button>
-                <button class="cat-btn">Pizzas Doces</button>
-                <button class="cat-btn">Bebidas</button>
+            <div class="categories-tabs">
+                <button class="cat-tab active" onclick="filtrarCategoria('salgadas')">Pizzas Salgadas</button>
+                <button class="cat-tab" onclick="filtrarCategoria('doces')">Pizzas Doces</button>
+                <button class="cat-tab" onclick="filtrarCategoria('bebidas')">Bebidas</button>
             </div>
 
             <div class="product-grid">
-                <div class="product-card" onclick="abrirModal('Pizza Margherita', 45.00)">
-                    <div class="card-img-placeholder">🍅</div>
-                    <h3>Margherita</h3>
-                    <p>Molho de tomate artesanal, mozarela de búfala, manjericão fresco e azeite.</p>
-                    <div class="price">R$ 45,00</div>
+                <!-- Produto 1 -->
+                <div class="product-card" onclick="abrirModal('Pizza Margherita Especial', 48.00)">
+                    <div class="card-image-box margherita-bg">
+                        <span class="food-emoji">🍅</span>
+                    </div>
+                    <div class="card-info">
+                        <h3>Margherita Especial</h3>
+                        <p>Molho de tomate rústico, mozarela de búfala artesanal, manjericão fresco e azeite extra virgem.</p>
+                        <div class="card-footer-card">
+                            <span class="price">R$ 48,00</span>
+                            <button class="btn-add">Pedir</button>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="product-card" onclick="abrirModal('Pizza Calabresa', 48.00)">
-                    <div class="card-img-placeholder">🍕</div>
-                    <h3>Calabresa Especial</h3>
-                    <p>Calabresa fatiada fina, cebolas roxas caramelizadas, azeitonas negras e orégano.</p>
-                    <div class="price">R$ 48,00</div>
+                <!-- Produto 2 -->
+                <div class="product-card" onclick="abrirModal('Pizza Calabresa Suprema', 52.00)">
+                    <div class="card-image-box calabresa-bg">
+                        <span class="food-emoji">🔥</span>
+                    </div>
+                    <div class="card-info">
+                        <h3>Calabresa Suprema</h3>
+                        <p>Fatias finas de calabresa artesanal defumada, cebolas roxas caramelizadas, azeitonas negras e orégano.</p>
+                        <div class="card-footer-card">
+                            <span class="price">R$ 52,00</span>
+                            <button class="btn-add">Pedir</button>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="product-card" onclick="abrirModal('Pizza Quatro Queijos', 52.00)">
-                    <div class="card-img-placeholder">🧀</div>
-                    <h3>Quatro Queijos</h3>
-                    <p>Mozarela, provolone, gorgonzola e catupiry original gratinados.</p>
-                    <div class="price">R$ 52,00</div>
+                <!-- Produto 3 -->
+                <div class="product-card" onclick="abrirModal('Pizza Quatro Queijos Premium', 58.00)">
+                    <div class="card-image-box queijos-bg">
+                        <span class="food-emoji">🧀</span>
+                    </div>
+                    <div class="card-info">
+                        <h3>Quatro Queijos Premium</h3>
+                        <p>Seleção especial de mozarela, provolone maturado, gorgonzola cremoso e catupiry original.</p>
+                        <div class="card-footer-card">
+                            <span class="price">R$ 58,00</span>
+                            <button class="btn-add">Pedir</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Produto 4 -->
+                <div class="product-card" onclick="abrirModal('Pizza Pepperoni com Mel', 62.00)">
+                    <div class="card-image-box pepperoni-bg">
+                        <span class="food-emoji">🍕</span>
+                    </div>
+                    <div class="card-info">
+                        <h3>Pepperoni com Mel</h3>
+                        <p>Generosas fatias de pepperoni levemente picante, mozarela e um toque final de mel silvestre.</p>
+                        <div class="card-footer-card">
+                            <span class="price">R$ 62,00</span>
+                            <button class="btn-add">Pedir</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -77,25 +134,25 @@
             <div class="modal-options">
                 <label>Escolha o Tamanho:</label>
                 <div class="size-options">
-                    <button onclick="mudarTamanho('P', 0)">Pequena</button>
-                    <button class="active" onclick="mudarTamanho('M', 10)">Média (+R$ 10)</button>
-                    <button onclick="mudarTamanho('G', 20)">Grande (+R$ 20)</button>
+                    <button class="size-btn" onclick="mudarTamanho('P', 0)">Pequena (6 fatias)</button>
+                    <button class="size-btn active" onclick="mudarTamanho('M', 10)">Média (8 fatias) +R$10</button>
+                    <button class="size-btn" onclick="mudarTamanho('G', 20)">Grande (12 fatias) +R$20</button>
                 </div>
 
                 <label>Borda Recheada:</label>
                 <select id="borda-select" onchange="atualizarPrecoModal()">
                     <option value="Nenhuma">Sem Borda Recheada</option>
-                    <option value="Catupiry">Catupiry (+R$ 8,00)</option>
-                    <option value="Cheddar">Cheddar (+R$ 8,00)</option>
-                    <option value="Chocolate">Chocolate (+R$ 10,00)</option>
+                    <option value="Catupiry">Catupiry Original (+R$ 8,00)</option>
+                    <option value="Cheddar">Cheddar Cremoso (+R$ 8,00)</option>
+                    <option value="Chocolate">Chocolate Belga (+R$ 10,00)</option>
                 </select>
 
                 <div class="modal-total">
-                    <span>Total:</span>
+                    <span>Total do Item:</span>
                     <strong id="modal-preco-total">R$ 0,00</strong>
                 </div>
 
-                <button class="btn primary" onclick="adicionarAoCarrinhoModal()">Adicionar ao Carrinho</button>
+                <button class="btn-main" onclick="adicionarAoCarrinhoModal()">Adicionar ao Carrinho</button>
             </div>
         </div>
     </div>
@@ -106,27 +163,28 @@
         <span id="cart-counter">0</span>
     </div>
 
-    <!-- PAINEL / GAVETA DO CARRINHO -->
+    <!-- GAVETA DO CARRINHO -->
     <div id="cart-drawer" class="cart-drawer" style="display: none;">
         <div class="cart-header">
             <h3>Seu Carrinho</h3>
-            <span onclick="fecharCarrinho()">&times;</span>
+            <span onclick="fecharCarrinho()" class="close-drawer">&times;</span>
         </div>
-        <div id="cart-items-container" class="cart-items"></div>
+        <div id="cart-items-container" class="cart-items">
+            <!-- Itens inseridos via JS -->
+        </div>
         <div class="cart-footer">
             <div class="checkout-inputs">
-                <input type="text" id="endereco-cliente" placeholder="Seu endereço completo (Rua, Nº, Bairro)">
+                <input type="text" id="endereco-cliente" placeholder="Endereço completo (Rua, Número, Bairro)">
                 <select id="pagamento-cliente">
                     <option value="Cartão na Entrega">Cartão na Entrega</option>
                     <option value="Pix">Pix</option>
                     <option value="Dinheiro">Dinheiro</option>
                 </select>
             </div>
-            <button class="btn primary" onclick="finalizarPedidoWhatsApp()">Enviar Pedido no WhatsApp 📱</button>
+            <button class="btn-main" onclick="finalizarPedidoWhatsApp()">Enviar Pedido no WhatsApp 📱</button>
         </div>
     </div>
 
-    <script src="src/js/three-scene.js"></script>
     <script src="src/js/cart.js"></script>
 </body>
 </html>
