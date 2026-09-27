@@ -3,121 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prime Pizza 3D Experience</title>
+    <title>Prime Pizza - Experiência 3D</title>
     <link rel="stylesheet" href="src/css/style.css">
+    <!-- Three.js para o efeito 3D -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 
-    <!-- SEÇÃO 1: HERO 3D (Abertura UAU) -->
+    <!-- HERO 3D E ANIMAÇÃO DE INGREDIENTES -->
     <section id="hero-3d">
+        <!-- Ingredientes flutuantes para a animação de montagem -->
+        <div class="ingredients-fly-container">
+            <span class="fly-item" style="--x: -120px; --y: -150px; --delay: 0.1s;">🍅</span>
+            <span class="fly-item" style="--x: 140px; --y: -120px; --delay: 0.2s;">🍄</span>
+            <span class="fly-item" style="--x: -100px; --y: 130px; --delay: 0.3s;">🧀</span>
+            <span class="fly-item" style="--x: 130px; --y: 110px; --delay: 0.4s;">🫒</span>
+            <span class="fly-item" style="--x: -50px; --y: -180px; --delay: 0.5s;">🍃</span>
+            <span class="fly-item" style="--x: 80px; --y: -160px; --delay: 0.2s;">🍅</span>
+            <span class="fly-item" style="--x: -140px; --y: 20px; --delay: 0.4s;">🍄</span>
+        </div>
+
         <div id="canvas-container"></div>
         <div class="hero-content">
-            <h1>SUA PIZZA.<br>DO SEU JEITO.</h1>
-            <p class="subtitle">A experiência imersiva de sabor</p>
+            <h1>PRIME PIZZA</h1>
+            <p class="subtitle">Ingredientes frescos, arte e sabor em cada pedaço.</p>
             <div class="hero-buttons">
-                <a href="#cardapio" class="btn primary">MONTAR MINHA PIZZA 🍕</a>
-                <a href="#cardapio" class="btn secondary">VER CARDÁPIO</a>
+                <a href="#cardapio" class="btn primary">Ver Cardápio</a>
             </div>
         </div>
     </section>
 
-    <!-- SEÇÃO 2: CARDÁPIO 3D INTERATIVO -->
+    <!-- CARDÁPIO -->
     <section id="cardapio" class="menu-section">
         <div class="container">
-            <h2>CARDÁPIO DIGITAL 3D</h2>
+            <h2>Escolha sua Delícia</h2>
             
-            <!-- Categorias -->
             <div class="categories">
-                <button class="cat-btn active" onclick="filtrarCategoria('pizzas')">🍕 Pizzas</button>
-                <button class="cat-btn" onclick="filtrarCategoria('bebidas')">🥤 Bebidas</button>
-                <button class="cat-btn" onclick="filtrarCategoria('sobremesas')">🍫 Sobremesas</button>
-                <button class="cat-btn" onclick="filtrarCategoria('combos')">🔥 Combos</button>
+                <button class="cat-btn active">Pizzas Salgadas</button>
+                <button class="cat-btn">Pizzas Doces</button>
+                <button class="cat-btn">Bebidas</button>
             </div>
 
-            <!-- Grid de Produtos / Cards -->
-            <div class="product-grid" id="product-grid">
-                <!-- Card 1: Calabresa -->
-                <div class="product-card" onclick="abrirModal('Pizza Calabresa', 45.00)">
-                    <div class="card-img-placeholder">🍕</div>
-                    <h3>Calabresa Especial</h3>
-                    <p>Molho artesanal, muçarela, calabresa fatiada e cebola roxa.</p>
-                    <span class="price">A partir de R$ 45,00</span>
+            <div class="product-grid">
+                <!-- Produto 1 -->
+                <div class="product-card" onclick="abrirModal('Pizza Margherita', 45.00)">
+                    <div class="card-img-placeholder">🍅</div>
+                    <h3>Margherita</h3>
+                    <p>Molho de tomate artesanal, mozarela de búfala, manjericão fresco e azeite.</p>
+                    <div class="price">R$ 45,00</div>
                 </div>
 
-                <!-- Card 2: Frango com Catupiry -->
-                <div class="product-card" onclick="abrirModal('Frango com Catupiry', 48.00)">
+                <!-- Produto 2 -->
+                <div class="product-card" onclick="abrirModal('Pizza Calabresa', 48.00)">
+                    <div class="card-img-placeholder">🍕</div>
+                    <h3>Calabresa Especial</h3>
+                    <p>Calabresa fatiada fina, cebolas roxas caramelizadas, azeitonas negras e orégano.</p>
+                    <div class="price">R$ 48,00</div>
+                </div>
+
+                <!-- Produto 3 -->
+                <div class="product-card" onclick="abrirModal('Pizza Quatro Queijos', 52.00)">
                     <div class="card-img-placeholder">🧀</div>
-                    <h3>Frango com Catupiry</h3>
-                    <p>Frango desfiado temperado e generosas camadas de Catupiry original.</p>
-                    <span class="price">A partir de R$ 48,00</span>
+                    <h3>Quatro Queijos</h3>
+                    <p>Mozarela, provolone, gorgonzola e catupiry original gratinados.</p>
+                    <div class="price">R$ 52,00</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- MODAL 3D DE PERSONALIZAÇÃO -->
+    <!-- MODAL DE PERSONALIZAÇÃO -->
     <div id="pizza-modal" class="modal" style="display: none;">
         <div class="modal-content">
             <span class="close-btn" onclick="fecharModal()">&times;</span>
-            <h2 id="modal-title">Monte sua Pizza</h2>
+            <h2 id="modal-title">Personalizar Pizza</h2>
             
             <div class="modal-options">
                 <label>Escolha o Tamanho:</label>
                 <div class="size-options">
-                    <button onclick="mudarTamanho('P', 0)">P (R$ 0)</button>
-                    <button onclick="mudarTamanho('M', 10)" class="active">M (+R$ 10)</button>
-                    <button onclick="mudarTamanho('G', 20)">G (+R$ 20)</button>
+                    <button onclick="mudarTamanho('P', 0)">Pequena</button>
+                    <button class="active" onclick="mudarTamanho('M', 10)">Média (+R$ 10)</button>
+                    <button onclick="mudarTamanho('G', 20)">Grande (+R$ 20)</button>
                 </div>
 
                 <label>Borda Recheada:</label>
                 <select id="borda-select" onchange="atualizarPrecoModal()">
                     <option value="Nenhuma">Sem Borda Recheada</option>
-                    <option value="Catupiry (+R$ 8)">Borda de Catupiry (+R$ 8,00)</option>
-                    <option value="Cheddar (+R$ 8)">Borda de Cheddar (+R$ 8,00)</option>
-                    <option value="Chocolate (+R$ 10)">Borda de Chocolate (+R$ 10,00)</option>
+                    <option value="Catupiry">Catupiry (+R$ 8,00)</option>
+                    <option value="Cheddar">Cheddar (+R$ 8,00)</option>
+                    <option value="Chocolate">Chocolate (+R$ 10,00)</option>
                 </select>
 
                 <div class="modal-total">
-                    <span>Total do Item:</span>
-                    <strong id="modal-preco-total">R$ 45,00</strong>
+                    <span>Total:</span>
+                    <strong id="modal-preco-total">R$ 0,00</strong>
                 </div>
 
-                <button class="btn primary" onclick="adicionarAoCarrinhoModal()">ADICIONAR AO PEDIDO 🛒</button>
+                <button class="btn primary" onclick="adicionarAoCarrinhoModal()">Adicionar ao Carrinho</button>
             </div>
         </div>
     </div>
 
-    <!-- BOTÃO FLUTUANTE DO CARRINHO / WHATSAPP -->
+    <!-- BOTÃO FLUTUANTE DO CARRINHO -->
     <div class="cart-floating" onclick="abrirCarrinho()">
-        🛒 <span id="cart-counter">0</span>
+        🛒
+        <span id="cart-counter">0</span>
     </div>
 
-    <!-- SEÇÃO DO CARRINHO / CHECKOUT WHATSAPP -->
+    <!-- PAINEL / GAVETA DO CARRINHO -->
     <div id="cart-drawer" class="cart-drawer" style="display: none;">
         <div class="cart-header">
-            <h3>MEU PEDIDO 🍕</h3>
+            <h3>Seu Carrinho</h3>
             <span onclick="fecharCarrinho()">&times;</span>
         </div>
-        <div class="cart-items" id="cart-items-container">
-            <!-- Itens entram aqui dinamicamente -->
+        <div id="cart-items-container" class="cart-items">
+            <!-- Itens inseridos via JS -->
         </div>
         <div class="cart-footer">
             <div class="checkout-inputs">
-                <input type="text" id="endereco-cliente" placeholder="Seu Endereço de Entrega (Rua, nº)">
+                <input type="text" id="endereco-cliente" placeholder="Seu endereço completo (Rua, Nº, Bairro)">
                 <select id="pagamento-cliente">
-                    <option value="Pix">Pagamento: Pix</option>
-                    <option value="Cartão na Entrega">Pagamento: Cartão na Entrega</option>
-                    <option value="Dinheiro">Pagamento: Dinheiro</option>
+                    <option value="Cartão na Entrega">Cartão na Entrega</option>
+                    <option value="Pix">Pix</option>
+                    <option value="Dinheiro">Dinheiro</option>
                 </select>
             </div>
-            <button class="btn primary" onclick="finalizarPedidoWhatsApp()">FINALIZAR PEDIDO NO WHATSAPP 📱</button>
+            <button class="btn primary" onclick="finalizarPedidoWhatsApp()">Enviar Pedido no WhatsApp 📱</button>
         </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="src/js/three-scene.js"></script>
     <script src="src/js/cart.js"></script>
-    <script src="src/js/main.js"></script>
 </body>
 </html>
