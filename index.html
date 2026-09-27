@@ -60,7 +60,7 @@
             color: #ff4500;
         }
 
-        /* HERO SECTION COM A IMAGEM DE REFERÊNCIA 3D / DINÂMICA */
+        /* HERO SECTION COM SUA IMAGEM DE ALTO IMPACTO */
         .hero {
             position: relative;
             width: 100%;
@@ -69,9 +69,12 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            /* Usando a imagem exata de referência com ingredientes flutuantes/dinâmicos em fundo preto */
-            background: linear-gradient(rgba(5,5,5,0.6), rgba(5,5,5,0.95)), 
-                        url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1600&auto=format&fit=crop') no-repeat center center/cover;
+            /* 
+              INSTRUÇÃO: Cole o link direto da sua imagem 1000159481_4.jpg ou 1000159477_4.jpg abaixo onde está 'SUA_IMAGEM_AQUI.jpg' 
+            */
+            background: linear-gradient(rgba(5,5,5,0.65), rgba(5,5,5,0.95)), 
+                        url('SUA_IMAGEM_AQUI.jpg') no-repeat center center/cover;
+            background-color: #111; /* Cor de fundo caso a imagem demore a carregar */
         }
 
         .hero-content {
@@ -166,7 +169,6 @@
             transition: 0.3s;
             display: flex;
             flex-direction: column;
-            cursor: pointer;
         }
 
         .menu-card:hover {
@@ -174,13 +176,11 @@
             transform: translateY(-5px);
         }
 
-        .card-img-placeholder {
-            height: 180px;
-            background: #181818;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #1a1a1a;
         }
 
         .card-body {
@@ -411,7 +411,7 @@
         </div>
     </header>
 
-    <!-- PÁGINA INICIAL -->
+    <!-- PÁGINA INICIAL COM A SUA FOTO DE DESTAQUE -->
     <section id="home" class="hero">
         <div class="hero-content">
             <span class="badge-fumaca">🔥 Artesanal • Forno a Lenha • Ingredientes Selecionados</span>
@@ -421,7 +421,7 @@
         </div>
     </section>
 
-    <!-- CARDÁPIO -->
+    <!-- CARDÁPIO COM AS SUAS FOTOS REAIS -->
     <section id="cardapio" class="menu-section">
         <div class="section-title">
             <h2>Nosso Cardápio Exclusivo</h2>
@@ -431,7 +431,8 @@
         <div class="menu-grid">
             <!-- Produto 1 -->
             <div class="menu-card">
-                <div class="card-img-placeholder">🍅</div>
+                <!-- Substitua o link abaixo pela URL da sua imagem da fatia de queijo esticando (1000159477_4.jpg) -->
+                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=600&auto=format&fit=crop" alt="Margherita Especial" class="card-img">
                 <div class="card-body">
                     <h3>Margherita Especial</h3>
                     <p>Molho de tomate rústico, mozarela de búfala artesanal esticando, manjericão fresco e azeite extra virgem.</p>
@@ -444,7 +445,8 @@
 
             <!-- Produto 2 -->
             <div class="menu-card">
-                <div class="card-img-placeholder">🔥</div>
+                <!-- Substitua o link abaixo pela URL da sua imagem da pizza com ingredientes flutuantes (1000159481_4.jpg) -->
+                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=600&auto=format&fit=crop" alt="Calabresa Suprema" class="card-img">
                 <div class="card-body">
                     <h3>Calabresa Suprema</h3>
                     <p>Fatias finas de calabresa artesanal defumada, toque especial de pimenta, cebolas roxas caramelizadas e azeitonas negras.</p>
@@ -457,7 +459,7 @@
 
             <!-- Produto 3 -->
             <div class="menu-card">
-                <div class="card-img-placeholder">🧀</div>
+                <img src="https://images.unsplash.com/photo-1571407971189-e2230472d196?q=80&w=600&auto=format&fit=crop" alt="Quatro Queijos Premium" class="card-img">
                 <div class="card-body">
                     <h3>Quatro Queijos Premium</h3>
                     <p>Seleção especial de mozarela, provolone maturado, gorgonzola cremoso e catupiry original de altíssima qualidade.</p>
@@ -470,7 +472,7 @@
 
             <!-- Produto 4 -->
             <div class="menu-card">
-                <div class="card-img-placeholder">🥤</div>
+                <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=600&auto=format&fit=crop" alt="Coca-Cola 2 Litros" class="card-img">
                 <div class="card-body">
                     <h3>Coca-Cola 2 Litros</h3>
                     <p>Gelada, perfeita para acompanhar a sua pizza artesanal favorita com a família ou amigos.</p>
@@ -519,7 +521,6 @@
                 carrinho.push({ name: nome, price: preco, quantidade: 1 });
             }
             atualizarCarrinho();
-            // Abre o carrinho automaticamente para feedback visual
             document.getElementById('cart-drawer').classList.add('open');
         }
 
@@ -571,9 +572,11 @@
             totalPriceEl.innerText = `R$ ${precoTotal.toFixed(2).replace('.', ',')}`;
         }
 
-        function toggleCarrinho() {
+        function toggleCartCarrinho() {
             document.getElementById('cart-drawer').classList.toggle('open');
         }
+        // Alias para compatibilidade
+        function toggleCarrinho() { toggleCartCarrinho(); }
 
         function finalizarPedidoWhatsApp() {
             if (carrinho.length === 0) {
