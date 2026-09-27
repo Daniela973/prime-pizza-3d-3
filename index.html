@@ -1,21 +1,12 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-
-<head>
+<!DOCTYPE html><html lang="pt-BR"><head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Prime Pizza — Artesanal & Saborosa</title>
-
-<script type="importmap">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Prime Pizza — Artesanal & Saborosa</title><script type="importmap">
 {
     "imports": {
         "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"
     }
 }
-</script>
-
-<style>
+</script><style>
 
 * {
     margin: 0;
@@ -78,7 +69,6 @@ nav a {
 ===================================================== */
 
 .hero {
-
     min-height: 100vh;
 
     position: relative;
@@ -105,7 +95,6 @@ nav a {
 }
 
 #pizza3d {
-
     position: absolute;
 
     inset: 0;
@@ -117,7 +106,6 @@ nav a {
 }
 
 .hero::after {
-
     content: "";
 
     position: absolute;
@@ -137,7 +125,6 @@ nav a {
 }
 
 .hero-content {
-
     position: relative;
 
     z-index: 5;
@@ -156,7 +143,6 @@ nav a {
 }
 
 .badge {
-
     display: inline-block;
 
     padding: 9px 16px;
@@ -177,7 +163,6 @@ nav a {
 }
 
 h1 {
-
     font-size: clamp(42px, 7vw, 82px);
 
     line-height: .95;
@@ -195,7 +180,6 @@ h1 span {
 }
 
 .hero p {
-
     max-width: 580px;
 
     margin: auto;
@@ -208,7 +192,6 @@ h1 span {
 }
 
 .btn-acao {
-
     margin-top: 30px;
 
     padding: 16px 28px;
@@ -239,7 +222,6 @@ h1 span {
 }
 
 .btn-acao:hover {
-
     transform: translateY(-4px) scale(1.03);
 
     box-shadow:
@@ -251,21 +233,18 @@ h1 span {
 ===================================================== */
 
 #cardapio {
-
     padding: 100px 5%;
 
     background: #090909;
 }
 
 .titulo-secao {
-
     text-align: center;
 
     margin-bottom: 50px;
 }
 
 .titulo-secao h2 {
-
     font-size: 42px;
 
     margin-bottom: 10px;
@@ -276,7 +255,6 @@ h1 span {
 }
 
 .menu {
-
     max-width: 1200px;
 
     margin: auto;
@@ -290,7 +268,6 @@ h1 span {
 }
 
 .card {
-
     overflow: hidden;
 
     border-radius: 20px;
@@ -303,14 +280,12 @@ h1 span {
 }
 
 .card:hover {
-
     transform: translateY(-8px);
 
     border-color: rgba(255,120,30,.4);
 }
 
 .card img {
-
     width: 100%;
 
     height: 220px;
@@ -327,7 +302,6 @@ h1 span {
 }
 
 .card p {
-
     color: #999;
 
     font-size: 14px;
@@ -336,7 +310,6 @@ h1 span {
 }
 
 .preco {
-
     margin-top: 15px;
 
     font-size: 22px;
@@ -347,7 +320,6 @@ h1 span {
 }
 
 .card button {
-
     width: 100%;
 
     margin-top: 15px;
@@ -372,7 +344,6 @@ h1 span {
 ===================================================== */
 
 .carrinho-flutuante {
-
     position: fixed;
 
     right: 20px;
@@ -403,7 +374,6 @@ h1 span {
 }
 
 #contadorCarrinho {
-
     position: absolute;
 
     top: -4px;
@@ -429,7 +399,6 @@ h1 span {
 }
 
 .carrinho {
-
     position: fixed;
 
     top: 0;
@@ -462,7 +431,6 @@ h1 span {
 }
 
 .fechar {
-
     position: absolute;
 
     right: 20px;
@@ -480,14 +448,12 @@ h1 span {
 }
 
 #itensCarrinho {
-
     max-height: 65vh;
 
     overflow-y: auto;
 }
 
 .item-carrinho {
-
     padding: 15px 0;
 
     border-bottom:
@@ -496,11 +462,11 @@ h1 span {
 
 .item-carrinho strong {
     display: block;
+
     margin-bottom: 8px;
 }
 
 .controles {
-
     display: flex;
 
     align-items: center;
@@ -509,7 +475,6 @@ h1 span {
 }
 
 .controles button {
-
     width: 30px;
     height: 30px;
 
@@ -525,7 +490,6 @@ h1 span {
 }
 
 .total {
-
     margin-top: 25px;
 
     font-size: 22px;
@@ -534,7 +498,6 @@ h1 span {
 }
 
 .whatsapp {
-
     width: 100%;
 
     margin-top: 20px;
@@ -586,290 +549,288 @@ h1 span {
 
 }
 
-</style>
-</head>
+/* =====================================================
+   AVISO DE ERRO 3D
+===================================================== */
 
+#erro3d {
+    position: absolute;
 
-<body>
+    left: 50%;
 
+    bottom: 20px;
 
-<header>
+    transform: translateX(-50%);
 
-    <div class="logo">
-        🍕 PRIME PIZZA
-    </div>
+    z-index: 10;
 
-    <nav>
-        <a href="#inicio">Início</a>
-        <a href="#cardapio">Cardápio</a>
-    </nav>
+    width: 90%;
 
-</header>
+    max-width: 600px;
 
+    padding: 12px 18px;
 
-<!-- =====================================================
+    border-radius: 12px;
+
+    background: rgba(120,0,0,.85);
+
+    color: white;
+
+    text-align: center;
+
+    font-size: 13px;
+
+    display: none;
+}
+
+</style></head><body><header><div class="logo">
+    🍕 PRIME PIZZA
+</div>
+
+<nav>
+    <a href="#inicio">Início</a>
+    <a href="#cardapio">Cardápio</a>
+</nav>
+
+</header><!-- =====================================================
      HERO
-===================================================== -->
-
-<section
+===================================================== --><section
     class="hero"
     id="inicio"
->
+><canvas id="pizza3d"></canvas>
 
-    <canvas id="pizza3d"></canvas>
+<div id="erro3d"></div>
 
-    <div class="hero-content">
+<div class="hero-content">
 
-        <div class="badge">
-            🔥 ARTESANAL • FORNO A LENHA • 3D INTERATIVO
-        </div>
-
-        <h1>
-            Veja sua pizza
-            <span>nascer.</span>
-        </h1>
-
-        <p>
-            Massa artesanal, molho de tomate,
-            queijo derretido e ingredientes frescos
-            ganhando vida em uma experiência 3D.
-        </p>
-
-        <button
-            class="btn-acao"
-            onclick="montarPizza()"
-        >
-            🍕 Montar Minha Pizza
-        </button>
-
+    <div class="badge">
+        🔥 ARTESANAL • FORNO A LENHA • 3D INTERATIVO
     </div>
 
-</section>
+    <h1>
+        Veja sua pizza
+        <span>nascer.</span>
+    </h1>
 
+    <p>
+        Massa artesanal, molho de tomate,
+        queijo derretido e ingredientes frescos
+        ganhando vida em uma experiência 3D.
+    </p>
 
-<!-- =====================================================
-     CARDÁPIO
-===================================================== -->
-
-<section id="cardapio">
-
-    <div class="titulo-secao">
-
-        <h2>
-            Nosso Cardápio
-        </h2>
-
-        <p>
-            Escolha sua pizza favorita
-        </p>
-
-    </div>
-
-
-    <div class="menu">
-
-
-        <div class="card">
-
-            <img
-                src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=85"
-            >
-
-            <div class="card-body">
-
-                <h3>
-                    Margherita
-                </h3>
-
-                <p>
-                    Molho de tomate, mozzarella,
-                    tomate fresco e manjericão.
-                </p>
-
-                <div class="preco">
-                    R$ 48,00
-                </div>
-
-                <button
-                    onclick="adicionarAoCarrinho('Margherita',48)"
-                >
-                    Adicionar
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div class="card">
-
-            <img
-                src="https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=800&q=85"
-            >
-
-            <div class="card-body">
-
-                <h3>
-                    Calabresa
-                </h3>
-
-                <p>
-                    Calabresa, queijo,
-                    cebola e molho especial.
-                </p>
-
-                <div class="preco">
-                    R$ 52,00
-                </div>
-
-                <button
-                    onclick="adicionarAoCarrinho('Calabresa',52)"
-                >
-                    Adicionar
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div class="card">
-
-            <img
-                src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=800&q=85"
-            >
-
-            <div class="card-body">
-
-                <h3>
-                    Quatro Queijos
-                </h3>
-
-                <p>
-                    Mozzarella, parmesão,
-                    provolone e gorgonzola.
-                </p>
-
-                <div class="preco">
-                    R$ 58,00
-                </div>
-
-                <button
-                    onclick="adicionarAoCarrinho('Quatro Queijos',58)"
-                >
-                    Adicionar
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div class="card">
-
-            <img
-                src="https://images.unsplash.com/photo-1627855437693-dcc7b0c4ba7c?auto=format&fit=crop&w=800&q=85"
-            >
-
-            <div class="card-body">
-
-                <h3>
-                    Coca-Cola 2L
-                </h3>
-
-                <p>
-                    Coca-Cola gelada para
-                    acompanhar sua pizza.
-                </p>
-
-                <div class="preco">
-                    R$ 14,00
-                </div>
-
-                <button
-                    onclick="adicionarAoCarrinho('Coca-Cola 2L',14)"
-                >
-                    Adicionar
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =====================================================
-     BOTÃO CARRINHO
-===================================================== -->
-
-<div
-    class="carrinho-flutuante"
-    onclick="toggleCarrinho()"
->
-
-    🛒
-
-    <span id="contadorCarrinho">
-        0
-    </span>
+    <button
+        class="btn-acao"
+        onclick="montarPizza()"
+    >
+        🍕 Montar Minha Pizza
+    </button>
 
 </div>
 
-
-<!-- =====================================================
-     CARRINHO
-===================================================== -->
-
-<div
-    class="carrinho"
-    id="carrinho"
->
-
-    <button
-        class="fechar"
-        onclick="toggleCarrinho()"
-    >
-        ×
-    </button>
+</section><!-- =====================================================
+     CARDÁPIO
+===================================================== --><section id="cardapio"><div class="titulo-secao">
 
     <h2>
-        Seu Pedido
+        Nosso Cardápio
     </h2>
 
-    <div id="itensCarrinho"></div>
-
-    <div class="total">
-        Total:
-        R$
-        <span id="totalCarrinho">
-            0,00
-        </span>
-    </div>
-
-    <button
-        class="whatsapp"
-        onclick="finalizarPedidoWhatsApp()"
-    >
-        📲 Finalizar pelo WhatsApp
-    </button>
+    <p>
+        Escolha sua pizza favorita
+    </p>
 
 </div>
 
 
-<!-- =====================================================
-     THREE.JS — PIZZA 3D
-===================================================== -->
+<div class="menu">
 
-<script type="module">
+
+    <div class="card">
+
+        <img
+            src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=85"
+        >
+
+        <div class="card-body">
+
+            <h3>
+                Margherita
+            </h3>
+
+            <p>
+                Molho de tomate, mozzarella,
+                tomate fresco e manjericão.
+            </p>
+
+            <div class="preco">
+                R$ 48,00
+            </div>
+
+            <button
+                onclick="adicionarAoCarrinho('Margherita',48)"
+            >
+                Adicionar
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <img
+            src="https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=800&q=85"
+        >
+
+        <div class="card-body">
+
+            <h3>
+                Calabresa
+            </h3>
+
+            <p>
+                Calabresa, queijo,
+                cebola e molho especial.
+            </p>
+
+            <div class="preco">
+                R$ 52,00
+            </div>
+
+            <button
+                onclick="adicionarAoCarrinho('Calabresa',52)"
+            >
+                Adicionar
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <img
+            src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=800&q=85"
+        >
+
+        <div class="card-body">
+
+            <h3>
+                Quatro Queijos
+            </h3>
+
+            <p>
+                Mozzarella, parmesão,
+                provolone e gorgonzola.
+            </p>
+
+            <div class="preco">
+                R$ 58,00
+            </div>
+
+            <button
+                onclick="adicionarAoCarrinho('Quatro Queijos',58)"
+            >
+                Adicionar
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <img
+            src="https://images.unsplash.com/photo-1627855437693-dcc7b0c4ba7c?auto=format&fit=crop&w=800&q=85"
+        >
+
+        <div class="card-body">
+
+            <h3>
+                Coca-Cola 2L
+            </h3>
+
+            <p>
+                Coca-Cola gelada para
+                acompanhar sua pizza.
+            </p>
+
+            <div class="preco">
+                R$ 14,00
+            </div>
+
+            <button
+                onclick="adicionarAoCarrinho('Coca-Cola 2L',14)"
+            >
+                Adicionar
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+</section><!-- =====================================================
+     BOTÃO CARRINHO
+===================================================== --><div
+    class="carrinho-flutuante"
+    onclick="toggleCarrinho()"
+>🛒
+
+<span id="contadorCarrinho">
+    0
+</span>
+
+</div><!-- =====================================================
+     CARRINHO
+===================================================== --><div
+    class="carrinho"
+    id="carrinho"
+><button
+    class="fechar"
+    onclick="toggleCarrinho()"
+>
+    ×
+</button>
+
+<h2>
+    Seu Pedido
+</h2>
+
+<div id="itensCarrinho"></div>
+
+<div class="total">
+    Total:
+    R$
+    <span id="totalCarrinho">
+        0,00
+    </span>
+</div>
+
+<button
+    class="whatsapp"
+    onclick="finalizarPedidoWhatsApp()"
+>
+    📲 Finalizar pelo WhatsApp
+</button>
+
+</div><!-- =====================================================
+     THREE.JS + MODELOS 3D
+===================================================== --><script type="module">
 
 import * as THREE from "three";
 
+import {
+    GLTFLoader
+} from "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/loaders/GLTFLoader.js";
+
 
 /* =====================================================
-   CONFIGURAÇÃO
+   ELEMENTOS
 ===================================================== */
 
 const canvas =
@@ -878,34 +839,47 @@ const canvas =
 const hero =
     document.querySelector(".hero");
 
+const erro3d =
+    document.getElementById("erro3d");
+
+
+/* =====================================================
+   CENA
+===================================================== */
 
 const scene =
     new THREE.Scene();
 
 
+/* =====================================================
+   CÂMERA
+===================================================== */
+
 const camera =
     new THREE.PerspectiveCamera(
         42,
         1,
-        .1,
+        0.1,
         100
     );
 
-
 camera.position.set(
     0,
-    5.5,
-    10.5
+    5.8,
+    11
 );
 
 
+/* =====================================================
+   RENDERIZADOR
+===================================================== */
+
 const renderer =
     new THREE.WebGLRenderer({
-        canvas,
+        canvas: canvas,
         alpha: true,
         antialias: true
     });
-
 
 renderer.setPixelRatio(
     Math.min(
@@ -914,28 +888,25 @@ renderer.setPixelRatio(
     )
 );
 
-
 renderer.outputColorSpace =
     THREE.SRGBColorSpace;
-
 
 renderer.toneMapping =
     THREE.ACESFilmicToneMapping;
 
-
 renderer.toneMappingExposure =
-    1.2;
+    1.25;
 
 
 /* =====================================================
-   LUZ
+   LUZES
 ===================================================== */
 
 const ambiente =
     new THREE.HemisphereLight(
         0xffead5,
         0x160804,
-        2.4
+        2.5
     );
 
 scene.add(ambiente);
@@ -949,19 +920,32 @@ const principal =
 
 principal.position.set(
     -5,
-    8,
-    6
+    9,
+    7
 );
-
-principal.castShadow = true;
 
 scene.add(principal);
 
 
+const preenchimento =
+    new THREE.DirectionalLight(
+        0xff7b35,
+        2
+    );
+
+preenchimento.position.set(
+    5,
+    4,
+    4
+);
+
+scene.add(preenchimento);
+
+
 const quente =
     new THREE.PointLight(
-        0xff501c,
-        3,
+        0xff4a16,
+        4,
         15
     );
 
@@ -982,9 +966,108 @@ const pizza =
     new THREE.Group();
 
 pizza.position.y =
-    -.5;
+    -0.6;
 
 scene.add(pizza);
+
+
+/* =====================================================
+   MASSA
+===================================================== */
+
+const massa =
+    new THREE.Mesh(
+        new THREE.CylinderGeometry(
+            3.55,
+            3.7,
+            0.55,
+            96
+        ),
+        new THREE.MeshStandardMaterial({
+            color: 0xd18b48,
+            roughness: 0.85
+        })
+    );
+
+massa.position.y =
+    0;
+
+pizza.add(massa);
+
+
+/* =====================================================
+   BORDA
+===================================================== */
+
+const borda =
+    new THREE.Mesh(
+        new THREE.TorusGeometry(
+            3.25,
+            0.38,
+            32,
+            96
+        ),
+        new THREE.MeshStandardMaterial({
+            color: 0xe3a15d,
+            roughness: 0.7
+        })
+    );
+
+borda.rotation.x =
+    Math.PI / 2;
+
+borda.position.y =
+    0.38;
+
+pizza.add(borda);
+
+
+/* =====================================================
+   MOLHO
+===================================================== */
+
+const molho =
+    new THREE.Mesh(
+        new THREE.CylinderGeometry(
+            3.05,
+            3.05,
+            0.08,
+            96
+        ),
+        new THREE.MeshStandardMaterial({
+            color: 0xa91e12,
+            roughness: 0.75
+        })
+    );
+
+molho.position.y =
+    0.34;
+
+pizza.add(molho);
+
+
+/* =====================================================
+   QUEIJO BASE
+===================================================== */
+
+const queijoBase =
+    new THREE.Mesh(
+        new THREE.CylinderGeometry(
+            2.92,
+            2.92,
+            0.13,
+            96
+        ),
+        new THREE.MeshStandardMaterial({
+            color: 0xffd75a,
+            roughness: 0.35
+        })
+    );
+
+queijoBase.position.y =
+    0.43;
+
+pizza.add(queijoBase);
 
 
 /* =====================================================
@@ -994,13 +1077,13 @@ scene.add(pizza);
 const sombra =
     new THREE.Mesh(
         new THREE.CircleGeometry(
-            4.3,
+            4.5,
             64
         ),
         new THREE.MeshBasicMaterial({
             color: 0x000000,
             transparent: true,
-            opacity: .35
+            opacity: 0.35
         })
     );
 
@@ -1008,14 +1091,814 @@ sombra.rotation.x =
     -Math.PI / 2;
 
 sombra.position.y =
-    -.35;
+    -0.45;
 
 pizza.add(sombra);
 
 
 /* =====================================================
-   MASSA
+   LOADER GLB
 ===================================================== */
 
-const massa =
-    new THREE.Mesh
+const loader =
+    new GLTFLoader();
+
+
+/* =====================================================
+   MODELOS
+===================================================== */
+
+const modelos = {
+
+    calabresa:
+        "./modelos/calabresa.glb",
+
+    tomate:
+        "./modelos/tomate.glb",
+
+    cebola:
+        "./modelos/cebola.glb",
+
+    manjericao:
+        "./modelos/manjericao.glb",
+
+    queijo:
+        "./modelos/queijo.glb"
+
+};
+
+
+/* =====================================================
+   POSIÇÕES NA PIZZA
+===================================================== */
+
+const posicoes = {
+
+    calabresa: [
+
+        [-1.7, 0.70, 0.8],
+        [-0.7, 0.70, 1.5],
+        [0.5, 0.70, 1.45],
+        [1.5, 0.70, 0.65],
+
+        [1.7, 0.70, -0.65],
+        [0.7, 0.70, -1.45],
+        [-0.7, 0.70, -1.45],
+        [-1.7, 0.70, -0.55]
+
+    ],
+
+    tomate: [
+
+        [-1.2, 0.76, 0.1],
+        [0.0, 0.76, 1.05],
+        [1.15, 0.76, 0.05],
+        [0.2, 0.76, -1.1]
+
+    ],
+
+    cebola: [
+
+        [-2.0, 0.78, 0.05],
+        [-0.9, 0.78, -0.7],
+        [0.8, 0.78, 0.65],
+        [1.8, 0.78, -0.15]
+
+    ],
+
+    manjericao: [
+
+        [-1.3, 0.85, 0.9],
+        [0.3, 0.85, 1.7],
+        [1.3, 0.85, -0.9],
+        [-0.5, 0.85, -1.65]
+
+    ],
+
+    queijo: [
+
+        [0, 0.84, 0]
+
+    ]
+
+};
+
+
+/* =====================================================
+   ESCALAS
+===================================================== */
+
+const escalas = {
+
+    calabresa: 0.65,
+
+    tomate: 0.55,
+
+    cebola: 0.50,
+
+    manjericao: 0.45,
+
+    queijo: 0.70
+
+};
+
+
+/* =====================================================
+   INGREDIENTES
+===================================================== */
+
+const ingredientes = [];
+
+
+/* =====================================================
+   NORMALIZAR MODELO
+===================================================== */
+
+function prepararModelo(objeto) {
+
+    const caixa =
+        new THREE.Box3()
+            .setFromObject(objeto);
+
+    const tamanho =
+        new THREE.Vector3();
+
+    const centro =
+        new THREE.Vector3();
+
+    caixa.getSize(tamanho);
+
+    caixa.getCenter(centro);
+
+    objeto.position.sub(centro);
+
+    const maior =
+        Math.max(
+            tamanho.x,
+            tamanho.y,
+            tamanho.z
+        );
+
+    if (maior > 0) {
+
+        objeto.scale.setScalar(
+            1 / maior
+        );
+
+    }
+
+}
+
+
+/* =====================================================
+   CARREGAR MODELO
+===================================================== */
+
+function carregarModelo(
+    nome,
+    destino,
+    indice
+) {
+
+    loader.load(
+
+        modelos[nome],
+
+        function(gltf) {
+
+            const objeto =
+                gltf.scene.clone(true);
+
+            prepararModelo(
+                objeto
+            );
+
+            objeto.scale.multiplyScalar(
+                escalas[nome]
+            );
+
+
+            /* posição inicial flutuando */
+
+            objeto.position.set(
+                (Math.random() - 0.5) * 7,
+                2.8 + Math.random() * 2.5,
+                (Math.random() - 0.5) * 3
+            );
+
+
+            objeto.rotation.x =
+                Math.random() * Math.PI;
+
+            objeto.rotation.y =
+                Math.random() * Math.PI;
+
+            objeto.rotation.z =
+                Math.random() * Math.PI;
+
+
+            objeto.userData.destino =
+                new THREE.Vector3(
+                    destino[0],
+                    destino[1],
+                    destino[2]
+                );
+
+
+            objeto.userData.flutuando =
+                true;
+
+
+            objeto.userData.indice =
+                indice;
+
+
+            pizza.add(
+                objeto
+            );
+
+            ingredientes.push(
+                objeto
+            );
+
+        },
+
+        undefined,
+
+        function(erro) {
+
+            console.error(
+                "Erro ao carregar:",
+                modelos[nome],
+                erro
+            );
+
+            erro3d.style.display =
+                "block";
+
+            erro3d.innerHTML =
+                "⚠️ Não foi possível carregar o modelo 3D: " +
+                nome +
+                ". Verifique se o arquivo está dentro da pasta modelos.";
+
+        }
+
+    );
+
+}
+
+
+/* =====================================================
+   CARREGAR TODOS
+===================================================== */
+
+Object.keys(posicoes).forEach(
+    nome => {
+
+        posicoes[nome].forEach(
+            (destino, indice) => {
+
+                carregarModelo(
+                    nome,
+                    destino,
+                    indice
+                );
+
+            }
+        );
+
+    }
+);
+
+
+/* =====================================================
+   MONTAR PIZZA
+===================================================== */
+
+let montando =
+    false;
+
+
+window.montarPizza =
+function() {
+
+    if (montando)
+        return;
+
+    montando =
+        true;
+
+
+    ingredientes.forEach(
+        (objeto, indice) => {
+
+            setTimeout(
+                function() {
+
+                    objeto.userData.flutuando =
+                        false;
+
+                },
+                indice * 120
+            );
+
+        }
+    );
+
+
+    setTimeout(
+        function() {
+
+            montando =
+                false;
+
+        },
+        ingredientes.length * 120 + 1800
+    );
+
+};
+
+
+/* =====================================================
+   PARALLAX
+===================================================== */
+
+let mouseX = 0;
+let mouseY = 0;
+
+
+window.addEventListener(
+    "pointermove",
+    function(event) {
+
+        mouseX =
+            (event.clientX /
+            window.innerWidth) * 2 - 1;
+
+        mouseY =
+            (event.clientY /
+            window.innerHeight) * 2 - 1;
+
+    }
+);
+
+
+/* =====================================================
+   TOQUE / CELULAR
+===================================================== */
+
+window.addEventListener(
+    "touchmove",
+    function(event) {
+
+        if (!event.touches.length)
+            return;
+
+        mouseX =
+            (event.touches[0].clientX /
+            window.innerWidth) * 2 - 1;
+
+        mouseY =
+            (event.touches[0].clientY /
+            window.innerHeight) * 2 - 1;
+
+    },
+    { passive: true }
+);
+
+
+/* =====================================================
+   REDIMENSIONAMENTO
+===================================================== */
+
+function redimensionar() {
+
+    const largura =
+        hero.clientWidth;
+
+    const altura =
+        hero.clientHeight;
+
+    camera.aspect =
+        largura / altura;
+
+    camera.updateProjectionMatrix();
+
+    renderer.setSize(
+        largura,
+        altura,
+        false
+    );
+
+}
+
+window.addEventListener(
+    "resize",
+    redimensionar
+);
+
+redimensionar();
+
+
+/* =====================================================
+   ANIMAÇÃO
+===================================================== */
+
+const relogio =
+    new THREE.Clock();
+
+
+function animar() {
+
+    requestAnimationFrame(
+        animar
+    );
+
+    const tempo =
+        relogio.getElapsedTime();
+
+
+    /* movimento suave */
+
+    pizza.rotation.y +=
+        0.002;
+
+
+    /* parallax */
+
+    const alvoX =
+        mouseX * 0.18;
+
+    const alvoY =
+        mouseY * 0.08;
+
+
+    pizza.rotation.x +=
+        (alvoY - pizza.rotation.x) *
+        0.025;
+
+
+    pizza.rotation.z +=
+        (-alvoX - pizza.rotation.z) *
+        0.025;
+
+
+    /* ingredientes */
+
+    ingredientes.forEach(
+        function(objeto, indice) {
+
+            if (
+                objeto.userData.flutuando
+            ) {
+
+                objeto.position.y +=
+                    Math.sin(
+                        tempo * 1.5 +
+                        indice
+                    ) * 0.006;
+
+                objeto.position.x +=
+                    Math.sin(
+                        tempo +
+                        indice
+                    ) * 0.0015;
+
+                objeto.rotation.y +=
+                    0.008;
+
+                objeto.rotation.x +=
+                    0.003;
+
+            }
+
+            else {
+
+                const destino =
+                    objeto.userData.destino;
+
+                objeto.position.lerp(
+                    destino,
+                    0.055
+                );
+
+                objeto.rotation.x *=
+                    0.94;
+
+                objeto.rotation.z *=
+                    0.94;
+
+            }
+
+        }
+    );
+
+
+    /* luz quente pulsando */
+
+    quente.intensity =
+        3.5 +
+        Math.sin(
+            tempo * 4
+        ) * 0.6;
+
+
+    renderer.render(
+        scene,
+        camera
+    );
+
+}
+
+
+animar();
+
+</script><!-- =====================================================
+     CARRINHO — JAVASCRIPT
+===================================================== --><script>
+
+let carrinho = [];
+
+
+/* =====================================================
+   ADICIONAR
+===================================================== */
+
+function adicionarAoCarrinho(
+    nome,
+    preco
+) {
+
+    const item =
+        carrinho.find(
+            produto =>
+                produto.nome === nome
+        );
+
+    if (item) {
+
+        item.quantidade++;
+
+    } else {
+
+        carrinho.push({
+
+            nome: nome,
+
+            preco: preco,
+
+            quantidade: 1
+
+        });
+
+    }
+
+    atualizarCarrinho();
+
+}
+
+
+/* =====================================================
+   ALTERAR QUANTIDADE
+===================================================== */
+
+function alterarQuantidade(
+    nome,
+    valor
+) {
+
+    const item =
+        carrinho.find(
+            produto =>
+                produto.nome === nome
+        );
+
+    if (!item)
+        return;
+
+    item.quantidade +=
+        valor;
+
+
+    if (item.quantidade <= 0) {
+
+        carrinho =
+            carrinho.filter(
+                produto =>
+                    produto.nome !== nome
+            );
+
+    }
+
+    atualizarCarrinho();
+
+}
+
+
+/* =====================================================
+   ATUALIZAR CARRINHO
+===================================================== */
+
+function atualizarCarrinho() {
+
+    const container =
+        document.getElementById(
+            "itensCarrinho"
+        );
+
+    const contador =
+        document.getElementById(
+            "contadorCarrinho"
+        );
+
+    const totalElemento =
+        document.getElementById(
+            "totalCarrinho"
+        );
+
+
+    container.innerHTML =
+        "";
+
+
+    let total =
+        0;
+
+    let quantidadeTotal =
+        0;
+
+
+    if (carrinho.length === 0) {
+
+        container.innerHTML =
+            "<p style='color:#999;'>Seu carrinho está vazio.</p>";
+
+    }
+
+
+    carrinho.forEach(
+        function(item) {
+
+            const subtotal =
+                item.preco *
+                item.quantidade;
+
+            total +=
+                subtotal;
+
+            quantidadeTotal +=
+                item.quantidade;
+
+
+            const div =
+                document.createElement(
+                    "div"
+                );
+
+            div.className =
+                "item-carrinho";
+
+
+            div.innerHTML = `
+
+                <strong>
+                    ${item.nome}
+                </strong>
+
+                <div
+                    style="
+                    color:#aaa;
+                    margin-bottom:10px;
+                    "
+                >
+                    R$ ${item.preco.toFixed(2).replace(".",",")}
+                </div>
+
+                <div class="controles">
+
+                    <button
+                        onclick="alterarQuantidade('${item.nome}',-1)"
+                    >
+                        −
+                    </button>
+
+                    <span>
+                        ${item.quantidade}
+                    </span>
+
+                    <button
+                        onclick="alterarQuantidade('${item.nome}',1)"
+                    >
+                        +
+                    </button>
+
+                </div>
+
+            `;
+
+
+            container.appendChild(
+                div
+            );
+
+        }
+    );
+
+
+    contador.textContent =
+        quantidadeTotal;
+
+
+    totalElemento.textContent =
+        total
+            .toFixed(2)
+            .replace(".", ",");
+
+}
+
+
+/* =====================================================
+   ABRIR / FECHAR CARRINHO
+===================================================== */
+
+function toggleCarrinho() {
+
+    const carrinhoElemento =
+        document.getElementById(
+            "carrinho"
+        );
+
+    carrinhoElemento.classList.toggle(
+        "aberto"
+    );
+
+}
+
+
+/* =====================================================
+   WHATSAPP
+===================================================== */
+
+function finalizarPedidoWhatsApp() {
+
+    if (carrinho.length === 0) {
+
+        alert(
+            "Seu carrinho está vazio."
+        );
+
+        return;
+
+    }
+
+
+    const numeroWhatsApp =
+        "5563999999999";
+
+
+    let mensagem =
+        "🍕 *NOVO PEDIDO — PRIME PIZZA*%0A%0A";
+
+
+    let total =
+        0;
+
+
+    carrinho.forEach(
+        function(item) {
+
+            const subtotal =
+                item.preco *
+                item.quantidade;
+
+            total +=
+                subtotal;
+
+
+            mensagem +=
+                `🍕 ${item.nome} — ${item.quantidade}x — R$ ${subtotal.toFixed(2).replace(".",",")}%0A`;
+
+        }
+    );
+
+
+    mensagem +=
+        `%0A💰 *TOTAL: R$ ${total.toFixed(2).replace(".",",")}*`;
+
+
+    window.open(
+        `https://wa.me/${numeroWhatsApp}?text=${mensagem}`,
+        "_blank"
+    );
+
+}
+
+
+/* =====================================================
+   INICIAR
+===================================================== */
+
+atualizarCarrinho();
+
+</script></body>
+</html>
