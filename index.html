@@ -8,11 +8,12 @@
 </head>
 <body>
 
-    <!-- Tela Inicial / Hero 3D -->
+    <!-- SEÇÃO 1: HERO 3D (Abertura UAU) -->
     <section id="hero-3d">
         <div id="canvas-container"></div>
         <div class="hero-content">
             <h1>SUA PIZZA.<br>DO SEU JEITO.</h1>
+            <p class="subtitle">A experiência imersiva de sabor</p>
             <div class="hero-buttons">
                 <a href="#cardapio" class="btn primary">MONTAR MINHA PIZZA 🍕</a>
                 <a href="#cardapio" class="btn secondary">VER CARDÁPIO</a>
@@ -20,12 +21,100 @@
         </div>
     </section>
 
-    <!-- Botão Flutuante WhatsApp -->
-    <a href="#" id="whatsapp-float" target="_blank" aria-label="Pedir pelo WhatsApp">
-        💬
-    </a>
+    <!-- SEÇÃO 2: CARDÁPIO 3D INTERATIVO -->
+    <section id="cardapio" class="menu-section">
+        <div class="container">
+            <h2>CARDÁPIO DIGITAL 3D</h2>
+            
+            <!-- Categorias -->
+            <div class="categories">
+                <button class="cat-btn active" onclick="filtrarCategoria('pizzas')">🍕 Pizzas</button>
+                <button class="cat-btn" onclick="filtrarCategoria('bebidas')">🥤 Bebidas</button>
+                <button class="cat-btn" onclick="filtrarCategoria('sobremesas')">🍫 Sobremesas</button>
+                <button class="cat-btn" onclick="filtrarCategoria('combos')">🔥 Combos</button>
+            </div>
 
-    <!-- Scripts (Three.js via CDN + Lógica) -->
+            <!-- Grid de Produtos / Cards -->
+            <div class="product-grid" id="product-grid">
+                <!-- Card 1: Calabresa -->
+                <div class="product-card" onclick="abrirModal('Pizza Calabresa', 45.00)">
+                    <div class="card-img-placeholder">🍕</div>
+                    <h3>Calabresa Especial</h3>
+                    <p>Molho artesanal, muçarela, calabresa fatiada e cebola roxa.</p>
+                    <span class="price">A partir de R$ 45,00</span>
+                </div>
+
+                <!-- Card 2: Frango com Catupiry -->
+                <div class="product-card" onclick="abrirModal('Frango com Catupiry', 48.00)">
+                    <div class="card-img-placeholder">🧀</div>
+                    <h3>Frango com Catupiry</h3>
+                    <p>Frango desfiado temperado e generosas camadas de Catupiry original.</p>
+                    <span class="price">A partir de R$ 48,00</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MODAL 3D DE PERSONALIZAÇÃO -->
+    <div id="pizza-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-btn" onclick="fecharModal()">&times;</span>
+            <h2 id="modal-title">Monte sua Pizza</h2>
+            
+            <div class="modal-options">
+                <label>Escolha o Tamanho:</label>
+                <div class="size-options">
+                    <button onclick="mudarTamanho('P', 0)">P (R$ 0)</button>
+                    <button onclick="mudarTamanho('M', 10)" class="active">M (+R$ 10)</button>
+                    <button onclick="mudarTamanho('G', 20)">G (+R$ 20)</button>
+                </div>
+
+                <label>Borda Recheada:</label>
+                <select id="borda-select" onchange="atualizarPrecoModal()">
+                    <option value="Nenhuma">Sem Borda Recheada</option>
+                    <option value="Catupiry (+R$ 8)">Borda de Catupiry (+R$ 8,00)</option>
+                    <option value="Cheddar (+R$ 8)">Borda de Cheddar (+R$ 8,00)</option>
+                    <option value="Chocolate (+R$ 10)">Borda de Chocolate (+R$ 10,00)</option>
+                </select>
+
+                <div class="modal-total">
+                    <span>Total do Item:</span>
+                    <strong id="modal-preco-total">R$ 45,00</strong>
+                </div>
+
+                <button class="btn primary" onclick="adicionarAoCarrinhoModal()">ADICIONAR AO PEDIDO 🛒</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTÃO FLUTUANTE DO CARRINHO / WHATSAPP -->
+    <div class="cart-floating" onclick="abrirCarrinho()">
+        🛒 <span id="cart-counter">0</span>
+    </div>
+
+    <!-- SEÇÃO DO CARRINHO / CHECKOUT WHATSAPP -->
+    <div id="cart-drawer" class="cart-drawer" style="display: none;">
+        <div class="cart-header">
+            <h3>MEU PEDIDO 🍕</h3>
+            <span onclick="fecharCarrinho()">&times;</span>
+        </div>
+        <div class="cart-items" id="cart-items-container">
+            <!-- Itens entram aqui dinamicamente -->
+        </div>
+        <div class="cart-footer">
+            <div class="checkout-inputs">
+                <input type="text" id="endereco-cliente" placeholder="Seu Endereço de Entrega (Rua, nº)">
+                <select id="pagamento-cliente">
+                    <option value="Pix">Pagamento: Pix</option>
+                    <option value="Cartão na Entrega">Pagamento: Cartão na Entrega</option>
+                    <option value="Dinheiro">Pagamento: Dinheiro</option>
+                </select>
+            </div>
+            <button class="btn primary" onclick="finalizarPedidoWhatsApp()">FINALIZAR PEDIDO NO WHATSAPP 📱</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="src/js/three-scene.js"></script>
     <script src="src/js/cart.js"></script>
