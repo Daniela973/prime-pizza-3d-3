@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prime Pizza - A Verdadeira Obra-Prima Artesanal</title>
+    <title>Prime Pizza - Artesanal & Saborosa</title>
     <style>
         * {
             margin: 0;
@@ -45,6 +45,7 @@
         .nav-links {
             display: flex;
             gap: 20px;
+            align-items: center;
         }
 
         .nav-links a {
@@ -59,7 +60,7 @@
             color: #ff4500;
         }
 
-        /* HERO SECTION - COM A SUA IMAGEM DE REFERÊNCIA E EFEITOS */
+        /* HERO SECTION COM A IMAGEM DE REFERÊNCIA 3D / DINÂMICA */
         .hero {
             position: relative;
             width: 100%;
@@ -68,17 +69,9 @@
             align-items: center;
             justify-content: center;
             text-align: center;
-            background: url('https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=1600&auto=format&fit=crop') no-repeat center center/cover;
-        }
-
-        /* Camada escura para dar o destaque dramático e focar na fumaça/pizza */
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, rgba(5,5,5,0.7), rgba(5,5,5,0.95));
+            /* Usando a imagem exata de referência com ingredientes flutuantes/dinâmicos em fundo preto */
+            background: linear-gradient(rgba(5,5,5,0.6), rgba(5,5,5,0.95)), 
+                        url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1600&auto=format&fit=crop') no-repeat center center/cover;
         }
 
         .hero-content {
@@ -145,7 +138,7 @@
 
         .section-title {
             text-align: center;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
 
         .section-title h2 {
@@ -161,7 +154,7 @@
 
         .menu-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 25px;
         }
 
@@ -173,6 +166,7 @@
             transition: 0.3s;
             display: flex;
             flex-direction: column;
+            cursor: pointer;
         }
 
         .menu-card:hover {
@@ -222,43 +216,187 @@
             color: #4cd137;
         }
 
-        .btn-whatsapp-pedir {
-            background: #25d366;
+        .btn-add-cart {
+            background: #ff4500;
             color: white;
             padding: 8px 16px;
             border-radius: 20px;
-            text-decoration: none;
+            border: none;
             font-weight: bold;
             font-size: 0.9rem;
+            cursor: pointer;
             transition: 0.3s;
         }
 
-        .btn-whatsapp-pedir:hover {
-            background: #1ebe5d;
+        .btn-add-cart:hover {
+            background: #e03e00;
         }
 
-        /* BOTÃO FLUTUANTE DO WHATSAPP */
-        .whatsapp-float {
+        /* BOTÃO FLUTUANTE DO CARRINHO */
+        .cart-float {
             position: fixed;
             bottom: 25px;
             right: 25px;
-            background: #25d366;
+            background: #4cd137;
             color: white;
-            width: 60px;
-            height: 60px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 2rem;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+            font-size: 1.8rem;
+            box-shadow: 0 4px 20px rgba(76, 209, 55, 0.5);
             z-index: 2000;
-            text-decoration: none;
+            cursor: pointer;
             transition: 0.3s;
         }
 
-        .whatsapp-float:hover {
-            transform: scale(1.1);
+        .cart-float:hover {
+            transform: scale(1.08);
+        }
+
+        .cart-counter {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            background: #ff4500;
+            color: white;
+            font-size: 0.75rem;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* GAVETA DO CARRINHO */
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            max-width: 380px;
+            height: 100%;
+            background: #111;
+            z-index: 2500;
+            box-shadow: -5px 0 25px rgba(0,0,0,0.8);
+            display: flex;
+            flex-direction: column;
+            transition: right 0.4s ease;
+            border-left: 1px solid #222;
+        }
+
+        .cart-drawer.open {
+            right: 0;
+        }
+
+        .cart-header {
+            padding: 20px;
+            background: #161616;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #222;
+        }
+
+        .cart-header h3 {
+            color: #fff;
+            font-size: 1.2rem;
+        }
+
+        .close-cart {
+            font-size: 1.8rem;
+            color: #888;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .cart-item {
+            background: #181818;
+            padding: 12px 15px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #252525;
+        }
+
+        .cart-item-info h4 {
+            color: #fff;
+            font-size: 0.95rem;
+            margin-bottom: 4px;
+        }
+
+        .cart-item-info span {
+            color: #4cd137;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .cart-item-controls button {
+            background: #252525;
+            color: white;
+            border: none;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cart-footer {
+            padding: 20px;
+            background: #161616;
+            border-top: 1px solid #222;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.1rem;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .cart-total span:last-child {
+            color: #4cd137;
+        }
+
+        .btn-whatsapp-finalizar {
+            background: #25d366;
+            color: white;
+            padding: 14px;
+            border-radius: 30px;
+            border: none;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .btn-whatsapp-finalizar:hover {
+            background: #1ebe5d;
         }
     </style>
 </head>
@@ -270,17 +408,15 @@
         <div class="nav-links">
             <a href="#home">Início</a>
             <a href="#cardapio">Cardápio</a>
-            <a href="https://wa.me/5500000000000?text=Olá!%20Gostaria%20de%20ver%20o%20cardápio%20completo." target="_blank">Pedir pelo WhatsApp</a>
         </div>
     </header>
 
-    <!-- PÁGINA INICIAL COM O VISUAL DA SUA FOTO (FUNDO PRETO, PIZZA QUENTE E DESTAQUE) -->
+    <!-- PÁGINA INICIAL -->
     <section id="home" class="hero">
-        <div class="hero-overlay"></div>
         <div class="hero-content">
-            <span class="badge-fumaca">🔥 Assada no Forno a Lenha • Fervendo na Ficha</span>
-            <h1>A verdadeira obra-prima da pizza artesanal</h1>
-            <p>Massa de longa fermentação, queijo super cremoso derretido e ingredientes frescos selecionados direto para a sua mesa.</p>
+            <span class="badge-fumaca">🔥 Artesanal • Forno a Lenha • Ingredientes Selecionados</span>
+            <h1>A verdadeira obra-prima da pizza</h1>
+            <p>Massa leve de longa fermentação, queijo super cremoso derretido e vapor fresco saindo na hora direto para a sua mesa.</p>
             <a href="#cardapio" class="btn-acao">Ver Cardápio Completo 🍕</a>
         </div>
     </section>
@@ -289,24 +425,24 @@
     <section id="cardapio" class="menu-section">
         <div class="section-title">
             <h2>Nosso Cardápio Exclusivo</h2>
-            <p>Escolha sua pizza favorita e faça seu pedido direto pelo WhatsApp</p>
+            <p>Monte seu pedido adicionando quantos itens quiser ao carrinho</p>
         </div>
 
         <div class="menu-grid">
-            <!-- Pizza 1 -->
+            <!-- Produto 1 -->
             <div class="menu-card">
                 <div class="card-img-placeholder">🍅</div>
                 <div class="card-body">
                     <h3>Margherita Especial</h3>
-                    <p>Molho de tomate rústico bem encorpado, mozarela de búfala artesanal esticando, manjericão fresco e azeite extra virgem.</p>
+                    <p>Molho de tomate rústico, mozarela de búfala artesanal esticando, manjericão fresco e azeite extra virgem.</p>
                     <div class="card-footer">
                         <span class="price">R$ 48,00</span>
-                        <a href="https://wa.me/5500000000000?text=Olá!%20Quero%20pedir%20a%20Pizza%20Margherita%20Especial." target="_blank" class="btn-whatsapp-pedir">Pedir 📱</a>
+                        <button class="btn-add-cart" onclick="adicionarAoCarrinho('Margherita Especial', 48.00)">Adicionar 🛒</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Pizza 2 -->
+            <!-- Produto 2 -->
             <div class="menu-card">
                 <div class="card-img-placeholder">🔥</div>
                 <div class="card-body">
@@ -314,12 +450,12 @@
                     <p>Fatias finas de calabresa artesanal defumada, toque especial de pimenta, cebolas roxas caramelizadas e azeitonas negras.</p>
                     <div class="card-footer">
                         <span class="price">R$ 52,00</span>
-                        <a href="https://wa.me/5500000000000?text=Olá!%20Quero%20pedir%20a%20Pizza%20Calabresa%20Suprema." target="_blank" class="btn-whatsapp-pedir">Pedir 📱</a>
+                        <button class="btn-add-cart" onclick="adicionarAoCarrinho('Calabresa Suprema', 52.00)">Adicionar 🛒</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Pizza 3 -->
+            <!-- Produto 3 -->
             <div class="menu-card">
                 <div class="card-img-placeholder">🧀</div>
                 <div class="card-body">
@@ -327,17 +463,141 @@
                     <p>Seleção especial de mozarela, provolone maturado, gorgonzola cremoso e catupiry original de altíssima qualidade.</p>
                     <div class="card-footer">
                         <span class="price">R$ 58,00</span>
-                        <a href="https://wa.me/5500000000000?text=Olá!%20Quero%20pedir%20a%20Pizza%20Quatro%20Queijos%20Premium." target="_blank" class="btn-whatsapp-pedir">Pedir 📱</a>
+                        <button class="btn-add-cart" onclick="adicionarAoCarrinho('Quatro Queijos Premium', 58.00)">Adicionar 🛒</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Produto 4 -->
+            <div class="menu-card">
+                <div class="card-img-placeholder">🥤</div>
+                <div class="card-body">
+                    <h3>Coca-Cola 2 Litros</h3>
+                    <p>Gelada, perfeita para acompanhar a sua pizza artesanal favorita com a família ou amigos.</p>
+                    <div class="card-footer">
+                        <span class="price">R$ 14,00</span>
+                        <button class="btn-add-cart" onclick="adicionarAoCarrinho('Coca-Cola 2 Litros', 14.00)">Adicionar 🛒</button>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- BOTÃO FLUTUANTE DO WHATSAPP -->
-    <a href="https://wa.me/5500000000000?text=Olá!%20Gostaria%20de%20ver%20o%20cardápio%20e%20fazer%20um%20pedido." target="_blank" class="whatsapp-float">
-        💬
-    </a>
+    <!-- BOTÃO FLUTUANTE DO CARRINHO -->
+    <div class="cart-float" onclick="toggleCarrinho()">
+        🛒
+        <span id="cart-counter" class="cart-counter">0</span>
+    </div>
 
+    <!-- GAVETA DO CARRINHO -->
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-header">
+            <h3>Seu Carrinho de Compras</h3>
+            <span class="close-cart" onclick="toggleCarrinho()">&times;</span>
+        </div>
+        <div id="cart-items-container" class="cart-items">
+            <!-- Itens adicionados aparecem aqui -->
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cart-total-price">R$ 0,00</span>
+            </div>
+            <button class="btn-whatsapp-finalizar" onclick="finalizarPedidoWhatsApp()">Finalizar Pedido no WhatsApp 📱</button>
+        </div>
+    </div>
+
+    <!-- SCRIPT DE CONTROLE DO CARRINHO E WHATSAPP -->
+    <script>
+        let carrinho = [];
+
+        function adicionarAoCarrinho(nome, preco) {
+            let itemExistente = carrinho.find(item => item.name === nome);
+            if (itemExistente) {
+                itemExistente.quantidade++;
+            } else {
+                carrinho.push({ name: nome, price: preco, quantidade: 1 });
+            }
+            atualizarCarrinho();
+            // Abre o carrinho automaticamente para feedback visual
+            document.getElementById('cart-drawer').classList.add('open');
+        }
+
+        function alterarQuantidade(nome, delta) {
+            let item = carrinho.find(item => item.name === nome);
+            if (item) {
+                item.quantidade += delta;
+                if (item.quantidade <= 0) {
+                    carrinho = carrinho.filter(i => i.name !== nome);
+                }
+            }
+            atualizarCarrinho();
+        }
+
+        function atualizarCarrinho() {
+            let container = document.getElementById('cart-items-container');
+            let counter = document.getElementById('cart-counter');
+            let totalPriceEl = document.getElementById('cart-total-price');
+
+            container.innerHTML = '';
+            let totalItens = 0;
+            let precoTotal = 0;
+
+            if (carrinho.length === 0) {
+                container.innerHTML = '<p style="color: #777; text-align: center; margin-top: 40px;">Seu carrinho está vazio.</p>';
+            }
+
+            carrinho.forEach(item => {
+                totalItens += item.quantidade;
+                precoTotal += item.price * item.quantidade;
+
+                let div = document.createElement('div');
+                div.className = 'cart-item';
+                div.innerHTML = `
+                    <div class="cart-item-info">
+                        <h4>${item.name}</h4>
+                        <span>R$ ${(item.price * item.quantidade).toFixed(2).replace('.', ',')}</span>
+                    </div>
+                    <div class="cart-item-controls">
+                        <button onclick="alterarQuantidade('${item.name}', -1)">-</button>
+                        <span style="color:#fff; font-weight:bold;">${item.quantidade}</span>
+                        <button onclick="alterarQuantidade('${item.name}', 1)">+</button>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+
+            counter.innerText = totalItens;
+            totalPriceEl.innerText = `R$ ${precoTotal.toFixed(2).replace('.', ',')}`;
+        }
+
+        function toggleCarrinho() {
+            document.getElementById('cart-drawer').classList.toggle('open');
+        }
+
+        function finalizarPedidoWhatsApp() {
+            if (carrinho.length === 0) {
+                alert('Seu carrinho está vazio! Adicione itens antes de finalizar.');
+                return;
+            }
+
+            let mensagem = "Olá! Gostaria de fazer o seguinte pedido:%0A%0A";
+            let total = 0;
+
+            carrinho.forEach(item => {
+                let subtotal = item.price * item.quantidade;
+                total += subtotal;
+                mensagem += `• ${item.quantidade}x ${item.name} - R$ ${subtotal.toFixed(2).replace('.', ',')}%0A`;
+            });
+
+            mensagem += `%0A*Total Geral: R$ ${total.toFixed(2).replace('.', ',')}*`;
+            mensagem += `%0A%0APor favor, confirmar entrega/retirada!`;
+
+            // Substitua pelo seu número de WhatsApp real com DDD (ex: 5511999999999)
+            let numeroWhatsApp = "5500000000000"; 
+            let url = `https://wa.me/${numeroWhatsApp}?text=${mensagem}`;
+            window.open(url, '_blank');
+        }
+    </script>
 </body>
 </html>
