@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prime Pizza - Artesanal & Saborosa</title>
+    
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/"
+        }
+    }
+    </script>
+
     <style>
         * {
             margin: 0;
@@ -60,25 +70,47 @@
             color: #ff4500;
         }
 
-        /* HERO SECTION COM SUA IMAGEM 3D / DINÂMICA DE DESTAQUE */
+        /* HERO COM O MOTOR 3D THREE.JS */
         .hero {
             position: relative;
             width: 100%;
             height: 100vh;
+            min-height: 700px;
+            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-align: center;
-            /* Imagem 3D de alta qualidade com ingredientes explodindo e vapor em fundo escuro */
-            background: linear-gradient(rgba(5,5,5,0.7), rgba(5,5,5,0.92)), 
-                        url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=1600&auto=format&fit=crop') no-repeat center center/cover;
+            background: radial-gradient(circle at center, #241008 0%, #080504 45%, #020202 100%);
+        }
+
+        #pizza3d {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+            background: radial-gradient(circle at center, transparent 20%, rgba(0,0,0,.25) 55%, rgba(0,0,0,.85) 100%);
         }
 
         .hero-content {
             position: relative;
-            z-index: 2;
-            max-width: 800px;
+            z-index: 5;
+            max-width: 650px;
             padding: 0 20px;
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .hero-content * {
+            pointer-events: auto;
         }
 
         .badge-fumaca {
@@ -96,7 +128,7 @@
         }
 
         .hero-content h1 {
-            font-size: clamp(2.5rem, 5vw, 4.2rem);
+            font-size: clamp(2.3rem, 5vw, 4rem);
             font-weight: 900;
             line-height: 1.1;
             margin-bottom: 20px;
@@ -122,6 +154,8 @@
             box-shadow: 0 6px 25px rgba(255, 69, 0, 0.5);
             display: inline-block;
             transition: 0.3s;
+            border: none;
+            cursor: pointer;
         }
 
         .btn-acao:hover {
@@ -134,6 +168,9 @@
             padding: 90px 20px;
             max-width: 1100px;
             margin: 0 auto;
+            position: relative;
+            z-index: 10;
+            background: #050505;
         }
 
         .section-title {
@@ -399,7 +436,6 @@
 </head>
 <body>
 
-    <!-- CABEÇALHO -->
     <header>
         <div class="logo">🍕 PRIME PIZZA</div>
         <div class="nav-links">
@@ -408,17 +444,16 @@
         </div>
     </header>
 
-    <!-- PÁGINA INICIAL COM A IMAGEM 3D DE DESTAQUE -->
     <section id="home" class="hero">
+        <canvas id="pizza3d"></canvas>
         <div class="hero-content">
-            <span class="badge-fumaca">🔥 Artesanal • Forno a Lenha • Ingredientes Selecionados</span>
-            <h1>A verdadeira obra-prima da pizza</h1>
-            <p>Massa leve de longa fermentação, queijo super cremoso derretido e vapor fresco saindo na hora direto para a sua mesa.</p>
-            <a href="#cardapio" class="btn-acao">Ver Cardápio Completo 🍕</a>
+            <span class="badge-fumaca">🔥 Artesanal • Forno a Lenha • 3D Interativo</span>
+            <h1>Veja sua pizza nascer em 3D</h1>
+            <p>Massa leve de longa fermentação, molho fresco, ingredientes flutuando e fumaça em tempo real direto na sua tela.</p>
+            <button class="btn-acao" onclick="montarPizza()">🍕 Montar Minha Pizza</button>
         </div>
     </section>
 
-    <!-- CARDÁPIO COM AS FOTOS REAIS (INCLUINDO A DA FATIA COM QUEIJO ESTICANDO) -->
     <section id="cardapio" class="menu-section">
         <div class="section-title">
             <h2>Nosso Cardápio Exclusivo</h2>
@@ -426,7 +461,6 @@
         </div>
 
         <div class="menu-grid">
-            <!-- Produto 1: Com a foto da fatia de queijo com fumaça -->
             <div class="menu-card">
                 <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=600&auto=format&fit=crop" alt="Margherita Especial" class="card-img">
                 <div class="card-body">
@@ -439,7 +473,6 @@
                 </div>
             </div>
 
-            <!-- Produto 2 -->
             <div class="menu-card">
                 <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=600&auto=format&fit=crop" alt="Calabresa Suprema" class="card-img">
                 <div class="card-body">
@@ -452,7 +485,6 @@
                 </div>
             </div>
 
-            <!-- Produto 3 -->
             <div class="menu-card">
                 <img src="https://images.unsplash.com/photo-1571407971189-e2230472d196?q=80&w=600&auto=format&fit=crop" alt="Quatro Queijos Premium" class="card-img">
                 <div class="card-body">
@@ -465,7 +497,6 @@
                 </div>
             </div>
 
-            <!-- Produto 4 -->
             <div class="menu-card">
                 <img src="https://images.unsplash.com/photo-1622483767028-3f66f32aef97?q=80&w=600&auto=format&fit=crop" alt="Coca-Cola 2 Litros" class="card-img">
                 <div class="card-body">
@@ -480,21 +511,18 @@
         </div>
     </section>
 
-    <!-- BOTÃO FLUTUANTE DO CARRINHO -->
     <div class="cart-float" onclick="toggleCarrinho()">
         🛒
         <span id="cart-counter" class="cart-counter">0</span>
     </div>
 
-    <!-- GAVETA DO CARRINHO -->
     <div id="cart-drawer" class="cart-drawer">
         <div class="cart-header">
             <h3>Seu Carrinho de Compras</h3>
             <span class="close-cart" onclick="toggleCarrinho()">&times;</span>
         </div>
         <div id="cart-items-container" class="cart-items">
-            <!-- Itens adicionados aparecem aqui -->
-        </div>
+            </div>
         <div class="cart-footer">
             <div class="cart-total">
                 <span>Total:</span>
@@ -504,7 +532,170 @@
         </div>
     </div>
 
-    <!-- SCRIPT DE CONTROLE DO CARRINHO E WHATSAPP -->
+    <script type="module">
+        import * as THREE from 'three';
+
+        const canvas = document.getElementById('pizza3d');
+        const scene = new THREE.Scene();
+
+        const camera = new THREE.PerspectiveCamera(
+            45,
+            canvas.clientWidth / canvas.clientHeight,
+            0.1,
+            100
+        );
+        camera.position.set(0, 5, 9);
+
+        const renderer = new THREE.WebGLRenderer({
+            canvas: canvas,
+            antialias: true,
+            alpha: true
+        });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
+        // ILUMINAÇÃO
+        const luzAmbiente = new THREE.HemisphereLight(0xffe8d0, 0x160604, 2);
+        scene.add(luzAmbiente);
+
+        const luzPrincipal = new THREE.DirectionalLight(0xffd0a0, 4);
+        luzPrincipal.position.set(4, 8, 6);
+        luzPrincipal.castShadow = true;
+        scene.add(luzPrincipal);
+
+        const luzQuente = new THREE.PointLight(0xff4500, 8, 15);
+        luzQuente.position.set(-4, 3, 4);
+        scene.add(luzQuente);
+
+        // 1. MASSA BRANCA 3D
+        const massaMaterial = new THREE.MeshStandardMaterial({
+            color: 0xf5e5c8,
+            roughness: 0.8
+        });
+        const massaGeometry = new THREE.CylinderGeometry(3.2, 3.2, 0.35, 96);
+        const massa = new THREE.Mesh(massaGeometry, massaMaterial);
+        massa.position.y = 0;
+        massa.castShadow = true;
+        massa.receiveShadow = true;
+        scene.add(massa);
+
+        // 2. MOLHO DE TOMATE 3D
+        const molhoMaterial = new THREE.MeshStandardMaterial({
+            color: 0xc83218,
+            roughness: 0.7
+        });
+        const molhoGeometry = new THREE.CylinderGeometry(2.95, 2.95, 0.08, 96);
+        const molho = new THREE.Mesh(molhoGeometry, molhoMaterial);
+        molho.position.y = 0.22;
+        molho.castShadow = true;
+        scene.add(molho);
+
+        // 3. INGREDIENTES FLUTUANTES (CALABRESA)
+        function criarCalabresa() {
+            const geometry = new THREE.CylinderGeometry(0.32, 0.32, 0.12, 32);
+            const material = new THREE.MeshStandardMaterial({
+                color: 0x9e2515,
+                roughness: 0.65
+            });
+            const objeto = new THREE.Mesh(geometry, material);
+            objeto.rotation.x = Math.PI / 2;
+            objeto.castShadow = true;
+            return objeto;
+        }
+
+        const ingredientes = [];
+        for (let i = 0; i < 12; i++) {
+            const ingrediente = criarCalabresa();
+            ingrediente.position.set(
+                (Math.random() - 0.5) * 5,
+                2 + Math.random() * 2,
+                (Math.random() - 0.5) * 4
+            );
+            ingrediente.userData.destino = {
+                x: (Math.random() - 0.5) * 4.5,
+                y: 0.45,
+                z: (Math.random() - 0.5) * 4.5
+            };
+            scene.add(ingrediente);
+            ingredientes.push(ingrediente);
+        }
+
+        // 4. FUMAÇA 3D DE PARTÍCULAS
+        const fumaca = [];
+        const fumacaMaterial = new THREE.MeshBasicMaterial({
+            color: 0xffffff,
+            transparent: true,
+            opacity: 0.12,
+            depthWrite: false
+        });
+
+        for (let i = 0; i < 25; i++) {
+            const geometry = new THREE.SphereGeometry(0.15 + Math.random() * 0.25, 16, 16);
+            const particula = new THREE.Mesh(geometry, fumacaMaterial.clone());
+            particula.position.set(
+                (Math.random() - 0.5) * 2,
+                0.5 + Math.random(),
+                (Math.random() - 0.5) * 2
+            );
+            particula.userData.velocidade = 0.002 + Math.random() * 0.004;
+            scene.add(particula);
+            fumaca.push(particula);
+        }
+
+        // CONTROLE DE MONTAGEM
+        window.montarPizza = function() {
+            ingredientes.forEach((ingrediente, index) => {
+                setTimeout(() => {
+                    ingrediente.userData.montando = true;
+                }, index * 120);
+            });
+        };
+
+        // LOOP DE ANIMAÇÃO
+        function animate(time) {
+            requestAnimationFrame(animate);
+
+            // Animar ingredientes
+            ingredientes.forEach((ingrediente) => {
+                if (!ingrediente.userData.montando) {
+                    ingrediente.position.y = 2.5 + Math.sin(time * 0.002 + ingrediente.id) * 0.25;
+                    ingrediente.rotation.z += 0.01;
+                } else {
+                    const destino = ingrediente.userData.destino;
+                    ingrediente.position.x += (destino.x - ingrediente.position.x) * 0.05;
+                    ingrediente.position.y += (destino.y - ingrediente.position.y) * 0.05;
+                    ingrediente.position.z += (destino.z - ingrediente.position.z) * 0.05;
+                }
+            });
+
+            // Animar fumaça
+            fumaca.forEach((particula) => {
+                particula.position.y += particula.userData.velocidade;
+                particula.position.x += Math.sin(time * 0.001 + particula.id) * 0.002;
+                particula.scale.multiplyScalar(1.002);
+
+                if (particula.position.y > 4) {
+                    particula.position.y = 0.5;
+                    particula.scale.set(1, 1, 1);
+                }
+            });
+
+            massa.rotation.y += 0.0015;
+            renderer.render(scene, camera);
+        }
+
+        animate();
+
+        // Ajustar redimensionamento de tela
+        window.addEventListener('resize', () => {
+            camera.aspect = canvas.clientWidth / canvas.clientHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(canvas.clientWidth, canvas.clientHeight, false);
+        });
+    </script>
+
     <script>
         let carrinho = [];
 
@@ -597,4 +788,3 @@
     </script>
 </body>
 </html>
-
