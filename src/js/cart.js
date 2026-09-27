@@ -131,3 +131,4 @@ function finalizarPedidoWhatsApp() {
 
     window.open(url, '_blank');
 }
+
