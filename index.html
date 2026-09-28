@@ -3,10 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>PrimePizza — Pizza Artesanal</title>
-
-<meta name="description" content="PrimePizza — pizza artesanal feita para você.">
+<meta name="description" content="PrimePizza — As melhores pizzas artesanais feitas com ingredientes frescos. Peça já pelo WhatsApp!">
 
 <style>
 *{
@@ -20,9 +18,9 @@ html{
 }
 
 body{
-    background:#080808;
-    color:#fff;
-    font-family:Arial, Helvetica, sans-serif;
+    background:#0b0b0b;
+    color:#f4f4f4;
+    font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
     overflow-x:hidden;
 }
 
@@ -38,7 +36,6 @@ button{
 /* =========================
    HEADER
 ========================= */
-
 header{
     position:fixed;
     top:0;
@@ -50,13 +47,13 @@ header{
     align-items:center;
     justify-content:space-between;
     padding:0 6%;
-    background:rgba(8,8,8,.72);
+    background:rgba(11,11,11,.85);
     backdrop-filter:blur(12px);
-    border-bottom:1px solid rgba(255,255,255,.07);
+    border-bottom:1px solid rgba(255,255,255,.08);
 }
 
 .logo{
-    font-size:25px;
+    font-size:24px;
     font-weight:900;
     letter-spacing:-1px;
 }
@@ -71,8 +68,9 @@ nav{
 }
 
 nav a{
-    color:#ddd;
+    color:#ccc;
     font-size:14px;
+    font-weight:500;
     transition:.3s;
 }
 
@@ -80,68 +78,56 @@ nav a:hover{
     color:#ff5a16;
 }
 
-.cart-button{
-    border:1px solid rgba(255,255,255,.2);
-    background:#151515;
+.whatsapp-top-btn{
+    background:#25d366;
     color:#fff;
-    padding:10px 17px;
+    padding:9px 18px;
     border-radius:30px;
-    cursor:pointer;
+    font-size:14px;
+    font-weight:bold;
+    display:flex;
+    align-items:center;
+    gap:8px;
     transition:.3s;
+    border:none;
+    cursor:pointer;
 }
 
-.cart-button:hover{
-    background:#ff5a16;
+.whatsapp-top-btn:hover{
+    background:#20ba5a;
+    transform:translateY(-2px);
 }
 
 /* =========================
-   HERO
+   HERO SECTION
 ========================= */
-
 .hero{
-    min-height:100vh;
-    position:relative;
+    min-height:90vh;
     display:flex;
     align-items:center;
-    overflow:hidden;
-    padding:100px 7% 60px;
-}
-
-.hero::before{
-    content:"";
-    position:absolute;
-    width:600px;
-    height:600px;
-    right:-200px;
-    top:100px;
-    background:radial-gradient(
-        circle,
-        rgba(255,74,10,.22),
-        transparent 68%
-    );
-    pointer-events:none;
+    justify-content:space-between;
+    padding:130px 7% 80px;
+    background:radial-gradient(circle at 80% 40%, rgba(255,90,22,0.12) 0%, transparent 60%);
 }
 
 .hero-content{
-    width:50%;
-    position:relative;
-    z-index:5;
+    max-width:600px;
 }
 
 .eyebrow{
-    color:#ff641f;
+    color:#ff5a16;
     font-size:13px;
     font-weight:bold;
     letter-spacing:3px;
     text-transform:uppercase;
-    margin-bottom:20px;
+    margin-bottom:15px;
 }
 
 .hero h1{
-    font-size:clamp(50px,7vw,100px);
-    line-height:.9;
-    letter-spacing:-5px;
-    margin-bottom:28px;
+    font-size:clamp(42px, 6vw, 75px);
+    line-height:1;
+    letter-spacing:-2px;
+    margin-bottom:24px;
 }
 
 .hero h1 span{
@@ -149,389 +135,165 @@ nav a:hover{
 }
 
 .hero p{
-    max-width:500px;
     color:#aaa;
-    font-size:18px;
+    font-size:17px;
     line-height:1.6;
     margin-bottom:35px;
 }
 
-.primary-button{
+.hero-buttons{
+    display:flex;
+    gap:15px;
+}
+
+.btn-primary{
+    background:#ff5a16;
+    color:#fff;
+    padding:15px 28px;
+    border-radius:35px;
+    font-size:15px;
+    font-weight:bold;
     display:inline-flex;
     align-items:center;
     gap:10px;
-    background:#ff5a16;
-    color:#fff;
-    border:none;
-    padding:16px 25px;
-    border-radius:40px;
-    font-size:15px;
-    font-weight:bold;
-    cursor:pointer;
     transition:.3s;
-    box-shadow:0 15px 40px rgba(255,90,22,.2);
+    border:none;
+    cursor:pointer;
+    box-shadow:0 10px 30px rgba(255,90,22,0.25);
 }
 
-.primary-button:hover{
-    transform:translateY(-3px);
-    box-shadow:0 20px 50px rgba(255,90,22,.35);
+.btn-primary:hover{
+    background:#e04d10;
+    transform:translateY(-2px);
 }
 
-/* =========================
-   3D CONTAINER
-========================= */
-
-#pizza-container{
-    position:absolute;
-    right:0;
-    top:75px;
-    width:58%;
-    height:calc(100vh - 75px);
-    z-index:2;
-}
-
-#pizza-canvas{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-}
-
-/* =========================
-   FALLBACK PIZZA
-========================= */
-
-.fallback-pizza{
-    position:absolute;
-    left:50%;
-    top:50%;
-    width:min(390px,65vw);
-    aspect-ratio:1;
-    transform:translate(-50%,-50%) rotate(-8deg);
-    border-radius:50%;
-    background:
-        radial-gradient(
-            circle at 30% 30%,
-            #fff3d1 0 3%,
-            transparent 4%
-        ),
-        radial-gradient(
-            circle at 68% 35%,
-            #ffbc25 0 4%,
-            transparent 5%
-        ),
-        radial-gradient(
-            circle at 40% 70%,
-            #ff3424 0 5%,
-            transparent 6%
-        ),
-        radial-gradient(
-            circle at 70% 70%,
-            #e52820 0 5%,
-            transparent 6%
-        ),
-        radial-gradient(
-            circle at 52% 48%,
-            #ef2d20 0 5%,
-            transparent 6%
-        ),
-        radial-gradient(
-            circle,
-            #f6c15a 0 72%,
-            #d56a22 73% 78%,
-            #8e3b13 79% 100%
-        );
-    box-shadow:
-        0 35px 80px rgba(0,0,0,.55),
-        0 0 80px rgba(255,70,10,.16);
-}
-
-.fallback-pizza::after{
-    content:"";
-    position:absolute;
-    inset:10%;
-    border-radius:50%;
-    border:10px solid rgba(255,255,255,.08);
-}
-
-.pizza-smoke{
-    position:absolute;
-    left:50%;
-    top:28%;
-    width:20px;
-    height:20px;
-    border-radius:50%;
-    background:rgba(255,255,255,.16);
-    filter:blur(8px);
-    animation:smoke 3s infinite ease-out;
-}
-
-.pizza-smoke:nth-child(2){
-    left:44%;
-    animation-delay:1s;
-}
-
-.pizza-smoke:nth-child(3){
-    left:58%;
-    animation-delay:1.7s;
-}
-
-@keyframes smoke{
-    0%{
-        transform:translateY(30px) scale(.6);
-        opacity:0;
-    }
-    30%{
-        opacity:.5;
-    }
-    100%{
-        transform:translateY(-120px) scale(2);
-        opacity:0;
-    }
-}
-
-/* =========================
-   STORY
-========================= */
-
-.story{
-    min-height:80vh;
+.hero-img-box{
+    width:42%;
     display:flex;
-    align-items:center;
     justify-content:center;
-    padding:120px 7%;
-    background:#0c0c0c;
 }
 
-.story-inner{
-    max-width:950px;
-    text-align:center;
-}
-
-.story h2{
-    font-size:clamp(40px,6vw,75px);
-    line-height:.95;
-    letter-spacing:-3px;
-    margin-bottom:30px;
-}
-
-.story h2 span{
-    color:#ff5a16;
-}
-
-.story p{
-    color:#999;
-    font-size:18px;
-    line-height:1.8;
-    max-width:720px;
-    margin:auto;
+.hero-img-box img{
+    width:100%;
+    max-width:450px;
+    border-radius:20px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.6);
+    border:1px solid rgba(255,255,255,0.08);
 }
 
 /* =========================
-   MENU
+   CARDÁPIO
 ========================= */
-
-.menu{
-    padding:120px 7%;
-    background:#080808;
+.menu-section{
+    padding:100px 7%;
+    background:#0f0f0f;
 }
 
-.section-top{
-    display:flex;
-    align-items:end;
-    justify-content:space-between;
-    margin-bottom:55px;
+.section-title{
+    text-align:center;
+    margin-bottom:60px;
 }
 
-.section-top h2{
-    font-size:clamp(40px,5vw,70px);
-    letter-spacing:-3px;
+.section-title h2{
+    font-size:clamp(32px, 4vw, 48px);
+    letter-spacing:-1px;
+    margin-bottom:10px;
 }
 
-.section-top p{
-    color:#777;
-    max-width:350px;
-    line-height:1.6;
+.section-title p{
+    color:#888;
+    font-size:16px;
 }
 
 .menu-grid{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
+    grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+    gap:30px;
 }
 
 .menu-card{
-    background:#111;
-    border:1px solid rgba(255,255,255,.07);
-    border-radius:24px;
-    padding:18px;
-    transition:.35s;
+    background:#141414;
+    border:1px solid rgba(255,255,255,0.06);
+    border-radius:18px;
+    overflow:hidden;
+    transition:.3s;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
 }
 
 .menu-card:hover{
-    transform:translateY(-8px);
-    border-color:rgba(255,90,22,.5);
+    border-color:rgba(255,90,22,0.4);
+    transform:translateY(-5px);
 }
 
-.food-image{
-    height:220px;
-    border-radius:18px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin-bottom:20px;
-    background:
-        radial-gradient(
-            circle at 50% 50%,
-            rgba(255,90,22,.18),
-            transparent 65%
-        );
+.card-image{
+    width:100%;
+    height:210px;
+    object-fit:cover;
 }
 
-.mini-pizza{
-    width:155px;
-    height:155px;
-    border-radius:50%;
-    background:
-        radial-gradient(circle at 25% 30%,#e52a20 0 5%,transparent 6%),
-        radial-gradient(circle at 70% 35%,#e52a20 0 5%,transparent 6%),
-        radial-gradient(circle at 45% 65%,#e52a20 0 5%,transparent 6%),
-        radial-gradient(circle,#f4bd51 0 72%,#d66d22 73% 80%,#813612 81%);
-    box-shadow:0 20px 35px rgba(0,0,0,.45);
+.card-info{
+    padding:22px;
 }
 
-.menu-card h3{
+.card-info h3{
     font-size:20px;
     margin-bottom:8px;
 }
 
-.menu-card p{
-    color:#777;
+.card-info p{
+    color:#888;
     font-size:14px;
     line-height:1.5;
-    min-height:43px;
-    margin-bottom:18px;
+    margin-bottom:20px;
 }
 
-.card-bottom{
+.card-footer{
     display:flex;
     align-items:center;
     justify-content:space-between;
+    padding:0 22px 22px 22px;
 }
 
 .price{
     font-size:20px;
     font-weight:bold;
-}
-
-.add-button{
-    width:40px;
-    height:40px;
-    border-radius:50%;
-    border:none;
-    background:#ff5a16;
     color:#fff;
-    font-size:22px;
-    cursor:pointer;
 }
 
-/* =========================
-   CUSTOMIZER
-========================= */
-
-.customizer{
-    padding:120px 7%;
-    background:#101010;
-}
-
-.customizer-box{
-    max-width:1100px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:50px;
-    align-items:center;
-}
-
-.custom-pizza-area{
-    min-height:450px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position:relative;
-}
-
-.custom-pizza{
-    width:330px;
-    height:330px;
-    border-radius:50%;
-    background:
-        radial-gradient(circle at 28% 30%,#e52a20 0 5%,transparent 6%),
-        radial-gradient(circle at 68% 30%,#e52a20 0 5%,transparent 6%),
-        radial-gradient(circle at 48% 60%,#e52a20 0 5%,transparent 6%),
-        radial-gradient(circle at 70% 70%,#e52a20 0 5%,transparent 6%),
-        radial-gradient(circle,#f5bd52 0 73%,#d66b21 74% 81%,#803511 82%);
-    box-shadow:0 30px 70px rgba(0,0,0,.6);
-    transition:.5s;
-}
-
-.customizer-content h2{
-    font-size:clamp(40px,5vw,65px);
-    line-height:.95;
-    letter-spacing:-3px;
-    margin-bottom:35px;
-}
-
-.option{
-    margin-bottom:25px;
-}
-
-.option label{
-    display:block;
-    color:#aaa;
-    margin-bottom:10px;
-    font-size:14px;
-}
-
-.option-buttons{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-}
-
-.option-buttons button{
-    border:1px solid #333;
-    background:#171717;
-    color:#fff;
-    padding:11px 17px;
-    border-radius:30px;
-    cursor:pointer;
-    transition:.25s;
-}
-
-.option-buttons button.active,
-.option-buttons button:hover{
-    background:#ff5a16;
-    border-color:#ff5a16;
-}
-
-.custom-price{
-    font-size:28px;
+.btn-zap-card{
+    background:rgba(37, 211, 102, 0.15);
+    color:#25d366;
+    border:1px solid rgba(37, 211, 102, 0.3);
+    padding:10px 15px;
+    border-radius:10px;
+    font-size:13px;
     font-weight:bold;
-    margin:25px 0;
+    cursor:pointer;
+    transition:.3s;
+    display:flex;
+    align-items:center;
+    gap:6px;
+}
+
+.btn-zap-card:hover{
+    background:#25d366;
+    color:#fff;
 }
 
 /* =========================
    FOOTER
 ========================= */
-
 footer{
     padding:50px 7%;
-    background:#050505;
-    border-top:1px solid rgba(255,255,255,.06);
+    background:#080808;
+    border-top:1px solid rgba(255,255,255,0.06);
     display:flex;
     justify-content:space-between;
+    align-items:center;
     color:#666;
+    font-size:14px;
 }
 
 footer strong{
@@ -539,79 +301,30 @@ footer strong{
 }
 
 /* =========================
-   CART OVERLAY
+   RESPONSIVO
 ========================= */
-
-.cart-overlay{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.72);
-    z-index:2000;
-    display:none;
-}
-
-.cart-overlay.active{
-    display:block;
-}
-
-.cart{
-    position:absolute;
-    right:0;
-    top:0;
-    width:min(460px,100%);
-    height:100%;
-    background:#111;
-    padding:30px;
-    overflow-y:auto;
-    box-shadow:-20px 0 70px rgba(0,0,0,.5);
-}
-
-.cart-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:25px;
-}
-
-.close-cart{
-    border:none;
-    background:#222;
-    color:#fff;
-    width:38px;
-    height:38px;
-    border-radius:50%;
-    cursor:pointer;
-}
-
-/* =========================
-   RESPONSIVE
-========================= */
-
-@media(max-width:900px){
-    header{ padding:0 5%; }
+@media(max-width: 900px){
     nav{ display:none; }
-    .hero{ min-height:900px; padding:120px 6% 40px; align-items:flex-start; }
-    .hero-content{ width:100%; position:relative; z-index:10; }
-    .hero h1{ font-size:58px; letter-spacing:-3px; }
-    .hero p{ font-size:16px; max-width:390px; }
-    #pizza-container{ width:100%; height:500px; top:390px; opacity:.95; }
-    .fallback-pizza{ width:320px; }
-    .menu-grid{ grid-template-columns:repeat(2,1fr); }
-    .customizer-box{ grid-template-columns:1fr; }
-    .custom-pizza-area{ min-height:350px; }
-}
-
-@media(max-width:600px){
-    .hero{ min-height:820px; }
-    .hero h1{ font-size:48px; }
-    #pizza-container{ top:380px; height:420px; }
-    .menu{ padding:90px 5%; }
-    .menu-grid{ grid-template-columns:1fr; }
-    .section-top{ display:block; }
-    .section-top p{ margin-top:15px; }
-    .customizer{ padding:90px 5%; }
-    .custom-pizza{ width:270px; height:270px; }
-    footer{ flex-direction:column; gap:15px; }
+    .hero{
+        flex-direction:column;
+        text-align:center;
+        padding-top:110px;
+        gap:40px;
+    }
+    .hero-content{
+        max-width:100%;
+    }
+    .hero-buttons{
+        justify-content:center;
+    }
+    .hero-img-box{
+        width:100%;
+    }
+    footer{
+        flex-direction:column;
+        gap:15px;
+        text-align:center;
+    }
 }
 </style>
 </head>
@@ -622,138 +335,118 @@ footer strong{
 <header>
     <div class="logo">Prime<span>Pizza</span></div>
     <nav>
-        <a href="#inicio">Início</a>
-        <a href="#historia">Nossa história</a>
-        <a href="#menu">Cardápio</a>
-        <a href="#montar">Monte sua pizza</a>
+        <a href="#cardapio">Cardápio</a>
+        <a href="#sobre">A Pizzaria</a>
     </nav>
-    <button class="cart-button" onclick="abrirCarrinho()">🛒 <span id="cart-count">0</span></button>
+    <button class="whatsapp-top-btn" onclick="pedirNoWhatsApp('Olá! Gostaria de fazer um pedido.')">
+        💬 Pedir Agora
+    </button>
 </header>
 
-<!-- HERO -->
-<section class="hero" id="inicio">
+<!-- HERO SECTION -->
+<section class="hero">
     <div class="hero-content">
-        <div class="eyebrow">Pizza artesanal</div>
-        <h1>A pizza<br>que você<br><span>imagina.</span></h1>
-        <p>Ingredientes selecionados, massa artesanal e aquele sabor que faz você querer mais.</p>
-        <button class="primary-button" onclick="document.getElementById('montar').scrollIntoView({behavior:'smooth'})">
-            Montar minha pizza →
-        </button>
-    </div>
-
-    <div id="pizza-container">
-        <div class="fallback-pizza" id="fallbackPizza"></div>
-        <div class="pizza-smoke"></div>
-        <div class="pizza-smoke"></div>
-        <div class="pizza-smoke"></div>
-        <canvas id="pizza-canvas"></canvas>
-    </div>
-</section>
-
-<!-- STORY -->
-<section class="story" id="historia">
-    <div class="story-inner">
-        <div class="eyebrow">Nossa história</div>
-        <h2>Não fazemos<br>apenas pizza.<br>Fazemos <span>experiência.</span></h2>
-        <p>Nossa massa é preparada artesanalmente, nossos ingredientes são escolhidos com cuidado e cada pizza sai da cozinha pensando em transformar uma refeição comum em um momento especial.</p>
-    </div>
-</section>
-
-<!-- MENU -->
-<section class="menu" id="menu">
-    <div class="section-top">
-        <div>
-            <div class="eyebrow">Nosso cardápio</div>
-            <h2>Escolha seu sabor.</h2>
+        <div class="eyebrow">Pizza Artesanal & Saborosa</div>
+        <h1>A verdadeira experiência da pizza em <span>casa.</span></h1>
+        <p>Massa de fermentação natural, ingredientes frescos selecionados e assadas no ponto perfeito. Escolha o seu sabor favorito e peça direto pelo WhatsApp.</p>
+        <div class="hero-buttons">
+            <button class="btn-primary" onclick="document.getElementById('cardapio').scrollIntoView({behavior:'smooth'})">
+                Ver Cardápio Completo ↓
+            </button>
         </div>
-        <p>Clássicos que nunca saem de moda e combinações pensadas para surpreender.</p>
+    </div>
+    <div class="hero-img-box">
+        <!-- Imagem inspirada nas suas referências de alta qualidade -->
+        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80" alt="Pizza PrimePizza">
+    </div>
+</section>
+
+<!-- CARDÁPIO -->
+<section class="menu-section" id="cardapio">
+    <div class="section-title">
+        <div class="eyebrow">Nosso Menu</div>
+        <h2>Escolha e peça em um clique</h2>
+        <p>Clique em "Pedir no WhatsApp" para enviar o seu pedido instantaneamente.</p>
     </div>
 
     <div class="menu-grid">
+        
+        <!-- ITEM 1 -->
         <div class="menu-card">
-            <div class="food-image"><div class="mini-pizza"></div></div>
-            <h3>Margherita</h3>
-            <p>Molho artesanal, mozzarella, tomate e manjericão.</p>
-            <div class="card-bottom">
-                <span class="price">R$ 48,00</span>
-                <button class="add-button" onclick="adicionarAoCarrinho('Margherita',48)">+</button>
+            <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=600&q=80" alt="Margherita" class="card-image">
+            <div class="card-info">
+                <h3>Margherita Especial</h3>
+                <p>Molho de tomate rústico, mozzarella fresca, tomates confitados e folhas de manjericão fresco.</p>
+            </div>
+            <div class="card-footer">
+                <span class="price">R$ 54,90</span>
+                <button class="btn-zap-card" onclick="pedirNoWhatsApp('Olá! Quero pedir a pizza Margherita Especial (R$ 54,90).')">
+                    💬 Pedir
+                </button>
             </div>
         </div>
 
+        <!-- ITEM 2 -->
         <div class="menu-card">
-            <div class="food-image"><div class="mini-pizza"></div></div>
-            <h3>Calabresa</h3>
-            <p>Calabresa, mozzarella, cebola e orégano.</p>
-            <div class="card-bottom">
-                <span class="price">R$ 52,00</span>
-                <button class="add-button" onclick="adicionarAoCarrinho('Calabresa',52)">+</button>
+            <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80" alt="Calabresa" class="card-image">
+            <div class="card-info">
+                <h3>Calabresa Artesanal</h3>
+                <p>Fatias generosas de calabresa artesanal defumada, cebola roxa marinada, mozzarella e orégano.</p>
+            </div>
+            <div class="card-footer">
+                <span class="price">R$ 58,90</span>
+                <button class="btn-zap-card" onclick="pedirNoWhatsApp('Olá! Quero pedir a pizza Calabresa Artesanal (R$ 58,90).')">
+                    💬 Pedir
+                </button>
             </div>
         </div>
 
+        <!-- ITEM 3 -->
         <div class="menu-card">
-            <div class="food-image"><div class="mini-pizza"></div></div>
-            <h3>Quatro Queijos</h3>
-            <p>Mozzarella, provolone, parmesão e gorgonzola.</p>
-            <div class="card-bottom">
-                <span class="price">R$ 58,00</span>
-                <button class="add-button" onclick="adicionarAoCarrinho('Quatro Queijos',58)">+</button>
+            <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=600&q=80" alt="Quatro Queijos" class="card-image">
+            <div class="card-info">
+                <h3>Quatro Queijos Premium</h3>
+                <p>Seleção exclusiva de mozzarella, provolone defumado, parmesão gratinado e gorgonzola cremoso.</p>
+            </div>
+            <div class="card-footer">
+                <span class="price">R$ 64,90</span>
+                <button class="btn-zap-card" onclick="pedirNoWhatsApp('Olá! Quero pedir a pizza Quatro Queijos Premium (R$ 64,90).')">
+                    💬 Pedir
+                </button>
             </div>
         </div>
 
+        <!-- ITEM 4 -->
         <div class="menu-card">
-            <div class="food-image">
-                <div style="font-size:70px; filter:drop-shadow(0 20px 20px rgba(0,0,0,.5));">🥤</div>
+            <img src="https://images.unsplash.com/photo-1622973536968-3ead9e780960?auto=format&fit=crop&w=600&q=80" alt="Coca-Cola" class="card-image">
+            <div class="card-info">
+                <h3>Coca-Cola 2 Litros</h3>
+                <p>Gelada na medida certa para acompanhar a sua pizza preferida.</p>
             </div>
-            <h3>Coca-Cola 2L</h3>
-            <p>Bebida gelada para acompanhar sua pizza.</p>
-            <div class="card-bottom">
+            <div class="card-footer">
                 <span class="price">R$ 14,00</span>
-                <button class="add-button" onclick="adicionarAoCarrinho('Coca-Cola 2L',14)">+</button>
+                <button class="btn-zap-card" onclick="pedirNoWhatsApp('Olá! Gostaria de adicionar uma Coca-Cola 2L (R$ 14,00) ao meu pedido.')">
+                    💬 Pedir
+                </button>
             </div>
         </div>
-    </div>
-</section>
 
-<!-- CUSTOMIZER -->
-<section class="customizer" id="montar">
-    <div class="customizer-box">
-        <div class="custom-pizza-area">
-            <div class="custom-pizza" id="customPizza"></div>
-        </div>
-
-        <div class="customizer-content">
-            <div class="eyebrow">Personalize</div>
-            <h2>Monte sua<br>própria pizza.</h2>
-
-            <div class="option">
-                <label>Tamanho</label>
-                <div class="option-buttons">
-                    <button class="active" onclick="selecionarTamanho(this,35,'P')">P</button>
-                    <button onclick="selecionarTamanho(this,45,'M')">M</button>
-                    <button onclick="selecionarTamanho(this,55,'G')">G</button>
-                </div>
-            </div>
-        </div>
     </div>
 </section>
 
 <!-- FOOTER -->
 <footer>
     <div><strong>PrimePizza</strong> &copy; 2026 — Todos os direitos reservados.</div>
-    <div>Feito com paixão e sabor.</div>
+    <div>Qualidade e sabor inconfundíveis.</div>
 </footer>
 
 <script>
-    function abrirCarrinho() {
-        alert("Carrinho aberto!");
-    }
-    function adicionarAoCarrinho(item, preco) {
-        alert(item + " adicionado por R$ " + preco);
-    }
-    function selecionarTamanho(btn, preco, tamanho) {
-        const botoes = btn.parentElement.querySelectorAll('button');
-        botoes.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
+    // Substitua o número abaixo pelo seu número de WhatsApp com DDD (ex: 5511999999999)
+    const numeroWhatsApp = "5563999999999"; 
+
+    function pedirNoWhatsApp(mensagem) {
+        const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
+        window.open(url, '_blank');
     }
 </script>
 
