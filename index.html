@@ -1,13 +1,21 @@
-<!DOCTYPE html><html lang="pt-BR"><head>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Prime Pizza — Artesanal & Saborosa</title><script type="importmap">
-{
-    "imports": {
-        "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"
-    }
-}
-</script><style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<title>PrimePizza — A pizza que você imaginou</title>
+
+<!-- THREE.JS -->
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js"
+  }
+}
+</script>
+
+<style>
 * {
     margin: 0;
     padding: 0;
@@ -19,874 +27,978 @@ html {
 }
 
 body {
-    background: #050505;
-    color: white;
+    background: #080706;
+    color: #fff;
     font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
 }
 
-/* =====================================================
+/* =========================
    HEADER
-===================================================== */
+========================= */
 
 header {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
+    height: 76px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 6%;
     z-index: 1000;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 18px 5%;
-
-    background: rgba(0,0,0,.45);
-    backdrop-filter: blur(14px);
-
+    background: rgba(8,7,6,.55);
+    backdrop-filter: blur(18px);
     border-bottom: 1px solid rgba(255,255,255,.08);
 }
 
 .logo {
-    font-size: 22px;
+    font-size: 25px;
     font-weight: 900;
-    color: #ff8a25;
+    letter-spacing: -1px;
+}
+
+.logo span {
+    color: #ff4b18;
 }
 
 nav {
     display: flex;
-    gap: 25px;
+    gap: 32px;
 }
 
 nav a {
-    color: white;
+    color: #fff;
     text-decoration: none;
-    font-weight: bold;
+    font-size: 14px;
+    opacity: .8;
+    transition: .3s;
 }
 
-/* =====================================================
+nav a:hover {
+    opacity: 1;
+    color: #ff5b27;
+}
+
+.cart-button {
+    border: 1px solid rgba(255,255,255,.15);
+    background: rgba(255,255,255,.06);
+    color: white;
+    padding: 12px 18px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+/* =========================
    HERO
-===================================================== */
+========================= */
 
 .hero {
     min-height: 100vh;
-
     position: relative;
-
-    overflow: hidden;
-
     display: flex;
     align-items: center;
-    justify-content: center;
-
-    background:
-
-    radial-gradient(
-        circle at 50% 55%,
-        rgba(255,100,20,.20),
-        transparent 28%
-    ),
-
-    radial-gradient(
-        circle at 50% 100%,
-        #321006,
-        #050505 65%
-    );
-}
-
-#pizza3d {
-    position: absolute;
-
-    inset: 0;
-
-    width: 100%;
-    height: 100%;
-
-    z-index: 1;
-}
-
-.hero::after {
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    z-index: 2;
-
-    pointer-events: none;
-
-    background:
-        radial-gradient(
-            circle,
-            transparent 25%,
-            rgba(0,0,0,.75) 100%
-        );
+    overflow: hidden;
 }
 
 .hero-content {
     position: relative;
-
-    z-index: 5;
-
-    width: 90%;
-
-    max-width: 700px;
-
-    text-align: center;
-
-    pointer-events: none;
-}
-
-.hero-content * {
-    pointer-events: auto;
+    z-index: 10;
+    width: 45%;
+    margin-left: 7%;
 }
 
 .badge {
     display: inline-block;
-
-    padding: 9px 16px;
-
-    margin-bottom: 20px;
-
-    border-radius: 30px;
-
-    background: rgba(255,100,20,.15);
-
-    border: 1px solid rgba(255,120,30,.35);
-
-    color: #ffae68;
-
-    font-size: 13px;
-
-    font-weight: bold;
+    padding: 9px 15px;
+    border-radius: 50px;
+    background: rgba(255,75,24,.12);
+    border: 1px solid rgba(255,75,24,.3);
+    color: #ff7447;
+    font-size: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 25px;
 }
 
-h1 {
-    font-size: clamp(42px, 7vw, 82px);
-
-    line-height: .95;
-
-    margin-bottom: 22px;
-
-    font-weight: 900;
-
-    text-shadow:
-        0 10px 40px rgba(0,0,0,.8);
+.hero h1 {
+    font-size: clamp(55px, 7vw, 105px);
+    line-height: .9;
+    letter-spacing: -6px;
+    margin-bottom: 28px;
 }
 
-h1 span {
-    color: #ff7420;
+.hero h1 span {
+    color: #ff5421;
 }
 
 .hero p {
-    max-width: 580px;
-
-    margin: auto;
-
-    color: #ddd;
-
+    max-width: 480px;
+    color: #aaa;
     line-height: 1.7;
-
     font-size: 17px;
 }
 
-.btn-acao {
-    margin-top: 30px;
-
-    padding: 16px 28px;
-
+.cta {
+    margin-top: 35px;
+    padding: 17px 27px;
     border: none;
-
     border-radius: 50px;
+    background: #ff4d18;
+    color: #fff;
+    font-weight: 800;
+    font-size: 15px;
+    cursor: pointer;
+    box-shadow: 0 15px 50px rgba(255,72,20,.28);
+    transition: .3s;
+}
+
+.cta:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 20px 70px rgba(255,72,20,.4);
+}
+
+/* =========================
+   3D
+========================= */
+
+#pizza3d {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+}
+
+.glow {
+    position: absolute;
+    width: 700px;
+    height: 700px;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        rgba(255,78,24,.18),
+        transparent 68%
+    );
+    filter: blur(20px);
+    z-index: 1;
+}
+
+/* =========================
+   SCROLL SECTION
+========================= */
+
+.story {
+    min-height: 100vh;
+    padding: 150px 7%;
+    position: relative;
+    background:
+        radial-gradient(circle at 80% 30%, rgba(255,70,20,.08), transparent 35%),
+        #0d0b09;
+}
+
+.story-inner {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.story-title {
+    font-size: clamp(42px, 6vw, 80px);
+    line-height: .95;
+    letter-spacing: -4px;
+    max-width: 750px;
+}
+
+.story-title span {
+    color: #ff4d18;
+}
+
+.story-text {
+    max-width: 600px;
+    margin-top: 25px;
+    color: #999;
+    line-height: 1.8;
+}
+
+/* =========================
+   MENU
+========================= */
+
+.menu {
+    padding: 130px 7%;
+    background: #080706;
+}
+
+.section-title {
+    font-size: clamp(40px, 5vw, 70px);
+    letter-spacing: -3px;
+    margin-bottom: 55px;
+}
+
+.section-title span {
+    color: #ff4d18;
+}
+
+.products {
+    max-width: 1250px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 22px;
+}
+
+.product {
+    position: relative;
+    min-height: 380px;
+    padding: 24px;
+    border-radius: 25px;
+    overflow: hidden;
 
     background:
         linear-gradient(
-            135deg,
-            #ff9a3c,
-            #e84316
+            145deg,
+            rgba(255,255,255,.08),
+            rgba(255,255,255,.025)
         );
 
-    color: white;
-
-    font-size: 16px;
-
-    font-weight: 900;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 15px 45px rgba(255,70,10,.35);
-
-    transition: .3s;
-}
-
-.btn-acao:hover {
-    transform: translateY(-4px) scale(1.03);
-
-    box-shadow:
-        0 20px 60px rgba(255,70,10,.5);
-}
-
-/* =====================================================
-   CARDÁPIO
-===================================================== */
-
-#cardapio {
-    padding: 100px 5%;
-
-    background: #090909;
-}
-
-.titulo-secao {
-    text-align: center;
-
-    margin-bottom: 50px;
-}
-
-.titulo-secao h2 {
-    font-size: 42px;
-
-    margin-bottom: 10px;
-}
-
-.titulo-secao p {
-    color: #999;
-}
-
-.menu {
-    max-width: 1200px;
-
-    margin: auto;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(auto-fit,minmax(230px,1fr));
-
-    gap: 25px;
-}
-
-.card {
-    overflow: hidden;
-
-    border-radius: 20px;
-
-    background: #151515;
-
     border: 1px solid rgba(255,255,255,.08);
-
-    transition: .3s;
-}
-
-.card:hover {
-    transform: translateY(-8px);
-
-    border-color: rgba(255,120,30,.4);
-}
-
-.card img {
-    width: 100%;
-
-    height: 220px;
-
-    object-fit: cover;
-}
-
-.card-body {
-    padding: 20px;
-}
-
-.card h3 {
-    margin-bottom: 8px;
-}
-
-.card p {
-    color: #999;
-
-    font-size: 14px;
-
-    line-height: 1.5;
-}
-
-.preco {
-    margin-top: 15px;
-
-    font-size: 22px;
-
-    font-weight: 900;
-
-    color: #ff8a25;
-}
-
-.card button {
-    width: 100%;
-
-    margin-top: 15px;
-
-    padding: 12px;
-
-    border: none;
-
-    border-radius: 10px;
-
-    background: #ff6b1a;
-
-    color: white;
-
-    font-weight: bold;
-
-    cursor: pointer;
-}
-
-/* =====================================================
-   CARRINHO
-===================================================== */
-
-.carrinho-flutuante {
-    position: fixed;
-
-    right: 20px;
-
-    bottom: 20px;
-
-    z-index: 2000;
-
-    width: 60px;
-
-    height: 60px;
-
-    border-radius: 50%;
-
-    background: #ff6b1a;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    font-size: 25px;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 10px 30px rgba(0,0,0,.5);
-}
-
-#contadorCarrinho {
-    position: absolute;
-
-    top: -4px;
-    right: -4px;
-
-    width: 23px;
-    height: 23px;
-
-    border-radius: 50%;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    background: white;
-
-    color: #111;
-
-    font-size: 12px;
-
-    font-weight: bold;
-}
-
-.carrinho {
-    position: fixed;
-
-    top: 0;
-    right: -420px;
-
-    width: 390px;
-
-    max-width: 92%;
-
-    height: 100vh;
-
-    z-index: 3000;
-
-    background: #111;
-
-    box-shadow:
-        -10px 0 50px rgba(0,0,0,.6);
-
-    padding: 25px;
 
     transition: .4s;
 }
 
-.carrinho.aberto {
-    right: 0;
+.product:hover {
+    transform: translateY(-10px);
+    border-color: rgba(255,76,24,.45);
 }
 
-.carrinho h2 {
+.product-visual {
+    height: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 100px;
+    filter: drop-shadow(0 25px 25px rgba(0,0,0,.5));
+}
+
+.product h3 {
+    font-size: 22px;
+    margin-top: 20px;
+}
+
+.product p {
+    color: #888;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.product-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 25px;
+}
+
+.price {
+    font-size: 21px;
+    font-weight: 800;
+}
+
+.add {
+    border: none;
+    background: #ff4d18;
+    color: white;
+    border-radius: 50px;
+    padding: 11px 16px;
+    cursor: pointer;
+}
+
+/* =========================
+   CUSTOMIZER
+========================= */
+
+.customizer {
+    padding: 130px 7%;
+    background: #0c0a08;
+}
+
+.customizer-box {
+    max-width: 1200px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 70px;
+    align-items: center;
+}
+
+.customizer-preview {
+    height: 520px;
+    border-radius: 35px;
+    position: relative;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255,73,23,.16),
+            transparent 55%
+        ),
+        #111;
+}
+
+.fake-pizza {
+    position: absolute;
+    width: 330px;
+    height: 330px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 35% 30%, #ffe1a0, #d89b43 60%, #74451d);
+    box-shadow:
+        0 40px 70px rgba(0,0,0,.65),
+        inset 0 -20px 30px rgba(0,0,0,.25);
+
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.fake-pizza::before {
+    content: "";
+    position: absolute;
+    inset: 22px;
+    border-radius: 50%;
+    background:
+        radial-gradient(circle at 20% 30%, #db2920 0 4%, transparent 5%),
+        radial-gradient(circle at 70% 60%, #db2920 0 5%, transparent 6%),
+        radial-gradient(circle at 50% 30%, #f2c84b 0 8%, transparent 9%),
+        radial-gradient(circle at 30% 70%, #f2c84b 0 7%, transparent 8%),
+        radial-gradient(circle at 75% 25%, #f2c84b 0 5%, transparent 6%),
+        #e6bd55;
+}
+
+.options h3 {
+    font-size: 28px;
     margin-bottom: 25px;
 }
 
-.fechar {
-    position: absolute;
-
-    right: 20px;
-    top: 20px;
-
-    border: none;
-
-    background: none;
-
-    color: white;
-
-    font-size: 25px;
-
-    cursor: pointer;
+.option-group {
+    margin-bottom: 28px;
 }
 
-#itensCarrinho {
-    max-height: 65vh;
-
-    overflow-y: auto;
-}
-
-.item-carrinho {
-    padding: 15px 0;
-
-    border-bottom:
-        1px solid rgba(255,255,255,.1);
-}
-
-.item-carrinho strong {
+.option-group strong {
     display: block;
-
-    margin-bottom: 8px;
+    margin-bottom: 12px;
 }
 
-.controles {
+.option-buttons {
     display: flex;
-
-    align-items: center;
-
+    flex-wrap: wrap;
     gap: 10px;
 }
 
-.controles button {
-    width: 30px;
-    height: 30px;
-
-    border: none;
-
-    border-radius: 6px;
-
-    background: #ff6b1a;
-
+.option-buttons button {
+    padding: 12px 17px;
+    border-radius: 50px;
+    border: 1px solid rgba(255,255,255,.13);
+    background: rgba(255,255,255,.04);
     color: white;
-
     cursor: pointer;
 }
 
-.total {
-    margin-top: 25px;
+.option-buttons button.active,
+.option-buttons button:hover {
+    background: #ff4d18;
+    border-color: #ff4d18;
+}
 
-    font-size: 22px;
+/* =========================
+   FOOTER
+========================= */
 
-    font-weight: bold;
+footer {
+    padding: 60px 7%;
+    border-top: 1px solid rgba(255,255,255,.08);
+    color: #666;
+    text-align: center;
+}
+
+/* =========================
+   CART
+========================= */
+
+.cart {
+    position: fixed;
+    top: 0;
+    right: -420px;
+    width: min(420px,100%);
+    height: 100vh;
+    z-index: 3000;
+    background: #111;
+    border-left: 1px solid rgba(255,255,255,.1);
+    padding: 30px;
+    transition: .4s;
+    overflow-y: auto;
+}
+
+.cart.open {
+    right: 0;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.close-cart {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.cart-item {
+    padding: 15px 0;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.cart-item-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.quantity {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.quantity button {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.cart-total {
+    margin-top: 30px;
+    font-size: 25px;
+    font-weight: 800;
 }
 
 .whatsapp {
     width: 100%;
-
     margin-top: 20px;
-
-    padding: 15px;
-
+    padding: 16px;
     border: none;
-
-    border-radius: 10px;
-
+    border-radius: 50px;
     background: #25d366;
-
     color: white;
-
-    font-weight: bold;
-
+    font-weight: 800;
     cursor: pointer;
 }
 
-/* =====================================================
+/* =========================
    MOBILE
-===================================================== */
+========================= */
 
-@media(max-width:700px) {
-
-    header {
-        padding: 15px 4%;
-    }
+@media(max-width:900px) {
 
     nav {
-        gap: 12px;
+        display: none;
     }
 
-    nav a {
-        font-size: 13px;
+    .hero {
+        min-height: 900px;
+        align-items: flex-start;
+        padding-top: 130px;
     }
 
     .hero-content {
-        padding-top: 80px;
-    }
-
-    h1 {
-        font-size: 48px;
+        width: 90%;
+        margin: auto;
+        text-align: center;
     }
 
     .hero p {
-        font-size: 15px;
+        margin: auto;
     }
 
+    .glow {
+        width: 500px;
+        height: 500px;
+        right: 50%;
+        transform: translate(50%,0);
+        top: 350px;
+    }
+
+    #pizza3d {
+        top: 330px;
+        height: 550px;
+    }
+
+    .products {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .customizer-box {
+        grid-template-columns: 1fr;
+    }
 }
 
-/* =====================================================
-   AVISO DE ERRO 3D
-===================================================== */
+@media(max-width:550px) {
 
-#erro3d {
-    position: absolute;
+    .hero h1 {
+        font-size: 54px;
+        letter-spacing: -4px;
+    }
 
-    left: 50%;
+    .products {
+        grid-template-columns: 1fr;
+    }
 
-    bottom: 20px;
+    .product {
+        min-height: 350px;
+    }
 
-    transform: translateX(-50%);
+    .customizer-preview {
+        height: 400px;
+    }
 
-    z-index: 10;
-
-    width: 90%;
-
-    max-width: 600px;
-
-    padding: 12px 18px;
-
-    border-radius: 12px;
-
-    background: rgba(120,0,0,.85);
-
-    color: white;
-
-    text-align: center;
-
-    font-size: 13px;
-
-    display: none;
+    .fake-pizza {
+        width: 260px;
+        height: 260px;
+    }
 }
+</style>
+</head>
 
-</style></head><body><header><div class="logo">
-    🍕 PRIME PIZZA
-</div>
+<body>
 
-<nav>
-    <a href="#inicio">Início</a>
-    <a href="#cardapio">Cardápio</a>
-</nav>
+<header>
 
-</header><!-- =====================================================
-     HERO
-===================================================== --><section
-    class="hero"
-    id="inicio"
-><canvas id="pizza3d"></canvas>
-
-<div id="erro3d"></div>
-
-<div class="hero-content">
-
-    <div class="badge">
-        🔥 ARTESANAL • FORNO A LENHA • 3D INTERATIVO
+    <div class="logo">
+        PRIME<span>PIZZA</span>
     </div>
 
-    <h1>
-        Veja sua pizza
-        <span>nascer.</span>
-    </h1>
+    <nav>
+        <a href="#inicio">Início</a>
+        <a href="#historia">Experiência</a>
+        <a href="#cardapio">Cardápio</a>
+        <a href="#montar">Monte sua pizza</a>
+    </nav>
 
-    <p>
-        Massa artesanal, molho de tomate,
-        queijo derretido e ingredientes frescos
-        ganhando vida em uma experiência 3D.
-    </p>
+    <button class="cart-button" onclick="toggleCarrinho()">
+        🛒 Carrinho <span id="cartCount">0</span>
+    </button>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero" id="inicio">
+
+    <div class="glow"></div>
+
+    <div class="hero-content">
+
+        <div class="badge">
+            EXPERIÊNCIA GASTRONÔMICA
+        </div>
+
+        <h1>
+            Veja sua<br>
+            pizza <span>nascer.</span>
+        </h1>
+
+        <p>
+            Ingredientes selecionados, massa artesanal
+            e uma experiência criada para transformar
+            seu pedido em algo inesquecível.
+        </p>
+
+        <button class="cta" onclick="montarPizza()">
+            🍕 MONTAR MINHA PIZZA
+        </button>
+
+    </div>
+
+    <div id="pizza3d"></div>
+
+</section>
+
+
+<!-- =========================
+     STORY
+========================= -->
+
+<section class="story" id="historia">
+
+    <div class="story-inner">
+
+        <h2 class="story-title">
+            Não é apenas<br>
+            uma pizza.<br>
+            É uma <span>experiência.</span>
+        </h2>
+
+        <p class="story-text">
+            Nossa cozinha combina ingredientes frescos,
+            massa artesanal e aquele sabor que faz você
+            querer repetir. Aqui, cada detalhe importa.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     MENU
+========================= -->
+
+<section class="menu" id="cardapio">
+
+    <h2 class="section-title">
+        Nosso <span>cardápio</span>
+    </h2>
+
+    <div class="products">
+
+        <div class="product">
+
+            <div class="product-visual">
+                🍕
+            </div>
+
+            <h3>Margherita</h3>
+
+            <p>
+                Molho artesanal, mozzarella,
+                tomate e manjericão fresco.
+            </p>
+
+            <div class="product-bottom">
+                <span class="price">R$ 48,00</span>
+
+                <button
+                    class="add"
+                    onclick="adicionarAoCarrinho('Margherita',48)"
+                >
+                    Adicionar
+                </button>
+            </div>
+
+        </div>
+
+
+        <div class="product">
+
+            <div class="product-visual">
+                🍕
+            </div>
+
+            <h3>Calabresa</h3>
+
+            <p>
+                Calabresa artesanal, mozzarella,
+                cebola e molho especial.
+            </p>
+
+            <div class="product-bottom">
+                <span class="price">R$ 52,00</span>
+
+                <button
+                    class="add"
+                    onclick="adicionarAoCarrinho('Calabresa',52)"
+                >
+                    Adicionar
+                </button>
+            </div>
+
+        </div>
+
+
+        <div class="product">
+
+            <div class="product-visual">
+                🍕
+            </div>
+
+            <h3>Quatro Queijos</h3>
+
+            <p>
+                Mozzarella, provolone, parmesão
+                e gorgonzola.
+            </p>
+
+            <div class="product-bottom">
+                <span class="price">R$ 58,00</span>
+
+                <button
+                    class="add"
+                    onclick="adicionarAoCarrinho('Quatro Queijos',58)"
+                >
+                    Adicionar
+                </button>
+            </div>
+
+        </div>
+
+
+        <div class="product">
+
+            <div class="product-visual">
+                🥤
+            </div>
+
+            <h3>Coca-Cola 2L</h3>
+
+            <p>
+                Refrigerante Coca-Cola 2 litros.
+            </p>
+
+            <div class="product-bottom">
+                <span class="price">R$ 14,00</span>
+
+                <button
+                    class="add"
+                    onclick="adicionarAoCarrinho('Coca-Cola 2L',14)"
+                >
+                    Adicionar
+                </button>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CUSTOMIZER
+========================= -->
+
+<section class="customizer" id="montar">
+
+    <div class="customizer-box">
+
+        <div class="customizer-preview">
+
+            <div class="fake-pizza"></div>
+
+        </div>
+
+
+        <div class="options">
+
+            <h3>
+                Monte do seu jeito.
+            </h3>
+
+            <div class="option-group">
+
+                <strong>Tamanho</strong>
+
+                <div class="option-buttons">
+
+                    <button>P</button>
+
+                    <button class="active">M</button>
+
+                    <button>G</button>
+
+                </div>
+
+            </div>
+
+
+            <div class="option-group">
+
+                <strong>Massa</strong>
+
+                <div class="option-buttons">
+
+                    <button class="active">
+                        Tradicional
+                    </button>
+
+                    <button>
+                        Fina
+                    </button>
+
+                    <button>
+                        Recheada
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="option-group">
+
+                <strong>Ingredientes</strong>
+
+                <div class="option-buttons">
+
+                    <button class="active">
+                        Calabresa
+                    </button>
+
+                    <button class="active">
+                        Queijo
+                    </button>
+
+                    <button>
+                        Cebola
+                    </button>
+
+                    <button>
+                        Tomate
+                    </button>
+
+                    <button>
+                        Manjericão
+                    </button>
+
+                </div>
+
+            </div>
+
+            <button
+                class="cta"
+                onclick="adicionarAoCarrinho('Pizza personalizada',55)"
+            >
+                ADICIONAR AO CARRINHO
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    PRIMEPIZZA © 2026 — Experiência, sabor e tecnologia.
+
+</footer>
+
+
+<!-- =========================
+     CARRINHO
+========================= -->
+
+<div class="cart" id="cart">
+
+    <div class="cart-header">
+
+        <h2>
+            Seu pedido
+        </h2>
+
+        <button
+            class="close-cart"
+            onclick="toggleCarrinho()"
+        >
+            ×
+        </button>
+
+    </div>
+
+    <div id="cartItems"></div>
+
+    <div class="cart-total">
+        Total:
+        R$ <span id="cartTotal">0,00</span>
+    </div>
 
     <button
-        class="btn-acao"
-        onclick="montarPizza()"
+        class="whatsapp"
+        onclick="finalizarPedidoWhatsApp()"
     >
-        🍕 Montar Minha Pizza
+        PEDIR PELO WHATSAPP
     </button>
 
 </div>
 
-</section><!-- =====================================================
-     CARDÁPIO
-===================================================== --><section id="cardapio"><div class="titulo-secao">
 
-    <h2>
-        Nosso Cardápio
-    </h2>
+<!-- =========================
+     JAVASCRIPT
+========================= -->
 
-    <p>
-        Escolha sua pizza favorita
-    </p>
-
-</div>
-
-
-<div class="menu">
-
-
-    <div class="card">
-
-        <img
-            src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=800&q=85"
-        >
-
-        <div class="card-body">
-
-            <h3>
-                Margherita
-            </h3>
-
-            <p>
-                Molho de tomate, mozzarella,
-                tomate fresco e manjericão.
-            </p>
-
-            <div class="preco">
-                R$ 48,00
-            </div>
-
-            <button
-                onclick="adicionarAoCarrinho('Margherita',48)"
-            >
-                Adicionar
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <div class="card">
-
-        <img
-            src="https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=800&q=85"
-        >
-
-        <div class="card-body">
-
-            <h3>
-                Calabresa
-            </h3>
-
-            <p>
-                Calabresa, queijo,
-                cebola e molho especial.
-            </p>
-
-            <div class="preco">
-                R$ 52,00
-            </div>
-
-            <button
-                onclick="adicionarAoCarrinho('Calabresa',52)"
-            >
-                Adicionar
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <div class="card">
-
-        <img
-            src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=800&q=85"
-        >
-
-        <div class="card-body">
-
-            <h3>
-                Quatro Queijos
-            </h3>
-
-            <p>
-                Mozzarella, parmesão,
-                provolone e gorgonzola.
-            </p>
-
-            <div class="preco">
-                R$ 58,00
-            </div>
-
-            <button
-                onclick="adicionarAoCarrinho('Quatro Queijos',58)"
-            >
-                Adicionar
-            </button>
-
-        </div>
-
-    </div>
-
-
-    <div class="card">
-
-        <img
-            src="https://images.unsplash.com/photo-1627855437693-dcc7b0c4ba7c?auto=format&fit=crop&w=800&q=85"
-        >
-
-        <div class="card-body">
-
-            <h3>
-                Coca-Cola 2L
-            </h3>
-
-            <p>
-                Coca-Cola gelada para
-                acompanhar sua pizza.
-            </p>
-
-            <div class="preco">
-                R$ 14,00
-            </div>
-
-            <button
-                onclick="adicionarAoCarrinho('Coca-Cola 2L',14)"
-            >
-                Adicionar
-            </button>
-
-        </div>
-
-    </div>
-
-</div>
-
-</section><!-- =====================================================
-     BOTÃO CARRINHO
-===================================================== --><div
-    class="carrinho-flutuante"
-    onclick="toggleCarrinho()"
->🛒
-
-<span id="contadorCarrinho">
-    0
-</span>
-
-</div><!-- =====================================================
-     CARRINHO
-===================================================== --><div
-    class="carrinho"
-    id="carrinho"
-><button
-    class="fechar"
-    onclick="toggleCarrinho()"
->
-    ×
-</button>
-
-<h2>
-    Seu Pedido
-</h2>
-
-<div id="itensCarrinho"></div>
-
-<div class="total">
-    Total:
-    R$
-    <span id="totalCarrinho">
-        0,00
-    </span>
-</div>
-
-<button
-    class="whatsapp"
-    onclick="finalizarPedidoWhatsApp()"
->
-    📲 Finalizar pelo WhatsApp
-</button>
-
-</div><!-- =====================================================
-     THREE.JS + MODELOS 3D
-===================================================== --><script type="module">
+<script type="module">
 
 import * as THREE from "three";
-
-import {
-    GLTFLoader
-} from "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/loaders/GLTFLoader.js";
+import { GLTFLoader } from
+"https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/loaders/GLTFLoader.js";
 
 
-/* =====================================================
-   ELEMENTOS
-===================================================== */
+/* =========================================
+   CENA THREE.JS
+========================================= */
 
-const canvas =
+const container =
     document.getElementById("pizza3d");
-
-const hero =
-    document.querySelector(".hero");
-
-const erro3d =
-    document.getElementById("erro3d");
-
-
-/* =====================================================
-   CENA
-===================================================== */
 
 const scene =
     new THREE.Scene();
 
 
-/* =====================================================
-   CÂMERA
-===================================================== */
+/* =========================================
+   CAMERA
+========================================= */
 
 const camera =
     new THREE.PerspectiveCamera(
         42,
-        1,
+        window.innerWidth / window.innerHeight,
         0.1,
         100
     );
 
 camera.position.set(
     0,
-    5.8,
-    11
+    3.8,
+    7.5
 );
 
 
-/* =====================================================
-   RENDERIZADOR
-===================================================== */
+/* =========================================
+   RENDERER
+========================================= */
 
 const renderer =
     new THREE.WebGLRenderer({
-        canvas: canvas,
-        alpha: true,
-        antialias: true
+        antialias: true,
+        alpha: true
     });
 
-renderer.setPixelRatio(
-    Math.min(
-        window.devicePixelRatio,
-        2
-    )
+renderer.setSize(
+    container.clientWidth,
+    container.clientHeight
 );
+
+renderer.setPixelRatio(
+    Math.min(window.devicePixelRatio,2)
+);
+
+renderer.shadowMap.enabled = true;
+
+renderer.shadowMap.type =
+    THREE.PCFSoftShadowMap;
 
 renderer.outputColorSpace =
     THREE.SRGBColorSpace;
@@ -895,712 +1007,769 @@ renderer.toneMapping =
     THREE.ACESFilmicToneMapping;
 
 renderer.toneMappingExposure =
-    1.25;
+    1.35;
+
+container.appendChild(renderer.domElement);
 
 
-/* =====================================================
-   LUZES
-===================================================== */
+/* =========================================
+   GRUPO DA PIZZA
+========================================= */
 
-const ambiente =
-    new THREE.HemisphereLight(
-        0xffead5,
-        0x160804,
-        2.5
+const pizzaGroup =
+    new THREE.Group();
+
+pizzaGroup.rotation.x =
+    -0.15;
+
+scene.add(pizzaGroup);
+
+
+/* =========================================
+   MATERIAIS
+========================================= */
+
+const doughMaterial =
+    new THREE.MeshStandardMaterial({
+
+        color: 0xd5964c,
+
+        roughness: .82,
+
+        metalness: 0
+
+    });
+
+
+const crustMaterial =
+    new THREE.MeshStandardMaterial({
+
+        color: 0xb86726,
+
+        roughness: .72
+
+    });
+
+
+const sauceMaterial =
+    new THREE.MeshStandardMaterial({
+
+        color: 0xb51d13,
+
+        roughness: .65
+
+    });
+
+
+const cheeseMaterial =
+    new THREE.MeshStandardMaterial({
+
+        color: 0xffd95c,
+
+        roughness: .48,
+
+        metalness: 0
+
+    });
+
+
+const pepperoniMaterial =
+    new THREE.MeshStandardMaterial({
+
+        color: 0x8e170e,
+
+        roughness: .58
+
+    });
+
+
+const tomatoMaterial =
+    new THREE.MeshStandardMaterial({
+
+        color: 0xd93222,
+
+        roughness: .48
+
+    });
+
+
+const onionMaterial =
+    new THREE.MeshStandardMaterial({
+
+        color: 0xf2e0c5,
+
+        roughness: .35,
+
+        transparent: true,
+
+        opacity: .92
+
+    });
+
+
+const basilMaterial =
+    new THREE.MeshStandardMaterial({
+
+        color: 0x236b32,
+
+        roughness: .72
+
+    });
+
+
+/* =========================================
+   MASSA
+========================================= */
+
+const doughGeometry =
+    new THREE.CylinderGeometry(
+        3,
+        3.08,
+        .28,
+        96
     );
 
-scene.add(ambiente);
-
-
-const principal =
-    new THREE.DirectionalLight(
-        0xffdfb2,
-        4
+const dough =
+    new THREE.Mesh(
+        doughGeometry,
+        doughMaterial
     );
 
-principal.position.set(
-    -5,
-    9,
-    7
+dough.castShadow = true;
+dough.receiveShadow = true;
+
+pizzaGroup.add(dough);
+
+
+/* =========================================
+   BORDA
+========================================= */
+
+const crustGeometry =
+    new THREE.TorusGeometry(
+        2.86,
+        .27,
+        20,
+        96
+    );
+
+const crust =
+    new THREE.Mesh(
+        crustGeometry,
+        crustMaterial
+    );
+
+crust.position.y = .16;
+
+crust.scale.set(
+    1,
+    .9,
+    1
 );
 
-scene.add(principal);
+crust.castShadow = true;
+
+pizzaGroup.add(crust);
 
 
-const preenchimento =
-    new THREE.DirectionalLight(
-        0xff7b35,
-        2
+/* =========================================
+   MOLHO
+========================================= */
+
+const sauceGeometry =
+    new THREE.CylinderGeometry(
+        2.72,
+        2.72,
+        .055,
+        96
     );
 
-preenchimento.position.set(
-    5,
-    4,
-    4
+const sauce =
+    new THREE.Mesh(
+        sauceGeometry,
+        sauceMaterial
+    );
+
+sauce.position.y =
+    .18;
+
+pizzaGroup.add(sauce);
+
+
+/* =========================================
+   QUEIJO
+========================================= */
+
+const cheeseGeometry =
+    new THREE.CylinderGeometry(
+        2.67,
+        2.67,
+        .07,
+        96
+    );
+
+const cheese =
+    new THREE.Mesh(
+        cheeseGeometry,
+        cheeseMaterial
+    );
+
+cheese.position.y =
+    .24;
+
+pizzaGroup.add(cheese);
+
+
+/* =========================================
+   INGREDIENTES
+========================================= */
+
+const ingredients =
+    new THREE.Group();
+
+pizzaGroup.add(ingredients);
+
+
+/* =========================================
+   CALABRESA
+========================================= */
+
+const pepperonis = [];
+
+const pepperoniPositions = [
+
+    [-1.5,.31,-.8],
+    [-.6,.33,-1.35],
+    [.45,.34,-1.45],
+    [1.35,.33,-.65],
+
+    [-1.9,.33,.25],
+    [-.85,.34,.25],
+    [.15,.34,.35],
+    [1.2,.34,.35],
+
+    [-1.45,.33,1.15],
+    [-.35,.34,1.35],
+    [.75,.34,1.15],
+    [1.7,.33,.95]
+
+];
+
+
+pepperoniPositions.forEach(
+    (position,index) => {
+
+        const geometry =
+            new THREE.CylinderGeometry(
+                .32,
+                .32,
+                .09,
+                32
+            );
+
+        const mesh =
+            new THREE.Mesh(
+                geometry,
+                pepperoniMaterial
+            );
+
+        mesh.rotation.x =
+            Math.PI / 2;
+
+        mesh.position.set(
+            position[0],
+            2.7 + index * .06,
+            position[2]
+        );
+
+        mesh.castShadow = true;
+
+        ingredients.add(mesh);
+
+        pepperonis.push(mesh);
+
+    }
 );
 
-scene.add(preenchimento);
+
+/* =========================================
+   TOMATES
+========================================= */
+
+const tomatoes = [];
+
+const tomatoPositions = [
+
+    [-1.2, .45, -.15],
+    [.1, .45, -1.0],
+    [1.3, .45, -.1],
+    [.5, .45, 1.15],
+    [-1.25, .45, .9]
+
+];
 
 
-const quente =
+tomatoPositions.forEach(
+    (position,index) => {
+
+        const geometry =
+            new THREE.SphereGeometry(
+                .20,
+                24,
+                16
+            );
+
+        const mesh =
+            new THREE.Mesh(
+                geometry,
+                tomatoMaterial
+            );
+
+        mesh.scale.y = .45;
+
+        mesh.position.set(
+            position[0],
+            2.9 + index * .05,
+            position[2]
+        );
+
+        mesh.castShadow = true;
+
+        ingredients.add(mesh);
+
+        tomatoes.push(mesh);
+
+    }
+);
+
+
+/* =========================================
+   CEBOLAS
+========================================= */
+
+const onions = [];
+
+const onionPositions = [
+
+    [-.8,-.2,-1.0],
+    [.8,-.1,-.8],
+    [1.3,-.1,.65],
+    [-.5,-.1,1.15],
+    [-1.7,-.1,.4]
+
+];
+
+
+onionPositions.forEach(
+    (position,index) => {
+
+        const geometry =
+            new THREE.TorusGeometry(
+                .25,
+                .055,
+                10,
+                24
+            );
+
+        const mesh =
+            new THREE.Mesh(
+                geometry,
+                onionMaterial
+            );
+
+        mesh.rotation.x =
+            Math.PI / 2;
+
+        mesh.position.set(
+            position[0],
+            2.75 + index * .04,
+            position[2]
+        );
+
+        ingredients.add(mesh);
+
+        onions.push(mesh);
+
+    }
+);
+
+
+/* =========================================
+   MANJERICÃO
+========================================= */
+
+const basil = [];
+
+const basilPositions = [
+
+    [-1.1,0,-1.35],
+    [.9,0,-1.4],
+    [1.55,0,.55],
+    [-.9,0,1.45],
+    [.2,0,1.45]
+
+];
+
+
+basilPositions.forEach(
+    (position,index) => {
+
+        const geometry =
+            new THREE.SphereGeometry(
+                .22,
+                20,
+                12
+            );
+
+        const mesh =
+            new THREE.Mesh(
+                geometry,
+                basilMaterial
+            );
+
+        mesh.scale.set(
+            1.7,
+            .18,
+            .75
+        );
+
+        mesh.rotation.y =
+            index * .8;
+
+        mesh.position.set(
+            position[0],
+            3.0 + index * .04,
+            position[2]
+        );
+
+        mesh.castShadow = true;
+
+        ingredients.add(mesh);
+
+        basil.push(mesh);
+
+    }
+);
+
+
+/* =========================================
+   LUZ PRINCIPAL
+========================================= */
+
+const keyLight =
+    new THREE.DirectionalLight(
+        0xffd6aa,
+        4.5
+    );
+
+keyLight.position.set(
+    3,
+    8,
+    5
+);
+
+keyLight.castShadow = true;
+
+scene.add(keyLight);
+
+
+/* =========================================
+   LUZ FRONTAL
+========================================= */
+
+const frontLight =
     new THREE.PointLight(
-        0xff4a16,
-        4,
+        0xff5b24,
+        12,
         15
     );
 
-quente.position.set(
+frontLight.position.set(
     0,
     1,
-    2
+    4
 );
 
-scene.add(quente);
+scene.add(frontLight);
 
 
-/* =====================================================
-   GRUPO DA PIZZA
-===================================================== */
+/* =========================================
+   LUZ AMBIENTE
+========================================= */
 
-const pizza =
+const ambient =
+    new THREE.HemisphereLight(
+        0xffdfbd,
+        0x16110e,
+        2.3
+    );
+
+scene.add(ambient);
+
+
+/* =========================================
+   FUMAÇA
+========================================= */
+
+const smokeGroup =
     new THREE.Group();
 
-pizza.position.y =
-    -0.6;
+scene.add(smokeGroup);
 
-scene.add(pizza);
 
+const smokeMaterial =
+    new THREE.MeshBasicMaterial({
 
-/* =====================================================
-   MASSA
-===================================================== */
+        color: 0xffffff,
 
-const massa =
-    new THREE.Mesh(
-        new THREE.CylinderGeometry(
-            3.55,
-            3.7,
-            0.55,
-            96
-        ),
-        new THREE.MeshStandardMaterial({
-            color: 0xd18b48,
-            roughness: 0.85
-        })
-    );
+        transparent: true,
 
-massa.position.y =
-    0;
+        opacity: .10
 
-pizza.add(massa);
+    });
 
 
-/* =====================================================
-   BORDA
-===================================================== */
+for(let i=0;i<18;i++){
 
-const borda =
-    new THREE.Mesh(
-        new THREE.TorusGeometry(
-            3.25,
-            0.38,
-            32,
-            96
-        ),
-        new THREE.MeshStandardMaterial({
-            color: 0xe3a15d,
-            roughness: 0.7
-        })
-    );
-
-borda.rotation.x =
-    Math.PI / 2;
-
-borda.position.y =
-    0.38;
-
-pizza.add(borda);
-
-
-/* =====================================================
-   MOLHO
-===================================================== */
-
-const molho =
-    new THREE.Mesh(
-        new THREE.CylinderGeometry(
-            3.05,
-            3.05,
-            0.08,
-            96
-        ),
-        new THREE.MeshStandardMaterial({
-            color: 0xa91e12,
-            roughness: 0.75
-        })
-    );
-
-molho.position.y =
-    0.34;
-
-pizza.add(molho);
-
-
-/* =====================================================
-   QUEIJO BASE
-===================================================== */
-
-const queijoBase =
-    new THREE.Mesh(
-        new THREE.CylinderGeometry(
-            2.92,
-            2.92,
-            0.13,
-            96
-        ),
-        new THREE.MeshStandardMaterial({
-            color: 0xffd75a,
-            roughness: 0.35
-        })
-    );
-
-queijoBase.position.y =
-    0.43;
-
-pizza.add(queijoBase);
-
-
-/* =====================================================
-   SOMBRA
-===================================================== */
-
-const sombra =
-    new THREE.Mesh(
-        new THREE.CircleGeometry(
-            4.5,
-            64
-        ),
-        new THREE.MeshBasicMaterial({
-            color: 0x000000,
-            transparent: true,
-            opacity: 0.35
-        })
-    );
-
-sombra.rotation.x =
-    -Math.PI / 2;
-
-sombra.position.y =
-    -0.45;
-
-pizza.add(sombra);
-
-
-/* =====================================================
-   LOADER GLB
-===================================================== */
-
-const loader =
-    new GLTFLoader();
-
-
-/* =====================================================
-   MODELOS
-===================================================== */
-
-const modelos = {
-
-    calabresa:
-        "./modelos/calabresa.glb",
-
-    tomate:
-        "./modelos/tomate.glb",
-
-    cebola:
-        "./modelos/cebola.glb",
-
-    manjericao:
-        "./modelos/manjericao.glb",
-
-    queijo:
-        "./modelos/queijo.glb"
-
-};
-
-
-/* =====================================================
-   POSIÇÕES NA PIZZA
-===================================================== */
-
-const posicoes = {
-
-    calabresa: [
-
-        [-1.7, 0.70, 0.8],
-        [-0.7, 0.70, 1.5],
-        [0.5, 0.70, 1.45],
-        [1.5, 0.70, 0.65],
-
-        [1.7, 0.70, -0.65],
-        [0.7, 0.70, -1.45],
-        [-0.7, 0.70, -1.45],
-        [-1.7, 0.70, -0.55]
-
-    ],
-
-    tomate: [
-
-        [-1.2, 0.76, 0.1],
-        [0.0, 0.76, 1.05],
-        [1.15, 0.76, 0.05],
-        [0.2, 0.76, -1.1]
-
-    ],
-
-    cebola: [
-
-        [-2.0, 0.78, 0.05],
-        [-0.9, 0.78, -0.7],
-        [0.8, 0.78, 0.65],
-        [1.8, 0.78, -0.15]
-
-    ],
-
-    manjericao: [
-
-        [-1.3, 0.85, 0.9],
-        [0.3, 0.85, 1.7],
-        [1.3, 0.85, -0.9],
-        [-0.5, 0.85, -1.65]
-
-    ],
-
-    queijo: [
-
-        [0, 0.84, 0]
-
-    ]
-
-};
-
-
-/* =====================================================
-   ESCALAS
-===================================================== */
-
-const escalas = {
-
-    calabresa: 0.65,
-
-    tomate: 0.55,
-
-    cebola: 0.50,
-
-    manjericao: 0.45,
-
-    queijo: 0.70
-
-};
-
-
-/* =====================================================
-   INGREDIENTES
-===================================================== */
-
-const ingredientes = [];
-
-
-/* =====================================================
-   NORMALIZAR MODELO
-===================================================== */
-
-function prepararModelo(objeto) {
-
-    const caixa =
-        new THREE.Box3()
-            .setFromObject(objeto);
-
-    const tamanho =
-        new THREE.Vector3();
-
-    const centro =
-        new THREE.Vector3();
-
-    caixa.getSize(tamanho);
-
-    caixa.getCenter(centro);
-
-    objeto.position.sub(centro);
-
-    const maior =
-        Math.max(
-            tamanho.x,
-            tamanho.y,
-            tamanho.z
+    const geometry =
+        new THREE.SphereGeometry(
+            .08 + Math.random()*.12,
+            12,
+            12
         );
 
-    if (maior > 0) {
-
-        objeto.scale.setScalar(
-            1 / maior
+    const smoke =
+        new THREE.Mesh(
+            geometry,
+            smokeMaterial
         );
 
-    }
+    smoke.position.set(
+
+        (Math.random()-.5)*1.8,
+
+        1.2 + Math.random()*2,
+
+        (Math.random()-.5)*1.8
+
+    );
+
+    smoke.userData.speed =
+        .003 + Math.random()*.006;
+
+    smokeGroup.add(smoke);
 
 }
 
 
-/* =====================================================
-   CARREGAR MODELO
-===================================================== */
+/* =========================================
+   POSIÇÕES ORIGINAIS
+========================================= */
 
-function carregarModelo(
-    nome,
-    destino,
-    indice
-) {
+const ingredientObjects = [
 
-    loader.load(
+    ...pepperonis,
+    ...tomatoes,
+    ...onions,
+    ...basil
 
-        modelos[nome],
+];
 
-        function(gltf) {
+ingredientObjects.forEach(
+    object => {
 
-            const objeto =
-                gltf.scene.clone(true);
+        object.userData.home =
+            object.position.clone();
 
-            prepararModelo(
-                objeto
-            );
-
-            objeto.scale.multiplyScalar(
-                escalas[nome]
-            );
-
-
-            /* posição inicial flutuando */
-
-            objeto.position.set(
-                (Math.random() - 0.5) * 7,
-                2.8 + Math.random() * 2.5,
-                (Math.random() - 0.5) * 3
-            );
-
-
-            objeto.rotation.x =
-                Math.random() * Math.PI;
-
-            objeto.rotation.y =
-                Math.random() * Math.PI;
-
-            objeto.rotation.z =
-                Math.random() * Math.PI;
-
-
-            objeto.userData.destino =
-                new THREE.Vector3(
-                    destino[0],
-                    destino[1],
-                    destino[2]
-                );
-
-
-            objeto.userData.flutuando =
-                true;
-
-
-            objeto.userData.indice =
-                indice;
-
-
-            pizza.add(
-                objeto
-            );
-
-            ingredientes.push(
-                objeto
-            );
-
-        },
-
-        undefined,
-
-        function(erro) {
-
-            console.error(
-                "Erro ao carregar:",
-                modelos[nome],
-                erro
-            );
-
-            erro3d.style.display =
-                "block";
-
-            erro3d.innerHTML =
-                "⚠️ Não foi possível carregar o modelo 3D: " +
-                nome +
-                ". Verifique se o arquivo está dentro da pasta modelos.";
-
-        }
-
-    );
-
-}
-
-
-/* =====================================================
-   CARREGAR TODOS
-===================================================== */
-
-Object.keys(posicoes).forEach(
-    nome => {
-
-        posicoes[nome].forEach(
-            (destino, indice) => {
-
-                carregarModelo(
-                    nome,
-                    destino,
-                    indice
-                );
-
-            }
-        );
+        object.userData.homeRotation =
+            object.rotation.clone();
 
     }
 );
 
 
-/* =====================================================
+/* =========================================
+   ANIMAÇÃO INICIAL
+========================================= */
+
+pizzaGroup.scale.set(
+    .8,
+    .8,
+    .8
+);
+
+pizzaGroup.position.y =
+    -.3;
+
+
+/* =========================================
    MONTAR PIZZA
-===================================================== */
-
-let montando =
-    false;
-
+========================================= */
 
 window.montarPizza =
-function() {
+function(){
 
-    if (montando)
-        return;
+    const timeline =
+        window.gsap.timeline();
 
-    montando =
-        true;
+    timeline.to(
+        pizzaGroup.scale,
+        {
+            x:1,
+            y:1,
+            z:1,
+            duration:1.1,
+            ease:"back.out(1.7)"
+        }
+    );
 
+    timeline.to(
+        pizzaGroup.rotation,
+        {
+            y: Math.PI * 2,
+            duration:1.8,
+            ease:"power2.inOut"
+        },
+        "<"
+    );
 
-    ingredientes.forEach(
-        (objeto, indice) => {
+    ingredientObjects.forEach(
+        (object,index) => {
 
-            setTimeout(
-                function() {
+            const home =
+                object.userData.home;
 
-                    objeto.userData.flutuando =
-                        false;
+            const startY =
+                2.5 + index*.15;
 
+            timeline.to(
+                object.position,
+                {
+                    x: home.x,
+                    y: home.y,
+                    z: home.z,
+
+                    duration:.55,
+
+                    ease:"back.out(2)"
                 },
-                indice * 120
+                index*.045
+            );
+
+            timeline.to(
+                object.rotation,
+                {
+                    x: home.x * .3,
+                    y: home.y * .3 + Math.PI*2,
+                    z: home.z * .3,
+
+                    duration:.55,
+
+                    ease:"power2.out"
+                },
+                index*.045
             );
 
         }
     );
 
-
-    setTimeout(
-        function() {
-
-            montando =
-                false;
-
-        },
-        ingredientes.length * 120 + 1800
-    );
-
 };
 
 
-/* =====================================================
-   PARALLAX
-===================================================== */
+/* =========================================
+   MOUSE PARALLAX
+========================================= */
 
 let mouseX = 0;
 let mouseY = 0;
 
-
 window.addEventListener(
-    "pointermove",
-    function(event) {
+    "mousemove",
+    event => {
 
         mouseX =
             (event.clientX /
-            window.innerWidth) * 2 - 1;
+            window.innerWidth - .5);
 
         mouseY =
             (event.clientY /
-            window.innerHeight) * 2 - 1;
+            window.innerHeight - .5);
 
     }
 );
 
 
-/* =====================================================
-   TOQUE / CELULAR
-===================================================== */
+/* =========================================
+   TOUCH
+========================================= */
 
 window.addEventListener(
     "touchmove",
-    function(event) {
+    event => {
 
-        if (!event.touches.length)
+        if(!event.touches.length)
             return;
 
         mouseX =
-            (event.touches[0].clientX /
-            window.innerWidth) * 2 - 1;
+            event.touches[0].clientX /
+            window.innerWidth - .5;
 
         mouseY =
-            (event.touches[0].clientY /
-            window.innerHeight) * 2 - 1;
+            event.touches[0].clientY /
+            window.innerHeight - .5;
 
     },
-    { passive: true }
+    {passive:true}
 );
 
 
-/* =====================================================
-   REDIMENSIONAMENTO
-===================================================== */
+/* =========================================
+   LOOP
+========================================= */
 
-function redimensionar() {
-
-    const largura =
-        hero.clientWidth;
-
-    const altura =
-        hero.clientHeight;
-
-    camera.aspect =
-        largura / altura;
-
-    camera.updateProjectionMatrix();
-
-    renderer.setSize(
-        largura,
-        altura,
-        false
-    );
-
-}
-
-window.addEventListener(
-    "resize",
-    redimensionar
-);
-
-redimensionar();
-
-
-/* =====================================================
-   ANIMAÇÃO
-===================================================== */
-
-const relogio =
-    new THREE.Clock();
-
-
-function animar() {
+function animate(){
 
     requestAnimationFrame(
-        animar
+        animate
     );
 
-    const tempo =
-        relogio.getElapsedTime();
+
+    pizzaGroup.rotation.x +=
+        (
+            -0.15 +
+            mouseY*.15 -
+            pizzaGroup.rotation.x
+        )*.035;
 
 
-    /* movimento suave */
-
-    pizza.rotation.y +=
-        0.002;
-
-
-    /* parallax */
-
-    const alvoX =
-        mouseX * 0.18;
-
-    const alvoY =
-        mouseY * 0.08;
+    pizzaGroup.rotation.y +=
+        (
+            mouseX*.45 -
+            pizzaGroup.rotation.y
+        )*.035;
 
 
-    pizza.rotation.x +=
-        (alvoY - pizza.rotation.x) *
-        0.025;
+    smokeGroup.children.forEach(
+        smoke => {
 
+            smoke.position.y +=
+                smoke.userData.speed;
 
-    pizza.rotation.z +=
-        (-alvoX - pizza.rotation.z) *
-        0.025;
+            smoke.position.x +=
+                Math.sin(
+                    Date.now()*.001 +
+                    smoke.position.y
+                )*.0015;
 
+            if(smoke.position.y > 4){
 
-    /* ingredientes */
-
-    ingredientes.forEach(
-        function(objeto, indice) {
-
-            if (
-                objeto.userData.flutuando
-            ) {
-
-                objeto.position.y +=
-                    Math.sin(
-                        tempo * 1.5 +
-                        indice
-                    ) * 0.006;
-
-                objeto.position.x +=
-                    Math.sin(
-                        tempo +
-                        indice
-                    ) * 0.0015;
-
-                objeto.rotation.y +=
-                    0.008;
-
-                objeto.rotation.x +=
-                    0.003;
-
-            }
-
-            else {
-
-                const destino =
-                    objeto.userData.destino;
-
-                objeto.position.lerp(
-                    destino,
-                    0.055
-                );
-
-                objeto.rotation.x *=
-                    0.94;
-
-                objeto.rotation.z *=
-                    0.94;
+                smoke.position.y =
+                    1;
 
             }
 
         }
     );
-
-
-    /* luz quente pulsando */
-
-    quente.intensity =
-        3.5 +
-        Math.sin(
-            tempo * 4
-        ) * 0.6;
 
 
     renderer.render(
@@ -1610,36 +1779,133 @@ function animar() {
 
 }
 
+animate();
 
-animar();
 
-</script><!-- =====================================================
-     CARRINHO — JAVASCRIPT
-===================================================== --><script>
+/* =========================================
+   RESIZE
+========================================= */
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        camera.aspect =
+            container.clientWidth /
+            container.clientHeight;
+
+        camera.updateProjectionMatrix();
+
+        renderer.setSize(
+            container.clientWidth,
+            container.clientHeight
+        );
+
+    }
+);
+
+
+/* =========================================
+   GSAP SCROLL
+========================================= */
+
+const script =
+    document.createElement("script");
+
+script.src =
+"https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js";
+
+script.onload = () => {
+
+    const scrollScript =
+        document.createElement("script");
+
+    scrollScript.src =
+"https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js";
+
+    scrollScript.onload = () => {
+
+        gsap.registerPlugin(
+            ScrollTrigger
+        );
+
+        gsap.to(
+            pizzaGroup.rotation,
+            {
+                y: Math.PI * 2,
+
+                scrollTrigger: {
+
+                    trigger: ".story",
+
+                    start: "top bottom",
+
+                    end: "bottom top",
+
+                    scrub: 1
+
+                }
+            }
+        );
+
+        gsap.to(
+            pizzaGroup.position,
+            {
+                y: .5,
+
+                scrollTrigger: {
+
+                    trigger: ".story",
+
+                    start: "top bottom",
+
+                    end: "bottom top",
+
+                    scrub: 1
+
+                }
+            }
+        );
+
+    };
+
+    document.head.appendChild(
+        scrollScript
+    );
+
+};
+
+document.head.appendChild(
+    script
+);
+
+</script>
+
+
+<script>
+
+/* =========================================
+   CARRINHO
+========================================= */
 
 let carrinho = [];
 
 
-/* =====================================================
-   ADICIONAR
-===================================================== */
-
 function adicionarAoCarrinho(
     nome,
     preco
-) {
+){
 
     const item =
         carrinho.find(
-            produto =>
-                produto.nome === nome
+            item => item.nome === nome
         );
 
-    if (item) {
+    if(item){
 
         item.quantidade++;
 
-    } else {
+    }else{
 
         carrinho.push({
 
@@ -1655,37 +1921,33 @@ function adicionarAoCarrinho(
 
     atualizarCarrinho();
 
+    document
+        .getElementById("cart")
+        .classList.add("open");
+
 }
 
-
-/* =====================================================
-   ALTERAR QUANTIDADE
-===================================================== */
 
 function alterarQuantidade(
     nome,
     valor
-) {
+){
 
     const item =
         carrinho.find(
-            produto =>
-                produto.nome === nome
+            item => item.nome === nome
         );
 
-    if (!item)
+    if(!item)
         return;
 
-    item.quantidade +=
-        valor;
+    item.quantidade += valor;
 
-
-    if (item.quantidade <= 0) {
+    if(item.quantidade <= 0){
 
         carrinho =
             carrinho.filter(
-                produto =>
-                    produto.nome !== nome
+                item => item.nome !== nome
             );
 
     }
@@ -1695,59 +1957,53 @@ function alterarQuantidade(
 }
 
 
-/* =====================================================
-   ATUALIZAR CARRINHO
-===================================================== */
-
-function atualizarCarrinho() {
+function atualizarCarrinho(){
 
     const container =
         document.getElementById(
-            "itensCarrinho"
+            "cartItems"
         );
 
-    const contador =
-        document.getElementById(
-            "contadorCarrinho"
+    const count =
+        carrinho.reduce(
+            (total,item) =>
+                total + item.quantidade,
+            0
         );
 
-    const totalElemento =
-        document.getElementById(
-            "totalCarrinho"
-        );
+    document.getElementById(
+        "cartCount"
+    ).textContent = count;
 
 
-    container.innerHTML =
-        "";
-
-
-    let total =
-        0;
-
-    let quantidadeTotal =
-        0;
-
-
-    if (carrinho.length === 0) {
+    if(carrinho.length === 0){
 
         container.innerHTML =
-            "<p style='color:#999;'>Seu carrinho está vazio.</p>";
+            "<p style='color:#777'>Seu carrinho está vazio.</p>";
+
+        document.getElementById(
+            "cartTotal"
+        ).textContent =
+            "0,00";
+
+        return;
 
     }
 
 
+    let total = 0;
+
+    container.innerHTML = "";
+
+
     carrinho.forEach(
-        function(item) {
+        item => {
 
             const subtotal =
                 item.preco *
                 item.quantidade;
 
-            total +=
-                subtotal;
-
-            quantidadeTotal +=
-                item.quantidade;
+            total += subtotal;
 
 
             const div =
@@ -1756,25 +2012,23 @@ function atualizarCarrinho() {
                 );
 
             div.className =
-                "item-carrinho";
-
+                "cart-item";
 
             div.innerHTML = `
 
-                <strong>
-                    ${item.nome}
-                </strong>
+                <div class="cart-item-line">
 
-                <div
-                    style="
-                    color:#aaa;
-                    margin-bottom:10px;
-                    "
-                >
-                    R$ ${item.preco.toFixed(2).replace(".",",")}
+                    <strong>
+                        ${item.nome}
+                    </strong>
+
+                    <span>
+                        R$ ${subtotal.toFixed(2).replace(".",",")}
+                    </span>
+
                 </div>
 
-                <div class="controles">
+                <div class="quantity">
 
                     <button
                         onclick="alterarQuantidade('${item.nome}',-1)"
@@ -1796,7 +2050,6 @@ function atualizarCarrinho() {
 
             `;
 
-
             container.appendChild(
                 div
             );
@@ -1805,43 +2058,27 @@ function atualizarCarrinho() {
     );
 
 
-    contador.textContent =
-        quantidadeTotal;
-
-
-    totalElemento.textContent =
+    document.getElementById(
+        "cartTotal"
+    ).textContent =
         total
             .toFixed(2)
-            .replace(".", ",");
+            .replace(".",",");
+}
+
+
+function toggleCarrinho(){
+
+    document
+        .getElementById("cart")
+        .classList.toggle("open");
 
 }
 
 
-/* =====================================================
-   ABRIR / FECHAR CARRINHO
-===================================================== */
+function finalizarPedidoWhatsApp(){
 
-function toggleCarrinho() {
-
-    const carrinhoElemento =
-        document.getElementById(
-            "carrinho"
-        );
-
-    carrinhoElemento.classList.toggle(
-        "aberto"
-    );
-
-}
-
-
-/* =====================================================
-   WHATSAPP
-===================================================== */
-
-function finalizarPedidoWhatsApp() {
-
-    if (carrinho.length === 0) {
+    if(carrinho.length === 0){
 
         alert(
             "Seu carrinho está vazio."
@@ -1857,33 +2094,31 @@ function finalizarPedidoWhatsApp() {
 
 
     let mensagem =
-        "🍕 *NOVO PEDIDO — PRIME PIZZA*%0A%0A";
-
-
-    let total =
-        0;
+        "🍕 *NOVO PEDIDO — PRIMEPIZZA*%0A%0A";
 
 
     carrinho.forEach(
-        function(item) {
-
-            const subtotal =
-                item.preco *
-                item.quantidade;
-
-            total +=
-                subtotal;
-
+        item => {
 
             mensagem +=
-                `🍕 ${item.nome} — ${item.quantidade}x — R$ ${subtotal.toFixed(2).replace(".",",")}%0A`;
+                `• ${item.quantidade}x ${item.nome} — R$ ${(item.preco * item.quantidade).toFixed(2).replace(".",",")}%0A`;
 
         }
     );
 
 
+    const total =
+        carrinho.reduce(
+            (total,item) =>
+                total +
+                item.preco *
+                item.quantidade,
+            0
+        );
+
+
     mensagem +=
-        `%0A💰 *TOTAL: R$ ${total.toFixed(2).replace(".",",")}*`;
+        `%0A💰 *Total: R$ ${total.toFixed(2).replace(".",",")}*`;
 
 
     window.open(
@@ -1894,11 +2129,9 @@ function finalizarPedidoWhatsApp() {
 }
 
 
-/* =====================================================
-   INICIAR
-===================================================== */
-
 atualizarCarrinho();
 
-</script></body>
+</script>
+
+</body>
 </html>
