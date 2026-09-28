@@ -283,11 +283,52 @@ nav a:hover{
 }
 
 /* =========================
+   COMO FUNCIONA / INFORMAÇÕES (Substituiu a repetição)
+========================= */
+.info-section{
+    padding:90px 7%;
+    background:#0b0b0b;
+    border-top:1px solid rgba(255,255,255,0.05);
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(250px, 1fr));
+    gap:30px;
+    margin-top:50px;
+}
+
+.info-box{
+    background:#131313;
+    border:1px solid rgba(255,255,255,0.05);
+    padding:30px;
+    border-radius:16px;
+    text-align:center;
+}
+
+.info-box span{
+    font-size:36px;
+    display:block;
+    margin-bottom:15px;
+}
+
+.info-box h3{
+    font-size:18px;
+    margin-bottom:10px;
+}
+
+.info-box p{
+    color:#888;
+    font-size:14px;
+    line-height:1.5;
+}
+
+/* =========================
    FOOTER
 ========================= */
 footer{
-    padding:50px 7%;
-    background:#080808;
+    padding:40px 7%;
+    background:#070707;
     border-top:1px solid rgba(255,255,255,0.06);
     display:flex;
     justify-content:space-between;
@@ -336,7 +377,7 @@ footer strong{
     <div class="logo">Prime<span>Pizza</span></div>
     <nav>
         <a href="#cardapio">Cardápio</a>
-        <a href="#sobre">A Pizzaria</a>
+        <a href="#informacoes">Como Pedir</a>
     </nav>
     <button class="whatsapp-top-btn" onclick="pedirNoWhatsApp('Olá! Gostaria de fazer um pedido.')">
         💬 Pedir Agora
@@ -356,7 +397,6 @@ footer strong{
         </div>
     </div>
     <div class="hero-img-box">
-        <!-- Imagem inspirada nas suas referências de alta qualidade -->
         <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80" alt="Pizza PrimePizza">
     </div>
 </section>
@@ -366,7 +406,7 @@ footer strong{
     <div class="section-title">
         <div class="eyebrow">Nosso Menu</div>
         <h2>Escolha e peça em um clique</h2>
-        <p>Clique em "Pedir no WhatsApp" para enviar o seu pedido instantaneamente.</p>
+        <p>Clique em "Pedir" para enviar o seu pedido instantaneamente pelo WhatsApp.</p>
     </div>
 
     <div class="menu-grid">
@@ -434,6 +474,32 @@ footer strong{
     </div>
 </section>
 
+<!-- COMO FUNCIONA (Substituiu a parte repetida) -->
+<section class="info-section" id="informacoes">
+    <div class="section-title" style="margin-bottom: 30px;">
+        <div class="eyebrow">Praticidade</div>
+        <h2>Como pedir é super fácil</h2>
+    </div>
+    
+    <div class="info-grid">
+        <div class="info-box">
+            <span>🍕</span>
+            <h3>1. Escolha o Sabor</h3>
+            <p>Navegue pelo nosso cardápio acima e escolha a sua pizza ou bebida favorita.</p>
+        </div>
+        <div class="info-box">
+            <span>💬</span>
+            <h3>2. Clique em Pedir</h3>
+            <p>O botão direciona você diretamente para o nosso WhatsApp com a mensagem pronta.</p>
+        </div>
+        <div class="info-box">
+            <span>🛵</span>
+            <h3>3. Receba em Casa</h3>
+            <p>A sua pizza é assada na hora e entregue quentinha e crocante na sua porta.</p>
+        </div>
+    </div>
+</section>
+
 <!-- FOOTER -->
 <footer>
     <div><strong>PrimePizza</strong> &copy; 2026 — Todos os direitos reservados.</div>
@@ -441,7 +507,7 @@ footer strong{
 </footer>
 
 <script>
-    // Substitua o número abaixo pelo seu número de WhatsApp com DDD (ex: 5511999999999)
+    // Substitua o número abaixo pelo seu número real do WhatsApp com DDD (ex: 5563999999999)
     const numeroWhatsApp = "5563999999999"; 
 
     function pedirNoWhatsApp(mensagem) {
