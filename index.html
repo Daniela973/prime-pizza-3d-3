@@ -397,4 +397,365 @@ nav a:hover{
         radial-gradient(circle at 70% 35%,#e52a20 0 5%,transparent 6%),
         radial-gradient(circle at 45% 65%,#e52a20 0 5%,transparent 6%),
         radial-gradient(circle,#f4bd51 0 72%,#d66d22 73% 80%,#813612 81%);
-    box
+    box-shadow:0 20px 35px rgba(0,0,0,.45);
+}
+
+.menu-card h3{
+    font-size:20px;
+    margin-bottom:8px;
+}
+
+.menu-card p{
+    color:#777;
+    font-size:14px;
+    line-height:1.5;
+    min-height:43px;
+    margin-bottom:18px;
+}
+
+.card-bottom{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.price{
+    font-size:20px;
+    font-weight:bold;
+}
+
+.add-button{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:none;
+    background:#ff5a16;
+    color:#fff;
+    font-size:22px;
+    cursor:pointer;
+}
+
+/* =========================
+   CUSTOMIZER
+========================= */
+
+.customizer{
+    padding:120px 7%;
+    background:#101010;
+}
+
+.customizer-box{
+    max-width:1100px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:50px;
+    align-items:center;
+}
+
+.custom-pizza-area{
+    min-height:450px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+}
+
+.custom-pizza{
+    width:330px;
+    height:330px;
+    border-radius:50%;
+    background:
+        radial-gradient(circle at 28% 30%,#e52a20 0 5%,transparent 6%),
+        radial-gradient(circle at 68% 30%,#e52a20 0 5%,transparent 6%),
+        radial-gradient(circle at 48% 60%,#e52a20 0 5%,transparent 6%),
+        radial-gradient(circle at 70% 70%,#e52a20 0 5%,transparent 6%),
+        radial-gradient(circle,#f5bd52 0 73%,#d66b21 74% 81%,#803511 82%);
+    box-shadow:0 30px 70px rgba(0,0,0,.6);
+    transition:.5s;
+}
+
+.customizer-content h2{
+    font-size:clamp(40px,5vw,65px);
+    line-height:.95;
+    letter-spacing:-3px;
+    margin-bottom:35px;
+}
+
+.option{
+    margin-bottom:25px;
+}
+
+.option label{
+    display:block;
+    color:#aaa;
+    margin-bottom:10px;
+    font-size:14px;
+}
+
+.option-buttons{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+}
+
+.option-buttons button{
+    border:1px solid #333;
+    background:#171717;
+    color:#fff;
+    padding:11px 17px;
+    border-radius:30px;
+    cursor:pointer;
+    transition:.25s;
+}
+
+.option-buttons button.active,
+.option-buttons button:hover{
+    background:#ff5a16;
+    border-color:#ff5a16;
+}
+
+.custom-price{
+    font-size:28px;
+    font-weight:bold;
+    margin:25px 0;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer{
+    padding:50px 7%;
+    background:#050505;
+    border-top:1px solid rgba(255,255,255,.06);
+    display:flex;
+    justify-content:space-between;
+    color:#666;
+}
+
+footer strong{
+    color:#fff;
+}
+
+/* =========================
+   CART OVERLAY
+========================= */
+
+.cart-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.72);
+    z-index:2000;
+    display:none;
+}
+
+.cart-overlay.active{
+    display:block;
+}
+
+.cart{
+    position:absolute;
+    right:0;
+    top:0;
+    width:min(460px,100%);
+    height:100%;
+    background:#111;
+    padding:30px;
+    overflow-y:auto;
+    box-shadow:-20px 0 70px rgba(0,0,0,.5);
+}
+
+.cart-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.close-cart{
+    border:none;
+    background:#222;
+    color:#fff;
+    width:38px;
+    height:38px;
+    border-radius:50%;
+    cursor:pointer;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:900px){
+    header{ padding:0 5%; }
+    nav{ display:none; }
+    .hero{ min-height:900px; padding:120px 6% 40px; align-items:flex-start; }
+    .hero-content{ width:100%; position:relative; z-index:10; }
+    .hero h1{ font-size:58px; letter-spacing:-3px; }
+    .hero p{ font-size:16px; max-width:390px; }
+    #pizza-container{ width:100%; height:500px; top:390px; opacity:.95; }
+    .fallback-pizza{ width:320px; }
+    .menu-grid{ grid-template-columns:repeat(2,1fr); }
+    .customizer-box{ grid-template-columns:1fr; }
+    .custom-pizza-area{ min-height:350px; }
+}
+
+@media(max-width:600px){
+    .hero{ min-height:820px; }
+    .hero h1{ font-size:48px; }
+    #pizza-container{ top:380px; height:420px; }
+    .menu{ padding:90px 5%; }
+    .menu-grid{ grid-template-columns:1fr; }
+    .section-top{ display:block; }
+    .section-top p{ margin-top:15px; }
+    .customizer{ padding:90px 5%; }
+    .custom-pizza{ width:270px; height:270px; }
+    footer{ flex-direction:column; gap:15px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    <div class="logo">Prime<span>Pizza</span></div>
+    <nav>
+        <a href="#inicio">Início</a>
+        <a href="#historia">Nossa história</a>
+        <a href="#menu">Cardápio</a>
+        <a href="#montar">Monte sua pizza</a>
+    </nav>
+    <button class="cart-button" onclick="abrirCarrinho()">🛒 <span id="cart-count">0</span></button>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+    <div class="hero-content">
+        <div class="eyebrow">Pizza artesanal</div>
+        <h1>A pizza<br>que você<br><span>imagina.</span></h1>
+        <p>Ingredientes selecionados, massa artesanal e aquele sabor que faz você querer mais.</p>
+        <button class="primary-button" onclick="document.getElementById('montar').scrollIntoView({behavior:'smooth'})">
+            Montar minha pizza →
+        </button>
+    </div>
+
+    <div id="pizza-container">
+        <div class="fallback-pizza" id="fallbackPizza"></div>
+        <div class="pizza-smoke"></div>
+        <div class="pizza-smoke"></div>
+        <div class="pizza-smoke"></div>
+        <canvas id="pizza-canvas"></canvas>
+    </div>
+</section>
+
+<!-- STORY -->
+<section class="story" id="historia">
+    <div class="story-inner">
+        <div class="eyebrow">Nossa história</div>
+        <h2>Não fazemos<br>apenas pizza.<br>Fazemos <span>experiência.</span></h2>
+        <p>Nossa massa é preparada artesanalmente, nossos ingredientes são escolhidos com cuidado e cada pizza sai da cozinha pensando em transformar uma refeição comum em um momento especial.</p>
+    </div>
+</section>
+
+<!-- MENU -->
+<section class="menu" id="menu">
+    <div class="section-top">
+        <div>
+            <div class="eyebrow">Nosso cardápio</div>
+            <h2>Escolha seu sabor.</h2>
+        </div>
+        <p>Clássicos que nunca saem de moda e combinações pensadas para surpreender.</p>
+    </div>
+
+    <div class="menu-grid">
+        <div class="menu-card">
+            <div class="food-image"><div class="mini-pizza"></div></div>
+            <h3>Margherita</h3>
+            <p>Molho artesanal, mozzarella, tomate e manjericão.</p>
+            <div class="card-bottom">
+                <span class="price">R$ 48,00</span>
+                <button class="add-button" onclick="adicionarAoCarrinho('Margherita',48)">+</button>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <div class="food-image"><div class="mini-pizza"></div></div>
+            <h3>Calabresa</h3>
+            <p>Calabresa, mozzarella, cebola e orégano.</p>
+            <div class="card-bottom">
+                <span class="price">R$ 52,00</span>
+                <button class="add-button" onclick="adicionarAoCarrinho('Calabresa',52)">+</button>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <div class="food-image"><div class="mini-pizza"></div></div>
+            <h3>Quatro Queijos</h3>
+            <p>Mozzarella, provolone, parmesão e gorgonzola.</p>
+            <div class="card-bottom">
+                <span class="price">R$ 58,00</span>
+                <button class="add-button" onclick="adicionarAoCarrinho('Quatro Queijos',58)">+</button>
+            </div>
+        </div>
+
+        <div class="menu-card">
+            <div class="food-image">
+                <div style="font-size:70px; filter:drop-shadow(0 20px 20px rgba(0,0,0,.5));">🥤</div>
+            </div>
+            <h3>Coca-Cola 2L</h3>
+            <p>Bebida gelada para acompanhar sua pizza.</p>
+            <div class="card-bottom">
+                <span class="price">R$ 14,00</span>
+                <button class="add-button" onclick="adicionarAoCarrinho('Coca-Cola 2L',14)">+</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CUSTOMIZER -->
+<section class="customizer" id="montar">
+    <div class="customizer-box">
+        <div class="custom-pizza-area">
+            <div class="custom-pizza" id="customPizza"></div>
+        </div>
+
+        <div class="customizer-content">
+            <div class="eyebrow">Personalize</div>
+            <h2>Monte sua<br>própria pizza.</h2>
+
+            <div class="option">
+                <label>Tamanho</label>
+                <div class="option-buttons">
+                    <button class="active" onclick="selecionarTamanho(this,35,'P')">P</button>
+                    <button onclick="selecionarTamanho(this,45,'M')">M</button>
+                    <button onclick="selecionarTamanho(this,55,'G')">G</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <div><strong>PrimePizza</strong> &copy; 2026 — Todos os direitos reservados.</div>
+    <div>Feito com paixão e sabor.</div>
+</footer>
+
+<script>
+    function abrirCarrinho() {
+        alert("Carrinho aberto!");
+    }
+    function adicionarAoCarrinho(item, preco) {
+        alert(item + " adicionado por R$ " + preco);
+    }
+    function selecionarTamanho(btn, preco, tamanho) {
+        const botoes = btn.parentElement.querySelectorAll('button');
+        botoes.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+    }
+</script>
+
+</body>
+</html>
